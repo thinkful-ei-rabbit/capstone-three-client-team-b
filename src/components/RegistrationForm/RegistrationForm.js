@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthApiService from '../../services/auth-api-service';
 import { Input, Required, Button } from '../Utils/Utils';
 
-import './RegisterForm.css';
+import './RegistrationForm.css';
 
 export default class RegisterForm extends Component {
   static defaultProps = {

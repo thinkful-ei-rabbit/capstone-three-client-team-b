@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import LoginPage from '../../routes/LoginPage/LoginPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import LandingPage from '../../routes/LandingPage/LandingPage';
+import ChatLog from '../Chat/ChatLog';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ export default class App extends Component {
         </header>
         <main>
           <Switch>
+            <Route exact path={'/chat'} component={ChatLog} />
             <Route exact path={'/'} component={LandingPage} />
             <PublicOnlyRoute path={'/login'} component={LoginPage} />
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
