@@ -6,25 +6,30 @@ import './GameTable.css';
 
 export default class GameTable extends Component {
   state = {
-    players: {
-      1: {
+    players: [
+      {
         playerName: 'host',
+        playerSeat: 1,
         playerHand: [],
       },
-      2: {
+      {
+        playerName: 'friend',
+        playerSeat: 2,
+        playerHand: [],
+      },
+      {
         playerName: '',
+        playerSeat: 3,
         playerHand: [],
       },
-      3: {
+      {
         playerName: '',
+        playerSeat: 4,
         playerHand: [],
       },
-      4: {
-        playerName: '',
-        playerHand: [],
-      },
-    },
+    ],
     deck: [],
+    inProgress: false,
   };
   // assign seat to player joining.  host is 'playerOne', first guest is 'playerTwo', etc
   // "deal" 7 cards to each player on start game click
@@ -33,7 +38,7 @@ export default class GameTable extends Component {
   // when takingAction === true, click player to ask for a card, pick a card from your hand
   // trigger speaking bubble asking player name for card after request made
 
-  startGame = () => {
+  createDeck = () => {
     const deck = new Deck();
     deck.shuffle();
 
@@ -42,12 +47,12 @@ export default class GameTable extends Component {
     });
   };
 
-  drawCard = (player) => {
+  drawCard = (i) => {
     const deck = this.state.deck;
     const drawnCard = deck.draw();
     const { players } = this.state;
 
-    players[1].playerHand.push(drawnCard);
+    players[i].playerHand.push(drawnCard);
 
     this.setState({
       players,
@@ -55,18 +60,24 @@ export default class GameTable extends Component {
   };
 
   // not working yet...
-  dealFirstHand = () => {
+  startGame = () => {
     const { players } = this.state;
-
-    console.log(players);
+    for (let i = 0; i < players.length; i++) {
+      while (players[i].playerName && players[i].playerHand.length < 7) {
+        this.drawCard(i);
+      }
+    }
+    this.setState({
+      inProgress: true,
+    });
   };
 
   render() {
     return (
       <section>
-        <Button onClick={() => this.startGame()}>Start</Button>
+        <Button onClick={() => this.createDeck()}>Ready</Button>
+        <Button onClick={() => this.startGame()}>Start Game</Button>
         <Button onClick={() => this.drawCard()}>Draw</Button>
-        <Button onClick={() => this.dealFirstHand()}>Deal First Hand</Button>
       </section>
     );
   }
