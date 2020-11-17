@@ -18,6 +18,11 @@ img {
   display: inline-block;
 }
 
+.user-create {
+  padding: 20px;
+  display:flex;
+  flex-wrap: wrap;
+}
 
 .body {
   display: flex;
