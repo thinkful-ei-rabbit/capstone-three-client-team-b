@@ -57,12 +57,8 @@ export default class GameTable extends Component {
   // not working yet...
   dealFirstHand = () => {
     const { players } = this.state;
-    for (let i = 1; i < players.length; i++) {
-      console.log('hi');
-      if (players.playerName && players.playerHand <= 7) {
-        console.log(players[i]);
-      }
-    }
+
+    console.log(players);
   };
 
   render() {
