@@ -7,6 +7,9 @@ import LoginPage from '../../routes/LoginPage/LoginPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import LandingPage from '../../routes/LandingPage/LandingPage';
 import ChatLog from '../Chat/ChatLog';
+import Game from '../Game/Game';
+import AskPerson from '../AskPerson/AskPerson';
+import AskForCard from '../AskForCard/AskForCard';
 
 import './App.css';
 
@@ -23,6 +26,9 @@ export default class App extends Component {
           <Switch>
             <Route exact path={'/chat'} component={ChatLog} />
             <Route exact path={'/'} component={LandingPage} />
+            <Route exact path={'/game'} component={Game} />
+            <Route exact path={'/firstMove'} component={AskPerson} />
+            <Route exact path={'/ask'} component={AskForCard} />
             <PublicOnlyRoute path={'/login'} component={LoginPage} />
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
           </Switch>
