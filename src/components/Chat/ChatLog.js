@@ -9,12 +9,13 @@ var socket;
 class ChatLog extends React.Component {
     state = {
         messages: [],
+        connected: false,
     }
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props.match)
         let count = 0;
         socket = socketClient(`${config.SERVER_URL}`, {
-            path: '/myownpath',
+            path: config.SOCKET_PATH,
             // path will be based on url
         });
         socket.on('messageResponse', (msg) => {
@@ -24,8 +25,17 @@ class ChatLog extends React.Component {
             this.setState({messages: [...this.state.messages, msg]})
         })
 
-        socket.on('serverResponse', (msg) => {
-            this.setState({room: msg})
+        socket.on('serverResponse', (retObj) => {
+            const players = retObj.players.map(el => {
+                // el.id, el.name, .room
+            return <div>{el.nickname}, {el.id}</div>
+            })
+            
+            this.setState({
+                room: retObj.room,
+                players: players,
+                connected: true,
+            })
         })
 
         // socket.on('serverResponse', (obj) => {
@@ -48,8 +58,8 @@ class ChatLog extends React.Component {
     onExClick = () => {
         const room = this.props.match.params[0];
         /* ROOM ID WILL BE BASED ON THIS ^ */
-
-        socket.emit('joinServer', room);
+        const username = 'Michael';
+        socket.emit('joinServer', {room, username});
     }
     
 
@@ -64,9 +74,14 @@ class ChatLog extends React.Component {
                 </div>
                 <form onSubmit={event => this.onSubmit(event)}>
                     <input type="text" id="input-message"/>
-                    <button type="submit">Send Message</button>
+                    <button 
+                    disabled={!this.state.connected}
+                    type="submit">Send Message</button>
                 </form>
                 <button onClick={() => this.onExClick()}>Join Server</button>
+                <div>
+                    {this.state.players}
+                </div>
             </div>
         )
     }
