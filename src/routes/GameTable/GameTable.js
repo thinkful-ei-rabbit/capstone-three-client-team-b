@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Deck from '../../components/Deck/Deck';
 import { Section, Button } from '../../components/Utils/Utils';
+import GameTableSeat from '../../components/GameTableSeat/GameTableSeat';
 
 import './GameTable.css';
 
@@ -84,12 +85,18 @@ export default class GameTable extends Component {
   };
 
   render() {
+    const { players } = this.state;
     return (
-      <section>
+      <Section className="game-table">
+        {players
+          .filter((player) => player.playerName)
+          .map((player) => {
+            return <GameTableSeat key={player.playerSeat} player={player} />;
+          })}
         <Button onClick={() => this.createDeck()}>Ready</Button>
         <Button onClick={() => this.startGame()}>Start Game</Button>
         {/* <Button onClick={(e) => this.drawCard(e.target)}>Draw</Button> */}
-      </section>
+      </Section>
     );
   }
 }
