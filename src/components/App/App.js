@@ -6,8 +6,8 @@ import Header from '../Header/Header';
 import LoginPage from '../../routes/LoginPage/LoginPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import LandingPage from '../../routes/LandingPage/LandingPage';
-import GameTable from '../../routes/GameTable/GameTable';
 import GamePage from '../../routes/GamePage/GamePage';
+import GameTable from '../../routes/GameTable/GameTable';
 
 import './App.css';
 

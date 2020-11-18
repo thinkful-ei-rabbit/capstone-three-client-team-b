@@ -13,7 +13,7 @@ const AuthApiService = {
     );
   },
   postUser(user) {
-    return fetch(`${config.SERVER_URL}/users`, {
+    return fetch(`${config.API_ENDPOINT}/users`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
