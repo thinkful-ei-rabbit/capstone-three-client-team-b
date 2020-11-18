@@ -9,33 +9,37 @@ export default class GameTable extends Component {
     players: [
       {
         playerName: 'host',
+        currentPlayer: false, // just use isTurn instead
         playerSeat: 1,
         playerHand: [],
-        isTurn: false,
+        // isTurn: false,
         askedPlayer: false,
         requestedCard: false,
       },
       {
         playerName: 'friend',
+        currentPlayer: false,
         playerSeat: 2,
         playerHand: [],
-        isTurn: false,
+        // isTurn: false,
         askedPlayer: false,
         requestedCard: false,
       },
       {
         playerName: '',
+        currentPlayer: false,
         playerSeat: 3,
         playerHand: [],
-        isTurn: false,
+        // isTurn: false,
         askedPlayer: false,
         requestedCard: false,
       },
       {
         playerName: '',
+        currentPlayer: false,
         playerSeat: 4,
         playerHand: [],
-        isTurn: false,
+        // isTurn: false,
         askedPlayer: false,
         requestedCard: false,
       },
@@ -73,23 +77,26 @@ export default class GameTable extends Component {
 
   // not working yet...
   startGame = () => {
-    const { players } = this.state;
+    const players = [...this.state.players];
     for (let i = 0; i < players.length; i++) {
       while (players[i].playerName && players[i].playerHand.length < 7) {
         this.drawCard(i);
       }
     }
+    players[1] ? players[1].currentPlayer = true : players[0].currentPlayer = false;
     this.setState({
       inProgress: true,
+      players
     });
   };
 
   render() {
     return (
       <section>
+        {this.state.players.find(player => player.currentPlayer) && <p>Current Player: {this.state.players.find(player => player.currentPlayer).playerName}</p>}
         <Button onClick={() => this.createDeck()}>Ready</Button>
         <Button onClick={() => this.startGame()}>Start Game</Button>
-        <Button onClick={() => this.drawCard()}>Draw</Button>
+        <Button onClick={() => this.drawCard(0)}>Draw</Button>
       </section>
     );
   }
