@@ -13,14 +13,18 @@ export default class RegisterForm extends Component {
 
   handleSubmit = (ev) => {
     ev.preventDefault();
-    const { email, password } = ev.target;
+    const { email, password, player_name, avatar } = ev.target;
 
     this.setState({ error: null });
     AuthApiService.postUser({
+      playerName: player_name.value,
+      avatarLink: avatar.value,
       email: email.value,
       password: password.value,
     })
       .then((user) => {
+        player_name.value = '';
+        avatar.value = '';
         email.value = '';
         password.value = '';
         this.props.onRegistrationSuccess();
@@ -35,6 +39,30 @@ export default class RegisterForm extends Component {
     return (
       <form className="RegistrationForm" onSubmit={this.handleSubmit}>
         <div role="alert">{error && <p className="red">{error}</p>}</div>
+        <div className="player_name">
+          <label htmlFor="RegistrationForm_player_name">
+            Player Name <Required />
+          </label>
+          <Input
+            name="player_name"
+            type="text"
+            required
+            id="RegistrationForm_player_name"
+            className="login_reg_inputs"
+          ></Input>
+        </div>
+        <div className="avatar">
+          <label htmlFor="RegistrationForm_avatar">
+            Link to avatar <Required />
+          </label>
+          <Input
+            name="avatar"
+            type="text"
+            required
+            id="RegistrationForm_avatar"
+            className="login_reg_inputs"
+          ></Input>
+        </div>
         <div className="email">
           <label htmlFor="RegistrationForm_email">
             Email <Required />

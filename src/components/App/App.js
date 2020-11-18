@@ -6,7 +6,12 @@ import Header from '../Header/Header';
 import LoginPage from '../../routes/LoginPage/LoginPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import LandingPage from '../../routes/LandingPage/LandingPage';
+<<<<<<< HEAD
 import GamePage from '../../routes/GamePage/GamePage';
+=======
+import GameTable from '../../routes/GameTable/GameTable';
+import ChatLog from '../Chat/ChatLog';
+>>>>>>> 84450ce428cb9690f07ff039e1a4b333812fab15
 
 import './App.css';
 
@@ -25,6 +30,7 @@ export default class App extends Component {
             <Route exact path={'/'} component={LandingPage} />
             <PublicOnlyRoute path={'/login'} component={LoginPage} />
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
+            <Route path={'/table'} component={GameTable} />
           </Switch>
         </main>
       </div>
