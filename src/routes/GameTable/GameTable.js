@@ -12,32 +12,32 @@ export default class GameTable extends Component {
         playerSeat: 1,
         playerHand: [],
         isTurn: false,
-        askedPlayer: false,
-        requestedCard: false,
+        askedPlayer: '',
+        requestedCard: '',
       },
       {
         playerName: 'friend',
         playerSeat: 2,
         playerHand: [],
         isTurn: false,
-        askedPlayer: false,
-        requestedCard: false,
+        askedPlayer: '',
+        requestedCard: '',
       },
       {
         playerName: '',
         playerSeat: 3,
         playerHand: [],
         isTurn: false,
-        askedPlayer: false,
-        requestedCard: false,
+        requestedPlayer: '',
+        requestedCard: '',
       },
       {
         playerName: '',
         playerSeat: 4,
         playerHand: [],
         isTurn: false,
-        askedPlayer: false,
-        requestedCard: false,
+        askedPlayer: '',
+        requestedCard: '',
       },
     ],
     deck: [],
@@ -71,7 +71,6 @@ export default class GameTable extends Component {
     });
   };
 
-  // not working yet...
   startGame = () => {
     const { players } = this.state;
     for (let i = 0; i < players.length; i++) {
@@ -89,7 +88,7 @@ export default class GameTable extends Component {
       <section>
         <Button onClick={() => this.createDeck()}>Ready</Button>
         <Button onClick={() => this.startGame()}>Start Game</Button>
-        <Button onClick={() => this.drawCard()}>Draw</Button>
+        {/* <Button onClick={(e) => this.drawCard(e.target)}>Draw</Button> */}
       </section>
     );
   }
