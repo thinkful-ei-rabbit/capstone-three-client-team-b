@@ -14,7 +14,7 @@ class ChatLog extends React.Component {
     componentDidMount() {
         // console.log(this.props.match)
         let count = 0;
-        socket = socketClient(`${config.SERVER_URL}`, {
+        socket = socketClient(`${config.API_ENDPOINT}`, {
             path: config.SOCKET_PATH,
             // path will be based on url
         });
