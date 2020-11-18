@@ -19,7 +19,7 @@ export default class GameTable extends Component {
         playerName: 'friend',
         playerSeat: 2,
         playerHand: [],
-        currentPlayer: false,
+        currentPlayer: true,
         requestedPlayer: '',
         requestedCard: '',
       },
@@ -42,6 +42,7 @@ export default class GameTable extends Component {
     ],
     deck: [],
     inProgress: false,
+    ready: false,
   };
   // assign seat to player joining.  host is 'playerOne', first guest is 'playerTwo', etc
   // "deal" 7 cards to each player on start game click
@@ -55,7 +56,7 @@ export default class GameTable extends Component {
     deck.shuffle();
 
     this.setState({
-      deck,
+      deck: deck, ready: true
     });
   };
 
@@ -70,6 +71,18 @@ export default class GameTable extends Component {
       players,
     });
   };
+
+  gofish = () => {
+    const players = this.state.players
+    const deck = this.state.deck
+    players.map(player => {
+      if (player.currentPlayer === true) {
+        return player.playerHand.push(deck.cards[0])
+      }
+    })
+    deck.cards.shift()
+    this.setState({ players, deck })
+  }
 
   startGame = () => {
     const { players } = this.state;
@@ -87,8 +100,8 @@ export default class GameTable extends Component {
     return (
       <section>
         <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
-        <Button onClick={() => this.startGame()}>Start Game</Button>
-        {/* <Button onClick={(e) => this.drawCard(e.target)}>Draw</Button> */}
+        <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
+        <Button disabled={this.state.inProgress === false} onClick={this.gofish}>Draw</Button>
       </section>
     );
   }
