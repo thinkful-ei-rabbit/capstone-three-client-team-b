@@ -21,8 +21,9 @@ class Header extends Component {
   renderLoginLink() {
     return (
       <div className="header-links">
-        <Link to="/login">Log in</Link>
-        <Link to="/register">Register</Link>
+        <Link to="/login">Log in|</Link>
+        <Link to="/register">Register|</Link>
+        <Link to="/">Home</Link>
       </div>
     );
   }
