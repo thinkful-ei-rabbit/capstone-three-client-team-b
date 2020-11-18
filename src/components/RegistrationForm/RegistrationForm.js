@@ -53,7 +53,7 @@ export default class RegisterForm extends Component {
         </div>
         <div className="avatar">
           <label htmlFor="RegistrationForm_avatar">
-            Player Name <Required />
+            Link to avatar <Required />
           </label>
           <Input
             name="avatar"

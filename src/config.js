@@ -1,3 +1,3 @@
 export default {
-    SERVER_URL: process.env.REACT_APP_SERVER_URL || 'localhost:8000'
-}
+  SERVER_URL: process.env.REACT_APP_SERVER_URL || 'localhost:8000',
+};
