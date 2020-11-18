@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Deck from '../../components/Deck/Deck';
 import { Section, Button } from '../../components/Utils/Utils';
+import UserContext from '../../contexts/UserContext';
 
 import './GameTable.css';
 
 export default class GameTable extends Component {
+  static contextType = UserContext;
+
   state = {
     players: [
       {
