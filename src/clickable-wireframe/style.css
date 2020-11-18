@@ -19,7 +19,20 @@ img {
 }
 
 header {
+  display: flex;
   justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.header-block {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 p {
