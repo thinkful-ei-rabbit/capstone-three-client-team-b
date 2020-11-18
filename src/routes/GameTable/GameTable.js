@@ -86,7 +86,7 @@ export default class GameTable extends Component {
   render() {
     return (
       <section>
-        <Button onClick={() => this.createDeck()}>Ready</Button>
+        <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
         <Button onClick={() => this.startGame()}>Start Game</Button>
         {/* <Button onClick={(e) => this.drawCard(e.target)}>Draw</Button> */}
       </section>
