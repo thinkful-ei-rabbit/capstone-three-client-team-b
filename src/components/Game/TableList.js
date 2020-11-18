@@ -19,13 +19,15 @@ class TableList extends React.Component {
             const list1 = [];
             let index = 0;
             for (var game in list) {
-                list1.push(<div key={index}>Room {game}, {list[game]} people in lobby</div>)
+                list1.push(<div key={index}>Room {game}, {list[game].capacity} people in lobby</div>)
                 index++;
             }
             this.setState({
                 list: list1
             })
         });
+
+        
 
         socket.emit('gather list', 'arbitrary message');
         // settimeout for callback rerender

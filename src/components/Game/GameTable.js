@@ -3,6 +3,11 @@ import ChatLog from '../Chat/ChatLog';
 import GameBoard from './GameBoard';
 
 class GameTable extends React.Component {
+    state = {
+        inProgress: false,
+
+    }
+    
     componentDidMount() {
         // console.log(this.props.match.params);
     }
@@ -12,6 +17,7 @@ class GameTable extends React.Component {
             <div>
                 <div>
                     <GameBoard />
+                    {/* diff component based on gamestate*/}
                 </div>
                 <div>
                     <ChatLog match={this.props.match} />

@@ -1,4 +1,5 @@
 export default {
-    SERVER_URL: process.env.REACT_APP_SERVER_URL || 'localhost:8000',
-    SOCKET_PATH: process.env.REACT_APP_SOCKET_PATH || '/myownpath'
+    API_ENDPOINT: process.env.REACT_APP_SERVER_URL || 'http://localhost:8000/api',
+    API_KEY: process.env.REACT_APP_API_KEY || 'gofish-jwt-token',
+    SOCKET_PATH: process.env.REACT_APP_SOCKET_PATH || '/myownpath',
 }

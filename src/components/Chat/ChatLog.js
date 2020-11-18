@@ -35,7 +35,11 @@ class ChatLog extends React.Component {
                 room: retObj.room,
                 players: players,
                 connected: true,
+                messages: [...this.state.messages, retObj.message],
             })
+        })
+        socket.on('gameFull', (message) => {
+            alert(message);
         })
 
         // socket.on('serverResponse', (obj) => {
@@ -55,22 +59,27 @@ class ChatLog extends React.Component {
         socket.emit('serverMessage', userObj);
     }
 
-    onExClick = () => {
+    onJoinServerClick = () => {
         const room = this.props.match.params[0];
         /* ROOM ID WILL BE BASED ON THIS ^ */
         const username = 'Michael';
-        socket.emit('joinServer', {room, username});
+        const token = TokenService.getAuthToken();
+        socket.emit('joinServer', {room, username, token});
+        
     }
     
 
     render() {
+        const messagesArr = this.state.messages.map((el, index) => {
+        return <div key={index}>{el}</div>
+        })
         return (
             <div>
                 <div>
                     {this.state.room}
                 </div>
                 <div>
-                    {this.state.messages}
+                    {messagesArr}
                 </div>
                 <form onSubmit={event => this.onSubmit(event)}>
                     <input type="text" id="input-message"/>
@@ -78,7 +87,7 @@ class ChatLog extends React.Component {
                     disabled={!this.state.connected}
                     type="submit">Send Message</button>
                 </form>
-                <button onClick={() => this.onExClick()}>Join Server</button>
+                <button onClick={() => this.onJoinServerClick()}>Join Server</button>
                 <div>
                     {this.state.players}
                 </div>
