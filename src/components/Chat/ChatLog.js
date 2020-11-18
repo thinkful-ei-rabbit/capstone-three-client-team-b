@@ -28,7 +28,7 @@ class ChatLog extends React.Component {
         socket.on('serverResponse', (retObj) => {
             const players = retObj.players.map(el => {
                 // el.id, el.name, .room
-            return <div>{el.nickname}, {el.id}</div>
+            return <div>{el.playerName}, {el.id}</div>
             })
             
             this.setState({
@@ -62,10 +62,18 @@ class ChatLog extends React.Component {
     onJoinServerClick = () => {
         const room = this.props.match.params[0];
         /* ROOM ID WILL BE BASED ON THIS ^ */
-        const username = 'Michael';
-        const token = TokenService.getAuthToken();
-        socket.emit('joinServer', {room, username, token});
-        
+        const playerName = 'Michael'; // context.user.playerName
+        const user_id = null; // context.user.user_id
+        const avatarLink = null; // context.user.avatarLink
+
+        const userObj = {
+            room, 
+            playerName,
+            user_id,
+            avatarLink,
+        }
+
+        socket.emit('joinServer', userObj);
     }
     
 
