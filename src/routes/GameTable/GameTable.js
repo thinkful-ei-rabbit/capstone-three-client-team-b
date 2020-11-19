@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import Deck from '../../components/Deck/Deck';
 import { Section, Button } from '../../components/Utils/Utils';
+import UserContext from '../../contexts/UserContext';
+import GameTableSeat from '../../components/GameTableSeat/GameTableSeat';
 
 import './GameTable.css';
 
 export default class GameTable extends Component {
+  static contextType = UserContext;
+
   state = {
     players: [
       {
-        playerName: 'host',
+        playerName: 'player1',
         playerSeat: 1,
         playerHand: [],
-        currentPlayer: false,
+        currentPlayer: true,
         requestedPlayer: '',
         requestedCard: '',
       },
       {
-        playerName: 'friend',
+        playerName: 'player2',
         playerSeat: 2,
         playerHand: [],
-        currentPlayer: true,
+        currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
       },
@@ -83,6 +87,15 @@ export default class GameTable extends Component {
     deck.cards.shift()
     this.setState({ players, deck })
   }
+  countPlayers = () => {
+    let count = 0;
+    for (let i = 0; i < this.state.players.length; i++) {
+      if (this.state.players[i].playerName) {
+        count++;
+      }
+    }
+    return count;
+  };
 
   startGame = () => {
     const { players } = this.state;
@@ -97,12 +110,27 @@ export default class GameTable extends Component {
   };
 
   render() {
+    const { players } = this.state;
+    const count = this.countPlayers();
     return (
-      <section>
+      <>
+        <Section className="game-table">
+          {players
+            .filter((player) => player.playerName)
+            .map((player) => {
+              return (
+                <GameTableSeat
+                  key={player.playerSeat}
+                  player={player}
+                  count={count}
+                />
+              );
+            })}
+        </Section>
         <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
         <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
-        <Button disabled={this.state.inProgress === false} onClick={this.gofish}>Draw</Button>
-      </section>
+        <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button>
+      </>
     );
   }
 }

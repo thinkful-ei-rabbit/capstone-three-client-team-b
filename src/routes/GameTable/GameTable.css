@@ -1,0 +1,15 @@
+.game-table {
+  background-color: darkgreen;
+  border: 1px solid darkgreen;
+  margin: 10px;
+  padding: 20px 0;
+  min-height: 400px;
+  position: relative;
+}
+
+@media all and (min-width: 600px) {
+  .game-table {
+    width: 800px;
+    height: 600px;
+  }
+}

@@ -3,7 +3,6 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 import { Section } from '../../components/Utils/Utils';
 
 export default class LoginPage extends Component {
-
   static defaultProps = {
     location: {},
     history: {
@@ -11,11 +10,9 @@ export default class LoginPage extends Component {
     },
   };
 
-  handleLoginSuccess = (userData) => {
-    console.log(userData);
+  handleLoginSuccess = () => {
     const { history } = this.props;
     history.push(`/`);
-    // update context with user information
   };
 
   render() {
