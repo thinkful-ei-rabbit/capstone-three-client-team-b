@@ -11,6 +11,7 @@ class ChatLog extends React.Component {
     state = {
         messages: [],
         connected: false,
+        asked: false,
     }
 
     static contextType = UserContext;
@@ -24,21 +25,17 @@ class ChatLog extends React.Component {
             // path will be based on url
         });
         socket.on('messageResponse', (msg) => {
-                // individual message response
+            // individual message response
             msg = <div key={count}>{msg}</div>;
             count++;
-            this.setState({messages: [...this.state.messages, msg]})
+            this.setState({ messages: [...this.state.messages, msg] })
         })
 
         socket.on('serverResponse', (retObj) => {
-            const players = retObj.players.map(el => {
-                // el.id, el.name, .room
-            return <div>{el.playerName}, {el.id}</div>
-            })
-            
             this.setState({
+                self: (this.state.self) ? this.state.self : retObj.self,
                 room: retObj.room,
-                players: players,
+                players: retObj.players,
                 connected: true,
                 messages: [...this.state.messages, retObj.message],
             })
@@ -47,67 +44,61 @@ class ChatLog extends React.Component {
             alert(message);
         })
 
-        // socket.on('serverResponse', (obj) => {
-        //     this.props.history.push(obj.urlEndpoint)
-        // })
+        socket.on('rank request from player', (requestObj) => {
+            this.setState({ asked: requestObj })
+        })
+
+        socket.on('go fish', (reqObj) => {
+            const { asker, requested, rankReq } = reqObj;
+            console.log(`${requested} did not have a ${rankReq}, sorry ${asker}.`)
+        })
+
+        socket.on('correct rank return', (gameObj) => {
+            const { requested, asker, rankReq, CARD } = gameObj;
+            // gameObj returned, 
+            // requested, asker(self), reqRank, CARD
+
+            // add CARD to hand
+            // check for books
+            // display next turn
+            console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
+        })
+
+
+        // map out server calls for tomorrow
+        // CLIENT RESPONSES =======
+
         /*
-            map out server calls for tomorrow
-            CLIENT RESPONSES =======
-
-            socket.on('go fish', (reqObj) => {
-                drawTopCard(selfId)
-                nextTurn()
-            })
-            socket.on('correct rank return', () => {
-                gameObj returned, 
-                requested, asker(self), reqRank, CARD
-
-                add CARD to hand
-                check for books
-                display next turn
-            })
-            socket.on('rank request from player', () => {
-                asker, requested(self), reqRank,
-                from would like to know if you (to) have reqRank
-
-                not have reqRank > emit 'rank request denial'
-                do have reqRank > {
-                    remove from hand
-                    emit 'rank request accept'
-                }
-            })
-
-
-
-            CLIENT EMITS ============
-            socket.emit('request rank from player', () => {
-                user_id
-                requestId (socket.id)
-                requestedRank
-            })
-
-            socket.emit('rank request denial', () => {
-                const requested = requestObj.user_id;
-                const asker = requestObj.request_id;
-                const reqRank = requestObj.requested_rank;
-
-
-                requested does NOT have aany reqRank's, asker must go fish
-            })
-            socket.emit('rank request accept', () => {
-                requested, asker, reqRank
-                user DOES have card
-
-                requested gives asker CARD, asked for reqRank
-
-            })
-
-
-            socket.emit('next turn click', () => {
-
-            })
-
-        */
+        
+                    CLIENT EMITS ============
+                    socket.emit('request rank from player', () => {
+                        user_id
+                        requestId (socket.id)
+                        requestedRank
+                    })
+        
+                    socket.emit('rank request denial', () => {
+                        const requested = requestObj.user_id;
+                        const asker = requestObj.request_id;
+                        const reqRank = requestObj.requested_rank;
+        
+        
+                        requested does NOT have aany reqRank's, asker must go fish
+                    })
+                    socket.emit('rank request accept', () => {
+                        requested, asker, reqRank
+                        user DOES have card
+        
+                        requested gives asker CARD, asked for reqRank
+        
+                    })
+        
+        
+                    socket.emit('next turn click', () => {
+        
+                    })
+        
+                */
     }
 
     onSubmit = (event) => {
@@ -125,26 +116,72 @@ class ChatLog extends React.Component {
     onJoinServerClick = () => {
         const room = this.props.match.params[0];
         /* ROOM ID WILL BE BASED ON THIS ^ */
-        const playerName = this.context.userData.player; 
+        const playerName = this.context.userData.player;
         const user_id = this.context.userData.id; // context.user.user_id
         const avatarLink = this.context.userData.avatar; // context.user.avatarLink
 
-        
+
         const userObj = {
-            room, 
+            room,
             playerName,
             user_id,
             avatarLink,
         }
-        
-        console.log(userObj);
+
         socket.emit('joinServer', userObj);
     }
-    
+
+    askOtherPlayer(e) {
+        e.preventDefault();
+        const requestedId = e.target['to-ask-id'].value;
+        const rankReq = e.target['rank-requested'].value;
+        const user_id = this.state.self.socket_id;
+
+        socket.emit('request rank from player', {
+            user_id,
+            requestedId,
+            rankReq,
+        })
+    }
+
+    yesResponse() {
+        // console.log(this.state.asked);
+
+        // VALIDATE 
+
+        const CARD = this.state.asked.rankReq// this.hand.splice(index, 1);
+        socket.emit('rank request accept', {
+            ...this.state.asked, CARD,
+        })
+
+
+        // after yes or no click, return to basic screen
+        this.setState({ asked: null })
+    }
+
+    noResponse() {
+        // console.log(this.state.asked);
+
+        // VALIDATE
+
+        socket.emit('rank request denial', {
+            ...this.state.asked,
+        })
+
+        // after yes or no click, return to basic screen
+        this.setState({ asked: null })
+    }
 
     render() {
+        let players = [];
+        if (this.state.players) {
+            players = this.state.players.map((el, index) => {
+                // el.id, el.name, .room
+                return <div key={index}>{el.playerName}, {el.id}</div>
+            })
+        }
         const messagesArr = this.state.messages.map((el, index) => {
-        return <div key={index}>{el}</div>
+            return <div key={index}>{el}</div>
         })
         return (
             <div>
@@ -155,14 +192,24 @@ class ChatLog extends React.Component {
                     {messagesArr}
                 </div>
                 <form onSubmit={event => this.onSubmit(event)}>
-                    <input type="text" id="input-message"/>
-                    <button 
-                    disabled={!this.state.connected}
-                    type="submit">Send Message</button>
+                    <input type="text" id="input-message" />
+                    <button
+                        disabled={!this.state.connected}
+                        type="submit">Send Message</button>
                 </form>
                 <button onClick={() => this.onJoinServerClick()}>Join Server</button>
+                <form onSubmit={(e) => this.askOtherPlayer(e)}>
+                    <input placeholder="id of player" type="text" id="to-ask-id" />
+                    <input placeholder="rank requested" type="text" id="rank-requested" />
+                    <button type="submit">Ask Other Player</button>
+                </form>
+                {
+                    this.state.asked && <div>
+                        <button onClick={() => this.yesResponse()}>Yes</button>
+                        <button onClick={() => this.noResponse()}>No</button>
+                    </div>}
                 <div>
-                    {this.state.players}
+                    {players}
                 </div>
             </div>
         )
