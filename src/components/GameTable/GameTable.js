@@ -91,9 +91,12 @@ export default class GameTable extends Component {
 
     socket.on('game start RESPONSE', (hand) => {
       console.log(hand)
+      // DO SOMETHING WITH hand
+      // yikes?
 
+
+      
       this.setState({
-        players:
         inProgress: true,
       });
     })
