@@ -10,7 +10,7 @@ class TableList extends React.Component {
   };
 
   componentDidMount() {
-    socket = socketClient(`${config.API_ENDPOINT}`, {
+    socket = socketClient(`${config.API_SOCKET_ENDPOINT}`, {
       path: config.SOCKET_PATH,
     });
 
