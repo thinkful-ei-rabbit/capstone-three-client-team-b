@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Deck from '../../components/Deck/Deck';
-import { Section, Button } from '../../components/Utils/Utils';
+import Deck from '../Deck/Deck';
+import { Section, Button } from '../Utils/Utils';
 import UserContext from '../../contexts/UserContext';
-import GameTableSeat from '../../components/GameTableSeat/GameTableSeat';
+import GameTableSeat from '../GameTableSeat/GameTableSeat';
+import ChatLog from '../Chat/ChatLog';
 
 import './GameTable.css';
 
@@ -48,12 +49,6 @@ export default class GameTable extends Component {
     inProgress: false,
     ready: false,
   };
-  // assign seat to player joining.  host is 'playerOne', first guest is 'playerTwo', etc
-  // "deal" 7 cards to each player on start game click
-  // prevent join after start is clicked and game 'inProgress'
-  // random player starts, receives 'takingAction' true
-  // when takingAction === true, click player to ask for a card, pick a card from your hand
-  // trigger speaking bubble asking player name for card after request made
 
   createDeck = () => {
     const deck = new Deck();
@@ -109,6 +104,10 @@ export default class GameTable extends Component {
     });
   };
 
+  requestCard = () => {
+    console.log('hi');
+  };
+
   render() {
     const { players } = this.state;
     const count = this.countPlayers();
@@ -123,6 +122,7 @@ export default class GameTable extends Component {
                   key={player.playerSeat}
                   player={player}
                   count={count}
+                  requestCard={this.requestCard}
                 />
               );
             })}
@@ -130,6 +130,7 @@ export default class GameTable extends Component {
         <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
         <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
         <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button>
+        <ChatLog match={this.props.match} />
       </>
     );
   }

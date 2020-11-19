@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from '../Utils/Utils';
 
 import './GameTableSeat.css';
 
@@ -6,7 +7,11 @@ export default class GameTableSeat extends Component {
   renderLoggedInUser = (player) => {
     return player.playerHand.map((card) => {
       return (
-        <div className="player-card" key={card.value + card.suit}>
+        <div
+          className="player-card"
+          key={card.value + card.suit}
+          onClick={() => this.props.requestCard()}
+        >
           {card.value}
           {card.suit}
         </div>
@@ -21,7 +26,10 @@ export default class GameTableSeat extends Component {
         <div className="player-hand">
           {player.playerHand.map((card) => {
             return (
-              <div className="player-card" key={card.value + card.suit}>
+              <div
+                className="player-card-opponent"
+                key={card.value + card.suit}
+              >
                 back
               </div>
             );
