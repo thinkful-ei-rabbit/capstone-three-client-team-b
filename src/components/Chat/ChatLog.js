@@ -114,7 +114,7 @@ class ChatLog extends React.Component {
     }
 
     onJoinServerClick = () => {
-        const room = this.props.match.params[0];
+        const room = this.props.match.params.game_id;
         /* ROOM ID WILL BE BASED ON THIS ^ */
         const playerName = this.context.userData.player;
         const user_id = this.context.userData.id; // context.user.user_id
