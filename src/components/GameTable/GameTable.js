@@ -52,13 +52,10 @@ export default class GameTable extends Component {
     ],
     deck: [],
     inProgress: false,
-<<<<<<< HEAD
     ready: false,
-=======
     chatLog: {
       messages: [],
     },
->>>>>>> f5c75d59dd9de0bf9a2a48748352d26b7343cc0f
   };
 
 
