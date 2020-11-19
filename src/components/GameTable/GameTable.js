@@ -283,7 +283,6 @@ export default class GameTable extends Component {
             })}
         </Section>
 
-        <ChatLog match={this.props.match} />
         <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
         <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
         <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button>
