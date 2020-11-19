@@ -8,10 +8,7 @@ export default class LandingPage extends Component {
   render() {
     return (
       <Section>
-        <h1>Hello!</h1>
-        <Link to="/table">
-          <Button>Table view</Button>
-        </Link>
+        <h1>Login!</h1>
       </Section>
     );
   }

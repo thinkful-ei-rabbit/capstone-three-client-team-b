@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import GameTable from '../../components/Game/GameTable';
-import TableList from '../../components/Game/TableList';
+import GameTable from '../../components/GameTable/GameTable';
+import TableList from '../../components/TableList/TableList';
 import UserContext from '../../contexts/UserContext';
 
 class GamePage extends React.Component {
@@ -27,25 +27,19 @@ class GamePage extends React.Component {
   render() {
     return (
       <div>
-        {this.state.ingame ? (
-          <Route path={'/game/*'} component={GameTable} />
-        ) : (
-          <div>
-            <button onClick={() => this.hostGame()}>Host a game</button>
-            <form onSubmit={(e) => this.joinGame(e)}>
-              <input
-                type="text"
-                id="room_request"
-                name="roomRequest"
-                placeholder="know the room id?"
-              />
-              <button type="submit">Join a game</button>
-            </form>
-            <div>
-              <TableList />
-            </div>
-          </div>
-        )}
+        <button onClick={() => this.hostGame()}>Host a game</button>
+        <form onSubmit={(e) => this.joinGame(e)}>
+          <input
+            type="text"
+            id="room_request"
+            name="roomRequest"
+            placeholder="know the room id?"
+          />
+          <button type="submit">Join a game</button>
+        </form>
+        <div>
+          <TableList />
+        </div>
       </div>
     );
   }

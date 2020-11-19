@@ -7,7 +7,7 @@ import LoginPage from '../../routes/LoginPage/LoginPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import LandingPage from '../../routes/LandingPage/LandingPage';
 import GamePage from '../../routes/GamePage/GamePage';
-import GameTable from '../../routes/GameTable/GameTable';
+import GameTable from '../GameTable/GameTable';
 
 import './App.css';
 
@@ -22,11 +22,11 @@ export default class App extends Component {
         </header>
         <main>
           <Switch>
-            <Route path={'/game'} component={GamePage} />
             <Route exact path={'/'} component={LandingPage} />
             <PublicOnlyRoute path={'/login'} component={LoginPage} />
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
-            <Route path={'/table'} component={GameTable} />
+            <PrivateRoute exact path={'/game'} component={GamePage} />
+            <PrivateRoute path={'/game/:game_id'} component={GameTable} />
           </Switch>
         </main>
       </div>
