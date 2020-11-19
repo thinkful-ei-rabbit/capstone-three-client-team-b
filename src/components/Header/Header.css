@@ -1,0 +1,8 @@
+.header-links {
+  text-align: right;
+}
+
+.header-links a {
+  text-decoration: none;
+  margin-right: 10px;
+}

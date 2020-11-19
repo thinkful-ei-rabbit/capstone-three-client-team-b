@@ -9,7 +9,7 @@ export default class GameTable extends Component {
   state = {
     players: [
       {
-        playerName: 'host',
+        playerName: 'player1',
         playerSeat: 1,
         playerHand: [],
         currentPlayer: false,
@@ -17,7 +17,7 @@ export default class GameTable extends Component {
         requestedCard: '',
       },
       {
-        playerName: 'friend',
+        playerName: 'player2',
         playerSeat: 2,
         playerHand: [],
         currentPlayer: false,
@@ -72,6 +72,16 @@ export default class GameTable extends Component {
     });
   };
 
+  countPlayers = () => {
+    let count = 0;
+    for (let i = 0; i < this.state.players.length; i++) {
+      if (this.state.players[i].playerName) {
+        count++;
+      }
+    }
+    return count;
+  };
+
   startGame = () => {
     const { players } = this.state;
     for (let i = 0; i < players.length; i++) {
@@ -86,17 +96,26 @@ export default class GameTable extends Component {
 
   render() {
     const { players } = this.state;
+    const count = this.countPlayers();
     return (
-      <Section className="game-table">
-        {players
-          .filter((player) => player.playerName)
-          .map((player) => {
-            return <GameTableSeat key={player.playerSeat} player={player} />;
-          })}
+      <>
+        <Section className="game-table">
+          {players
+            .filter((player) => player.playerName)
+            .map((player) => {
+              return (
+                <GameTableSeat
+                  key={player.playerSeat}
+                  player={player}
+                  count={count}
+                />
+              );
+            })}
+        </Section>
         <Button onClick={() => this.createDeck()}>Ready</Button>
         <Button onClick={() => this.startGame()}>Start Game</Button>
         {/* <Button onClick={(e) => this.drawCard(e.target)}>Draw</Button> */}
-      </Section>
+      </>
     );
   }
 }
