@@ -89,6 +89,16 @@ export default class GameTable extends Component {
       })
     })
 
+    socket.on('game start RESPONSE', (hand) => {
+      console.log(hand)
+
+      this.setState({
+        players:
+        inProgress: true,
+      });
+    })
+
+
     socket.on('gameFull', (message) => {
       alert(message);
     })
@@ -117,6 +127,8 @@ export default class GameTable extends Component {
       // display next turn
       console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
     })
+
+
   }
 
   onChatMessageSubmit = (event) => {
@@ -204,59 +216,68 @@ export default class GameTable extends Component {
 
 
 
-  createDeck = () => {
-    const deck = new Deck();
-    deck.shuffle();
+  gameReadyCheck = () => {
 
     this.setState({
-      deck: deck, ready: true
+      ready: true
     });
+
   };
 
-  drawCard = (i) => {
-    const deck = this.state.deck;
-    const drawnCard = deck.draw();
-    const { players } = this.state;
+  // drawCard = (i) => {
+  //   // socket.emit('drawTopCard')
+  //   const deck = this.state.deck;
+  //   const drawnCard = deck.draw();
+  //   const { players } = this.state;
 
-    players[i].playerHand.push(drawnCard);
+  //   players[i].playerHand.push(drawnCard);
 
-    this.setState({
-      players,
-    });
-  };
+  //   this.setState({
+  //     players,
+  //   });
+  // };
 
   gofish = () => {
-    const players = this.state.players
-    const deck = this.state.deck
-    players.map(player => {
-      if (player.currentPlayer === true) {
-        return player.playerHand.push(deck.cards[0])
-      }
-    })
-    deck.cards.shift()
-    this.setState({ players, deck })
+    // socket.emit('go fish call', userObj)
+    // update player hand with new card
+    
+    // const players = this.state.players
+    // const deck = this.state.deck
+    // players.map(player => {
+    //   if (player.currentPlayer === true) {
+    //     return player.playerHand.push(deck.cards[0])
+    //   }
+    // })
+    // deck.cards.shift()
+    // this.setState({ players, deck })
   }
+  
   countPlayers = () => {
-    let count = 0;
-    for (let i = 0; i < this.state.players.length; i++) {
-      if (this.state.players[i].playerName) {
-        count++;
-      }
-    }
-    return count;
+    // let count = 0;
+    // for (let i = 0; i < this.state.players.length; i++) {
+    //   if (this.state.players[i].playerName) {
+    //     count++;
+    //   }
+    // }
+    // return count;
+    
+    // return this.state.players.length
   };
 
   startGame = () => {
     // needs to outsource deck creation
-    const { players } = this.state;
-    for (let i = 0; i < players.length; i++) {
-      while (players[i].playerName && players[i].playerHand.length < 7) {
-        this.drawCard(i);
-      }
-    }
-    this.setState({
-      inProgress: true,
-    });
+    const { players } = this.state.chatLog;
+    console.log(players);
+    // for (let i = 0; i < players.length; i++) {
+    //   while (players[i].playerName && players[i].playerHand.length < 7) {
+    //     this.drawCard(i);
+    //   }
+    // }
+
+    socket.emit('start game', players)
+    // this.setState({
+    //   inProgress: true,
+    // });
   };
 
   requestCard = () => {
@@ -283,7 +304,7 @@ export default class GameTable extends Component {
             })}
         </Section>
 
-        <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
+        <Button disabled={this.state.inProgress === true} onClick={() => this.gameReadyCheck()}>Ready</Button>
         <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
         <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button>
         <ChatLog
