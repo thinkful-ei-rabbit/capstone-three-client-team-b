@@ -253,7 +253,7 @@ export default class GameTable extends Component {
 
   onCardChoice = (card) => {
     console.log(card);
-    
+
 
     currentSeatOfDOMPlayer.requestedCard = card;
     console.log(currentSeatOfDOMPlayer);
@@ -287,6 +287,57 @@ export default class GameTable extends Component {
   countPlayers = () => {
 
   };
+
+  setsChecker = (i) => {
+    const { players, deck } = this.state;
+    //const books = []; //place books in state?
+
+    players.map(player => {
+      //if it's my turn
+      if (player.currentPlayer === true) {
+        console.log("player's hand:", player.playerHand)
+        //creates a new book arr
+        const book = player.playerHand.filter(
+          cards =>
+            cards.value === 1 ||
+            cards.value === 2 ||
+            cards.value === 3 ||
+            cards.value === 4 ||
+            cards.value === 5 ||
+            cards.value === 6 ||
+            cards.value === 7 ||
+            cards.value === 8 ||
+            cards.value === 9 ||
+            cards.value === 10 ||
+            cards.value === 11 ||
+            cards.value === 12 ||
+            cards.value === 13
+        )
+        //book length counter
+        const count = book.length
+        console.log("count:", count)
+        //should be if count === 4, but just greater than 2 is for testing
+        if (count >= 2) {
+          console.log("Nice, You made a book!\n", book)
+          //alerts user that they made a book
+          alert("Nice you made a book!")
+
+          //to-do: update player's hand, maybe with an updateHand function?
+
+          return book
+        }
+        else {
+          console.log("no books yet")
+        }
+      }
+
+    })
+
+
+    this.setState({
+      players,
+    });
+  }
 
   startGame = () => {
     const { players } = this.state.chatLog;
@@ -345,6 +396,15 @@ export default class GameTable extends Component {
         </Section>
 
         <Button
+          disabled={this.state.inProgress === false}
+          onClick={() => this.setsChecker()}
+        >
+          Do I have any sets?
+        </Button>
+        <br />
+
+
+        <Button
           disabled={this.state.inProgress === true}
           onClick={() => this.gameReadyCheck()}
         >
@@ -374,7 +434,7 @@ export default class GameTable extends Component {
             (currentSeatOfDOMPlayer)
               ? currentSeatOfDOMPlayer.requestedCard
               : ''
-            }
+          }
           yesResponse={this.yesResponse}
           noResponse={this.noResponse}
           upperState={this.state.chatLog}
