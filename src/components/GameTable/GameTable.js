@@ -187,7 +187,7 @@ export default class GameTable extends Component {
     const player = currentSeatOfDOMPlayer;
 
     // VALIDATE 
-    const cardInHand = player.playerHand.find(el => el.value == this.state.chatLog.asked.rankReq);
+    const cardInHand = player.playerHand.find(el => el.value === this.state.chatLog.asked.rankReq);
 
     if (cardInHand) {
       const index = player.playerHand.indexOf(cardInHand);
@@ -213,7 +213,7 @@ export default class GameTable extends Component {
 
     // VALIDATE
     const player = currentSeatOfDOMPlayer;
-    const cardInHand = player.playerHand.find(el => el.value == this.state.chatLog.asked.rankReq);
+    const cardInHand = player.playerHand.find(el => el.value === this.state.chatLog.asked.rankReq);
     if (cardInHand) {
       // const index = player.playerHand.indexOf(cardInHand);
       alert(`You do have a ${this.state.chatLog.asked.rankReq} in hand`)
@@ -289,7 +289,7 @@ export default class GameTable extends Component {
   };
 
   setsChecker = (i) => {
-    const { players, deck } = this.state;
+    const { players } = this.state;
     //const books = []; //place books in state?
 
     players.map(player => {
