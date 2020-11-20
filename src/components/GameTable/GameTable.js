@@ -92,6 +92,16 @@ export default class GameTable extends Component {
       });
     });
 
+    socket.on('seat chosen', (retObj) => {
+        console.log(retObj);
+
+        const updatedPlayers = [...this.state.players];
+
+        updatedPlayers[retObj.seat - 1].playerName = retObj.name;
+
+        this.setState({players: updatedPlayers})
+    })
+
 
     socket.on('game start RESPONSE', (hand) => {
       console.log(hand)
@@ -304,14 +314,16 @@ export default class GameTable extends Component {
   };
 
   claimSeat = (seat) => {
-    let roomPlayers = this.state.chatLog.players;
-    let name = this.context.userData.player;
-    let players = [...this.state.players];
+      let roomPlayers = this.state.chatLog.players;
+      let name = this.context.userData.player;
+      let players = [...this.state.players];
     let player = {
       ...players[seat - 1],
       playerName: this.context.userData.player,
     };
     if (!currentSeatOfDOMPlayer) {
+      // current seat needed to update client hand without
+      // updating all others
       currentSeatOfDOMPlayer = {
         ...players[seat - 1],
         playerName: this.context.userData.player,
@@ -321,9 +333,13 @@ export default class GameTable extends Component {
     this.setState({
       players,
     });
-    socket.emit('claim seat', { name, seat, roomPlayers });
-  };
 
+    console.log(name, seat, roomPlayers)
+    socket.emit('claim seat', { name, seat, roomPlayers });
+  }
+
+
+  
   render() {
     const { players } = this.state;
     const count = this.countPlayers();
