@@ -25,9 +25,23 @@
   height: 2rem;
   width: 1.25rem;
   font-size: 0.75rem;
+  text-align: center;
 }
 
 .player-card:hover {
+  -moz-transform: translate(-2px, -5px);
+  -ms-transform: translate(-2px, -5px);
+  -o-transform: translate(-2px, -5px);
+  -webkit-transform: translate(-2px, -5px);
+  transform: translate(-2px, -5px);
+  box-shadow: #000 2px 5px 10px;
+}
+
+.player-card[type="radio"] {
+  appearance: none;
+}
+
+.player-card[type="radio"]:checked {
   -moz-transform: translate(-2px, -5px);
   -ms-transform: translate(-2px, -5px);
   -o-transform: translate(-2px, -5px);

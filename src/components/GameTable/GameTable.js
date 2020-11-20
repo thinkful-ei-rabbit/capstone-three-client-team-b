@@ -77,6 +77,8 @@ export default class GameTable extends Component {
       })
     })
 
+    this.onPlayerJoin();
+
     socket.on('serverResponse', (retObj) => {
       this.setState({
         self_info: (this.state.self_info) ? this.state.self_info : retObj.self,
@@ -89,15 +91,23 @@ export default class GameTable extends Component {
       })
     })
 
+
     socket.on('game start RESPONSE', (hand) => {
       console.log(hand)
       // DO SOMETHING WITH hand
       // yikes?
+      const player = this.state.players[0]
+
+      player.playerHand = hand.hand;
 
 
-      
+
       this.setState({
         inProgress: true,
+        players: [
+          ...this.state.players,
+          player,
+        ]
       });
     })
 
@@ -121,7 +131,17 @@ export default class GameTable extends Component {
     })
 
     socket.on('correct rank return', (gameObj) => {
+      const player = this.state.players[0];
+
       const { requested, asker, rankReq, CARD } = gameObj;
+      player.playerHand.push(CARD[0])
+
+      this.setState({
+        players: [
+          ...this.state.players,
+          player,
+        ]
+      })
       // gameObj returned, 
       // requested, asker(self), reqRank, CARD
 
@@ -159,45 +179,84 @@ export default class GameTable extends Component {
   }
 
   yesResponse = () => {
-    // console.log(this.state.asked);
+    // console.log(this.state.asked)
+    const player = this.state.players[0];
 
     // VALIDATE 
+    const cardInHand = player.playerHand.find(el => el.value == this.state.chatLog.asked.rankReq);
+    
+    if (cardInHand) {
+      const index = player.playerHand.indexOf(cardInHand);
 
-    const CARD = this.state.chatLog.asked.rankReq// this.hand.splice(index, 1);
-    socket.emit('rank request accept', {
-      ...this.state.chatLog.asked, CARD,
-    })
-
-
-    // after yes or no click, return to basic screen
-    this.setState({
-      chatLog: {
-        ...this.state.chatLog,
-        asked: null
-      }
-    })
+      const CARD = player.playerHand.splice(index, 1);
+      socket.emit('rank request accept', {
+        ...this.state.chatLog.asked, CARD,
+      })
+      // after yes or no click, return to basic screen
+      this.setState({
+        chatLog: {
+          ...this.state.chatLog,
+          asked: null
+        }
+      })
+    }
   }
 
   noResponse = () => {
     // console.log(this.state.asked);
 
     // VALIDATE
+    const player = this.state.players[0]; 
+    const cardInHand = player.playerHand.find(el => el.value == this.state.chatLog.asked.rankReq);
+    if (cardInHand) {
+      // const index = player.playerHand.indexOf(cardInHand);
+      alert(`You do have a ${this.state.chatLog.asked.rankReq} in hand`)
+      // const CARD = player.playerHand.splice(index, 1);
+      // console.log(CARD)
+    } else {
+      socket.emit('rank request denial', {
+        ...this.state.chatLog.asked,
+      })
+      // after yes or no click, return to basic screen
+      this.setState({
+        chatLog: {
+          ...this.state.chatLog,
+          asked: null
+        }
+      })
+    }
+  }
 
-    socket.emit('rank request denial', {
-      ...this.state.chatLog.asked,
-    })
+  onPlayerJoin = () => {
+    const room = this.props.match.params.game_id;
+    /* ROOM ID WILL BE BASED ON THIS ^ */
+    const playerName = this.context.userData.player;
+    const user_id = this.context.userData.id;
+    const avatarLink = this.context.userData.avatar;
 
-    // after yes or no click, return to basic screen
-    this.setState({
-      chatLog: {
-        ...this.state.chatLog,
-        asked: null
-      }
-    })
+    const userObj = {
+      room,
+      playerName,
+      user_id,
+      avatarLink,
+    };
+
+    socket.emit('joinServer', userObj);
   }
 
 
+  onCardChoice = (card) => {
+    console.log(card);
+    const player = this.state.players[0];
+    player.requestedCard = card;
 
+    this.setState({
+      players: [
+        ...this.state.players,
+        player
+      ]
+    })
+  }
 
 
 
@@ -209,60 +268,24 @@ export default class GameTable extends Component {
 
   };
 
-  // drawCard = (i) => {
-  //   // socket.emit('drawTopCard')
-  //   const deck = this.state.deck;
-  //   const drawnCard = deck.draw();
-  //   const { players } = this.state;
-
-  //   players[i].playerHand.push(drawnCard);
-
-  //   this.setState({
-  //     players,
-  //   });
-  // };
 
   gofish = () => {
-    // socket.emit('go fish call', userObj)
-    // update player hand with new card
     
-    // const players = this.state.players
-    // const deck = this.state.deck
-    // players.map(player => {
-    //   if (player.currentPlayer === true) {
-    //     return player.playerHand.push(deck.cards[0])
-    //   }
-    // })
-    // deck.cards.shift()
-    // this.setState({ players, deck })
   }
-  
+
   countPlayers = () => {
-    // let count = 0;
-    // for (let i = 0; i < this.state.players.length; i++) {
-    //   if (this.state.players[i].playerName) {
-    //     count++;
-    //   }
-    // }
-    // return count;
     
-    // return this.state.players.length
   };
 
   startGame = () => {
-    // needs to outsource deck creation
     const { players } = this.state.chatLog;
-    console.log(players);
-    // for (let i = 0; i < players.length; i++) {
-    //   while (players[i].playerName && players[i].playerHand.length < 7) {
-    //     this.drawCard(i);
-    //   }
-    // }
-
-    socket.emit('start game', players)
-    // this.setState({
-    //   inProgress: true,
-    // });
+   
+    if (players.length > 1) {
+      socket.emit('start game', players)
+    } else {
+      alert('Not enough players in room, need 2 or more');
+    }
+    
   };
 
   requestCard = () => {
@@ -277,12 +300,13 @@ export default class GameTable extends Component {
         <Section className="game-table">
           {players
             .filter((player) => player.playerName)
-            .map((player) => {
+            .map((player, index) => {
               return (
                 <GameTableSeat
-                  key={player.playerSeat}
+                  key={index}
                   player={player}
                   count={count}
+                  onCardChoice={this.onCardChoice}
                   requestCard={this.requestCard}
                 />
               );
@@ -291,11 +315,12 @@ export default class GameTable extends Component {
 
         <Button disabled={this.state.inProgress === true} onClick={() => this.gameReadyCheck()}>Ready</Button>
         <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
-        <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button>
+        {/* <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button> */}
         <ChatLog
           match={this.props.match}
           onChatMessageSubmit={this.onChatMessageSubmit}
           askAnotherPlayer={this.askOtherPlayer}
+          requestedCard={this.state.players[0].requestedCard}
           yesResponse={this.yesResponse}
           noResponse={this.noResponse}
           upperState={this.state.chatLog}

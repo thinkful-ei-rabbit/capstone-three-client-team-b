@@ -129,7 +129,6 @@ class ChatLog extends React.Component {
           );
         });
       }
-      console.log(this.state.messages);
       messagesArr = this.state.messages.map((el, index) => {
         return <div key={index}>{el}</div>;
       });
@@ -146,7 +145,7 @@ class ChatLog extends React.Component {
         </form>
         <form onSubmit={(e) => this.props.askAnotherPlayer(e)}>
           <input placeholder="id of player" type="text" id="to-ask-id" />
-          <input placeholder="rank requested" type="text" id="rank-requested" />
+          <input placeholder="rank requested" type="text" id="rank-requested" value={this.props.requestedCard} readOnly/>
           <button type="submit">Ask Other Player</button>
         </form>
         {this.state.asked && (

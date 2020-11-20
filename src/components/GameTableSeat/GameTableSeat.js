@@ -5,16 +5,22 @@ import './GameTableSeat.css';
 
 export default class GameTableSeat extends Component {
   renderLoggedInUser = (player) => {
-    return player.playerHand.map((card) => {
+    return player.playerHand.map((card, index) => {
       return (
-        <div
+        <div key={index}>
+
+        <input
+          type="radio"
           className="player-card"
-          key={card.value + card.suit}
-          onClick={() => this.props.requestCard()}
-        >
+          id={card.value + card.suit}
+          value={card.value}
+          onChange={(e) => this.props.onCardChoice(e.target.value)}
+          />
+        <label>
           {card.value}
           {card.suit}
-        </div>
+        </label>
+          </div>
       );
     });
   };

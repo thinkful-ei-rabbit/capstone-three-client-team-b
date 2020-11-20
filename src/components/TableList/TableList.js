@@ -56,20 +56,7 @@ export default class TableList extends Component {
   };
 
   onJoinServerClick = (game) => {
-    const room = game;
-    /* ROOM ID WILL BE BASED ON THIS ^ */
-    const playerName = this.context.userData.player;
-    const user_id = this.context.userData.id;
-    const avatarLink = this.context.userData.avatar;
-
-    const userObj = {
-      room,
-      playerName,
-      user_id,
-      avatarLink,
-    };
-
-    socket.emit('joinServer', userObj);
+    
     this.props.history.push(`/game/${game}`);
   };
 
