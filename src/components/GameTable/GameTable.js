@@ -269,21 +269,20 @@ export default class GameTable extends Component {
         console.log("player's hand:", player.playerHand)
         console.log("player's hand2:", player.playerHand.indexOf("Card"))
 
-        const book = player.playerHand.filter(
-          cards =>
-            cards.value === 1 ||
-            cards.value === 2 ||
-            cards.value === 3 ||
-            cards.value === 4 ||
-            cards.value === 5 ||
-            cards.value === 6 ||
-            cards.value === 7 ||
-            cards.value === 8 ||
-            cards.value === 9 ||
-            cards.value === 10 ||
-            cards.value === 11 ||
-            cards.value === 12 ||
-            cards.value === 13
+        const book = player.playerHand.filter(cards =>
+          cards.value === 1 ||
+          cards.value === 2 ||
+          cards.value === 3 ||
+          cards.value === 4 ||
+          cards.value === 5 ||
+          cards.value === 6 ||
+          cards.value === 7 ||
+          cards.value === 8 ||
+          cards.value === 9 ||
+          cards.value === 10 ||
+          cards.value === 11 ||
+          cards.value === 12 ||
+          cards.value === 13
         )
         const count = book.length
         console.log("count:", count)
