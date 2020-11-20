@@ -130,24 +130,6 @@ export default class GameTable extends Component {
     socket.emit('serverMessage', userObj);
   }
 
-  onJoinServerClick = () => {
-    const room = this.props.match.params.game_id;
-    /* ROOM ID WILL BE BASED ON THIS ^ */
-    const playerName = this.context.userData.player;
-    const user_id = this.context.userData.id; // context.user.user_id
-    const avatarLink = this.context.userData.avatar; // context.user.avatarLink
-
-
-    const userObj = {
-      room,
-      playerName,
-      user_id,
-      avatarLink,
-    }
-
-    socket.emit('joinServer', userObj);
-  }
-
   askOtherPlayer = (e) => {
     e.preventDefault();
     const requestedId = e.target['to-ask-id'].value;
@@ -289,7 +271,6 @@ export default class GameTable extends Component {
         <ChatLog
           match={this.props.match}
           onChatMessageSubmit={this.onChatMessageSubmit}
-          onJoinServerClick={this.onJoinServerClick}
           askAnotherPlayer={this.askOtherPlayer}
           yesResponse={this.yesResponse}
           noResponse={this.noResponse}
