@@ -11,19 +11,18 @@ export default class GameTableSeat extends Component {
     return player.playerHand.map((card, index) => {
       return (
         <div key={index}>
-
-        <input
-          type="radio"
-          className="player-card"
-          id={card.value + card.suit}
-          value={card.value}
-          onChange={(e) => this.props.onCardChoice(e.target.value)}
+          <input
+            type="radio"
+            className="player-card"
+            id={card.value + card.suit}
+            value={card.value}
+            onChange={(e) => this.props.onCardChoice(e.target.value)}
           />
-        <label>
-          {card.value}
-          {card.suit}
-        </label>
-          </div>
+          <label>
+            {card.value}
+            {card.suit}
+          </label>
+        </div>
       );
     });
   };
@@ -49,10 +48,10 @@ export default class GameTableSeat extends Component {
   };
 
   render() {
-    const { player, count } = this.props;
+    const { player, seated, count } = this.props;
     return (
       <>
-        {!player.playerName ? (
+        {!player.playerName && !seated ? (
           <button
             value={player.playerSeat}
             onClick={(e) => this.props.claimSeat(e.target.value)}
