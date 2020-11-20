@@ -185,7 +185,7 @@ export default class GameTable extends Component {
 
     // VALIDATE
     const cardInHand = player.playerHand.find(
-      (el) => el.value == this.state.chatLog.asked.rankReq
+      (el) => el.value === this.state.chatLog.asked.rankReq
     );
 
     if (cardInHand) {
@@ -214,7 +214,7 @@ export default class GameTable extends Component {
     // VALIDATE
     const player = currentSeatOfDOMPlayer;
     const cardInHand = player.playerHand.find(
-      (el) => el.value == this.state.chatLog.asked.rankReq
+      (el) => el.value === this.state.chatLog.asked.rankReq
     );
     if (cardInHand) {
       // const index = player.playerHand.indexOf(cardInHand);
@@ -275,9 +275,9 @@ export default class GameTable extends Component {
     });
   };
 
-  gofish = () => {};
+  gofish = () => { };
 
-  countPlayers = () => {};
+  countPlayers = () => { };
 
   setsChecker = (i) => {
     const { players } = this.state;
