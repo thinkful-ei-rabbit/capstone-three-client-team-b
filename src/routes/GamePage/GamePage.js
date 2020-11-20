@@ -2,11 +2,7 @@ import React from 'react';
 import TableList from '../../components/TableList/TableList';
 
 class GamePage extends React.Component {
-  state = {
-    ingame: false,
-  };
-
-  render(props) {
+  render() {
     return (
       <div>
         <TableList {...this.props} />
