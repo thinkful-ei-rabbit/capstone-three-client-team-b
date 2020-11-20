@@ -112,9 +112,20 @@ export default class GameTable extends Component {
       // gameObj returned, 
       // requested, asker(self), reqRank, CARD
 
-      // add CARD to hand
+      // add CARD to hand 
+
       // check for books
-      // display next turn
+      /*
+      if (count === 4) {
+        //take out books
+        //update hand display
+        //where do books show up on the screen? do they show up on the screen or will there just be a "book won count"?
+      }
+      maybe have this logic in a helper function called takeOutSets
+      */
+
+      // display next turn 
+      //maybe this could look similar to how the chat displays "userX is typing", but instead "it's {playerX}'s turn"
       console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
     })
   }
@@ -130,12 +141,14 @@ export default class GameTable extends Component {
     socket.emit('serverMessage', userObj);
   }
 
+  //clicking this breaks the game, says "Cannot read property 'socket_id' of undefined"
   askOtherPlayer = (e) => {
+    // console.log("test")
     e.preventDefault();
     const requestedId = e.target['to-ask-id'].value;
     const rankReq = e.target['rank-requested'].value;
     const user_id = this.state.self_info.socket_id;
-
+    // console.log(user_id)
     socket.emit('request rank from player', {
       user_id,
       requestedId,
@@ -199,7 +212,6 @@ export default class GameTable extends Component {
     const deck = this.state.deck;
     const drawnCard = deck.draw();
     const { players } = this.state;
-
     players[i].playerHand.push(drawnCard);
 
     this.setState({
@@ -207,17 +219,55 @@ export default class GameTable extends Component {
     });
   };
 
+
+
   gofish = () => {
     const players = this.state.players
     const deck = this.state.deck
+    const drawnCard = deck.draw();
+
     players.map(player => {
       if (player.currentPlayer === true) {
+        console.log("test", player.playerHand)
         return player.playerHand.push(deck.cards[0])
+        // return player.playerHand.push(drawnCard) //player not specified here
       }
     })
     deck.cards.shift()
     this.setState({ players, deck })
   }
+
+  takeoutSets = (i) => {
+    const { players } = this.state;
+    const book = []; //place books in state under individual players
+
+
+    players.map(player => {
+      //if it's my turn
+      if (player.currentPlayer === true) {
+        console.log("player's hand:", player.playerHand)
+        const book = player.playerHand.filter(card => card.indexOf("1") > -1)
+        const count = book.length
+        // console.log(count)
+        if (count === 2) {
+          //maybe create a pop-up message
+          console.log("Nice, You made a book!\n", book)
+
+          return book
+        }
+        else {
+          console.log("no books yet")
+        }
+      }
+    })
+
+
+    this.setState({
+      players,
+    });
+  }
+
+
   countPlayers = () => {
     let count = 0;
     for (let i = 0; i < this.state.players.length; i++) {
@@ -254,6 +304,10 @@ export default class GameTable extends Component {
           {players
             .filter((player) => player.playerName)
             .map((player) => {
+              console.log("players present", player)
+              console.log("all the seats", players)
+              console.log("card requested", this.requestCard)
+
               return (
                 <GameTableSeat
                   key={player.playerSeat}
@@ -262,9 +316,10 @@ export default class GameTable extends Component {
                   requestCard={this.requestCard}
                 />
               );
-            })}
+            }
+            )}
         </Section>
-
+        <Button disabled={this.state.ready === false || this.state.deck.cards.length === 0} onClick={() => this.takeoutSets()}>Do I have any sets?</Button>
         <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
         <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
         <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button>

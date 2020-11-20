@@ -122,11 +122,13 @@ class ChatLog extends React.Component {
       if (this.state.players) {
         players = this.state.players.map((el, index) => {
           // el.id, el.name, .room
+          console.log(el.playerName)
           return (
             <div key={index}>
               {el.playerName}, {el.id}
             </div>
           );
+
         });
       }
       console.log(this.state.messages);
