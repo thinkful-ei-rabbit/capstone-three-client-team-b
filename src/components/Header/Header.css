@@ -1,3 +1,7 @@
+html {
+  /* background-color: #fa9800; */
+}
+
 .header-links {
   text-align: right;
 }
@@ -5,4 +9,44 @@
 .header-links a {
   text-decoration: none;
   margin-right: 10px;
+}
+
+.box {
+  position: fixed;
+  bottom: 0;
+}
+
+.wave {
+  position: absolute;
+  opacity: 0.4;
+  width: 3000px;
+  height: 2600px;
+  margin: 100px 0 0 -1000px;
+  border-radius: 40%;
+}
+
+.wave.-one {
+  animation: rotate 15000ms infinite linear;
+  opacity: 0.1;
+  background-color: #000;
+}
+
+.wave.-two {
+  animation: rotate 19000ms infinite linear;
+  opacity: 0.1;
+  background-color: #f7eec1;
+}
+
+.wave.-three {
+  animation: rotate 25000ms infinite linear;
+  background-color: #777;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
 }

@@ -41,6 +41,11 @@ class Header extends Component {
             ? this.renderLogoutLink()
             : this.renderLoginLink()}
         </nav>
+        <div className="box">
+          <div className="wave -one"></div>
+          <div className="wave -two"></div>
+          <div className="wave -three"></div>
+        </div>
       </>
     );
   }
