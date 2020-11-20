@@ -237,21 +237,62 @@ export default class GameTable extends Component {
     this.setState({ players, deck })
   }
 
-  takeoutSets = (i) => {
-    const { players } = this.state;
-    const book = []; //place books in state under individual players
+  setsChecker = (i) => {
+    /*
+        const beasts = ['ant', 'bison', 'bison', 'camel', 'duck', 'bison', 'bison'];
+        const newArr = beasts.filter(beasts => beasts.indexOf('bison') > -1)
+        console.log("before1", newArr);
+        const count = newArr.length
+        console.log("before", newArr);
+        if (count === 4) {
+          //maybe create a pop-up message
+          console.log("Nice, You made a book!\n", newArr)
+          console.log("player's NEW hand(slice):", beasts.slice(newArr)) //doesnt work returns beasts
+          //console.log("player's NEW hand(push):", beasts.push(newArr)) //doesnt work return 8?
+          //console.log("player's NEW hand(nothing):", beasts) //doesnt work return 8?
+        }
+        console.log(beasts.indexOf('bison'));
+        console.log("after", newArr);
+        //console.log(booksss);
+        // expected output: 1
+    */
+    //_------------------------------------------------//
+    // const currentCards = player.playerHand
+    //_------------------------------------------------//
 
+    const { players, deck } = this.state;
+    //const book = []; //place books in state under individual players
 
     players.map(player => {
       //if it's my turn
       if (player.currentPlayer === true) {
         console.log("player's hand:", player.playerHand)
-        const book = player.playerHand.filter(card => card.indexOf("1") > -1)
+        console.log("player's hand2:", player.playerHand.indexOf("Card"))
+
+        const book = player.playerHand.filter(
+          cards =>
+            cards.value === 1 ||
+            cards.value === 2 ||
+            cards.value === 3 ||
+            cards.value === 4 ||
+            cards.value === 5 ||
+            cards.value === 6 ||
+            cards.value === 7 ||
+            cards.value === 8 ||
+            cards.value === 9 ||
+            cards.value === 10 ||
+            cards.value === 11 ||
+            cards.value === 12 ||
+            cards.value === 13
+        )
         const count = book.length
-        // console.log(count)
-        if (count === 2) {
+        console.log("count:", count)
+
+        if (count >= 2) {
           //maybe create a pop-up message
           console.log("Nice, You made a book!\n", book)
+          //console.log("player's hand:", player.playerHand.slice(book)) //does this only slice off the first thing that matches
+
 
           return book
         }
@@ -259,6 +300,7 @@ export default class GameTable extends Component {
           console.log("no books yet")
         }
       }
+
     })
 
 
@@ -304,9 +346,9 @@ export default class GameTable extends Component {
           {players
             .filter((player) => player.playerName)
             .map((player) => {
-              console.log("players present", player)
+              // console.log("players present", player)
               console.log("all the seats", players)
-              console.log("card requested", this.requestCard)
+              // console.log("card requested", this.requestCard)
 
               return (
                 <GameTableSeat
@@ -319,7 +361,7 @@ export default class GameTable extends Component {
             }
             )}
         </Section>
-        <Button disabled={this.state.ready === false || this.state.deck.cards.length === 0} onClick={() => this.takeoutSets()}>Do I have any sets?</Button>
+        <Button disabled={this.state.ready === false || this.state.deck.cards.length === 0} onClick={() => this.setsChecker()}>Do I have any sets?</Button><br />
         <Button disabled={this.state.inProgress === true} onClick={() => this.createDeck()}>Ready</Button>
         <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
         <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button>
