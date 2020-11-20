@@ -196,7 +196,7 @@ export default class GameTable extends Component {
 
     // VALIDATE
     const cardInHand = player.playerHand.find(
-      (el) => el.value === this.state.chatLog.asked.rankReq
+      (el) => el.value == this.state.chatLog.asked.rankReq
     );
 
     if (cardInHand) {
@@ -215,7 +215,7 @@ export default class GameTable extends Component {
         },
       });
     } else {
-      alert(`You do not have any ${this.state.asked.rankReq}s in hand`);
+      alert(`You do not have any ${this.state.chatLog.asked.rankReq}s in hand`);
     }
   };
 
@@ -225,7 +225,7 @@ export default class GameTable extends Component {
     // VALIDATE
     const player = currentSeatOfDOMPlayer;
     const cardInHand = player.playerHand.find(
-      (el) => el.value === this.state.chatLog.asked.rankReq
+      (el) => el.value == this.state.chatLog.asked.rankReq
     );
     if (cardInHand) {
       // const index = player.playerHand.indexOf(cardInHand);
