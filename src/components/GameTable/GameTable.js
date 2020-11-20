@@ -58,6 +58,8 @@ export default class GameTable extends Component {
     chatLog: {
       messages: [],
     },
+    books: [],
+
   };
 
   componentDidMount = () => {
@@ -349,6 +351,17 @@ export default class GameTable extends Component {
     }
 
   };
+
+  endGame = () => {
+    const { books } = this.state
+
+    if (books.length === 13) {
+      alert('The game has ended')
+    }
+    else {
+
+    }
+  }
 
   requestCard = () => {
     console.log('hi');
