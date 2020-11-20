@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from '../Utils/Utils';
+import UserContext from '../../contexts/UserContext';
 
 import './GameTableSeat.css';
 
 export default class GameTableSeat extends Component {
+  static contextType = UserContext;
+
   renderLoggedInUser = (player) => {
     return player.playerHand.map((card, index) => {
       return (
@@ -49,7 +52,14 @@ export default class GameTableSeat extends Component {
     const { player, count } = this.props;
     return (
       <>
-        {player.playerSeat === 1 ? (
+        {!player.playerName ? (
+          <button
+            value={player.playerSeat}
+            onClick={(e) => this.props.claimSeat(e.target.value)}
+          >
+            claim seat {player.playerSeat}
+          </button>
+        ) : player.playerName === this.context.userData.player ? (
           <div className={`player-seat-${player.playerSeat}`}>
             <div className="player-hand">{this.renderLoggedInUser(player)}</div>
             <h2>{player.playerName}</h2>

@@ -7,28 +7,30 @@ import ChatLog from '../Chat/ChatLog';
 import socketClient from 'socket.io-client';
 import config from '../../config';
 
-
-
 import './GameTable.css';
 
 let socket;
+let currentSeatOfDOMPlayer;
+
 export default class GameTable extends Component {
   static contextType = UserContext;
 
   state = {
     players: [
       {
-        playerName: 'player1',
+        playerName: '',
         playerSeat: 1,
         playerHand: [],
-        currentPlayer: true,
+        books: [],
+        currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
       },
       {
-        playerName: 'player2',
+        playerName: '',
         playerSeat: 2,
         playerHand: [],
+        books: [],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -58,7 +60,6 @@ export default class GameTable extends Component {
     },
   };
 
-
   componentDidMount = () => {
     socket = socketClient(`${config.API_SOCKET_ENDPOINT}`, {
       path: config.SOCKET_PATH,
@@ -72,75 +73,78 @@ export default class GameTable extends Component {
       count++;
       this.setState({
         chatLog: {
-          messages: [...this.state.chatLog.messages, msg]
-        }
-      })
-    })
+          messages: [...this.state.chatLog.messages, msg],
+        },
+      });
+    });
 
     this.onPlayerJoin();
 
     socket.on('serverResponse', (retObj) => {
       this.setState({
-        self_info: (this.state.self_info) ? this.state.self_info : retObj.self,
+        self_info: this.state.self_info ? this.state.self_info : retObj.self,
         chatLog: {
           room: retObj.room,
           players: retObj.players,
           connected: true,
           messages: [...this.state.chatLog.messages, retObj.message],
-        }
-      })
-    })
+        },
+      });
+    });
 
 
     socket.on('game start RESPONSE', (hand) => {
       console.log(hand)
       // DO SOMETHING WITH hand
       // yikes?
-      const player = this.state.players[0]
+      // const player = currentSeatOfDOMPlayer
 
-      player.playerHand = hand.hand;
+      currentSeatOfDOMPlayer.playerHand = hand.hand;
+      console.log(currentSeatOfDOMPlayer);
 
+      const updatedPlayers = [
+        ...this.state.players,
+      ]
+
+      updatedPlayers[currentSeatOfDOMPlayer.playerSeat - 1] = currentSeatOfDOMPlayer;
 
 
       this.setState({
         inProgress: true,
-        players: [
-          ...this.state.players,
-          player,
-        ]
+        players: updatedPlayers
       });
+      console.log(this.state.players);
     })
 
 
     socket.on('gameFull', (message) => {
       alert(message);
-    })
+    });
 
     socket.on('rank request from player', (requestObj) => {
       this.setState({
         chatLog: {
           ...this.state.chatLog,
-          asked: requestObj
-        }
-      })
-    })
+          asked: requestObj,
+        },
+      });
+    });
 
     socket.on('go fish', (reqObj) => {
       const { asker, requested, rankReq } = reqObj;
-      console.log(`${requested} did not have a ${rankReq}, sorry ${asker}.`)
-    })
+      console.log(`${requested} did not have a ${rankReq}, sorry ${asker}.`);
+    });
 
     socket.on('correct rank return', (gameObj) => {
-      const player = this.state.players[0];
-
       const { requested, asker, rankReq, CARD } = gameObj;
-      player.playerHand.push(CARD[0])
+      currentSeatOfDOMPlayer.playerHand.push(CARD[0])
+
+
+      const updatedPlayers = [...this.state.players]
+      updatedPlayers[currentSeatOfDOMPlayer.playerSeat - 1] = currentSeatOfDOMPlayer;
 
       this.setState({
-        players: [
-          ...this.state.players,
-          player,
-        ]
+        players: updatedPlayers
       })
       // gameObj returned, 
       // requested, asker(self), reqRank, CARD
@@ -159,11 +163,11 @@ export default class GameTable extends Component {
     const room = this.props.match.params.game_id;
     const userObj = {
       value: event.target['input-message'].value,
-      room
-    }
+      room,
+    };
 
     socket.emit('serverMessage', userObj);
-  }
+  };
 
   askOtherPlayer = (e) => {
     e.preventDefault();
@@ -175,16 +179,16 @@ export default class GameTable extends Component {
       user_id,
       requestedId,
       rankReq,
-    })
-  }
+    });
+  };
 
   yesResponse = () => {
     // console.log(this.state.asked)
-    const player = this.state.players[0];
+    const player = currentSeatOfDOMPlayer;
 
     // VALIDATE 
     const cardInHand = player.playerHand.find(el => el.value == this.state.chatLog.asked.rankReq);
-    
+
     if (cardInHand) {
       const index = player.playerHand.indexOf(cardInHand);
 
@@ -199,6 +203,8 @@ export default class GameTable extends Component {
           asked: null
         }
       })
+    } else {
+      alert(`You do not have any ${this.state.asked.rankReq}s in hand`)
     }
   }
 
@@ -206,7 +212,7 @@ export default class GameTable extends Component {
     // console.log(this.state.asked);
 
     // VALIDATE
-    const player = this.state.players[0]; 
+    const player = currentSeatOfDOMPlayer;
     const cardInHand = player.playerHand.find(el => el.value == this.state.chatLog.asked.rankReq);
     if (cardInHand) {
       // const index = player.playerHand.indexOf(cardInHand);
@@ -247,14 +253,19 @@ export default class GameTable extends Component {
 
   onCardChoice = (card) => {
     console.log(card);
-    const player = this.state.players[0];
-    player.requestedCard = card;
+    
+
+    currentSeatOfDOMPlayer.requestedCard = card;
+    console.log(currentSeatOfDOMPlayer);
+
+    const updatedPlayers = [
+      ...this.state.players,
+    ]
+
+    updatedPlayers[currentSeatOfDOMPlayer.playerSeat - 1] = currentSeatOfDOMPlayer;
 
     this.setState({
-      players: [
-        ...this.state.players,
-        player
-      ]
+      players: updatedPlayers
     })
   }
 
@@ -270,26 +281,47 @@ export default class GameTable extends Component {
 
 
   gofish = () => {
-    
+
   }
 
   countPlayers = () => {
-    
+
   };
 
   startGame = () => {
     const { players } = this.state.chatLog;
-   
+
     if (players.length > 1) {
       socket.emit('start game', players)
     } else {
       alert('Not enough players in room, need 2 or more');
     }
-    
+
   };
 
   requestCard = () => {
     console.log('hi');
+  };
+
+  claimSeat = (seat) => {
+    let roomPlayers = this.state.chatLog.players;
+    let name = this.context.userData.player;
+    let players = [...this.state.players];
+    let player = {
+      ...players[seat - 1],
+      playerName: this.context.userData.player,
+    };
+    if (!currentSeatOfDOMPlayer) {
+      currentSeatOfDOMPlayer = {
+        ...players[seat - 1],
+        playerName: this.context.userData.player,
+      };
+    }
+    players[seat - 1] = player;
+    this.setState({
+      players,
+    });
+    socket.emit('claim seat', { name, seat, roomPlayers });
   };
 
   render() {
@@ -299,7 +331,6 @@ export default class GameTable extends Component {
       <>
         <Section className="game-table">
           {players
-            .filter((player) => player.playerName)
             .map((player, index) => {
               return (
                 <GameTableSeat
@@ -307,20 +338,43 @@ export default class GameTable extends Component {
                   player={player}
                   count={count}
                   onCardChoice={this.onCardChoice}
-                  requestCard={this.requestCard}
+                  claimSeat={this.claimSeat}
                 />
               );
             })}
         </Section>
 
-        <Button disabled={this.state.inProgress === true} onClick={() => this.gameReadyCheck()}>Ready</Button>
-        <Button disabled={this.state.ready === false || this.state.inProgress === true} onClick={() => this.startGame()}>Start Game</Button>
-        {/* <Button disabled={this.state.inProgress === false || this.state.deck.cards.length === 0} onClick={this.gofish}>Draw</Button> */}
+        <Button
+          disabled={this.state.inProgress === true}
+          onClick={() => this.gameReadyCheck()}
+        >
+          Ready
+        </Button>
+        <Button
+          disabled={
+            this.state.ready === false || this.state.inProgress === true
+          }
+          onClick={() => this.startGame()}
+        >
+          Start Game
+        </Button>
+        <Button
+          disabled={
+            this.state.inProgress === false
+          }
+          onClick={this.gofish}
+        >
+          Draw
+        </Button>
         <ChatLog
           match={this.props.match}
           onChatMessageSubmit={this.onChatMessageSubmit}
           askAnotherPlayer={this.askOtherPlayer}
-          requestedCard={this.state.players[0].requestedCard}
+          requestedCard={
+            (currentSeatOfDOMPlayer)
+              ? currentSeatOfDOMPlayer.requestedCard
+              : ''
+            }
           yesResponse={this.yesResponse}
           noResponse={this.noResponse}
           upperState={this.state.chatLog}
