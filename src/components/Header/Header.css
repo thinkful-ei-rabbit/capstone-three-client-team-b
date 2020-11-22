@@ -25,7 +25,7 @@ html {
   border-radius: 40%;
 }
 
-.wave.-one {
+/* .wave.-one {
   animation: rotate 15000ms infinite linear;
   opacity: 0.1;
   background-color: #000;
@@ -49,4 +49,4 @@ html {
   from {
     transform: rotate(360deg);
   }
-}
+} */

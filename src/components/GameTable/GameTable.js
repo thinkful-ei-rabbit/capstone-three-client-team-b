@@ -123,7 +123,7 @@ export default class GameTable extends Component {
         inProgress: true,
         players: updatedPlayers,
       });
-      console.log(this.state.players);
+      // console.log(this.state.players);
     });
 
     socket.on('gameFull', (message) => {
@@ -264,7 +264,7 @@ export default class GameTable extends Component {
   };
 
   onCardChoice = (card) => {
-    console.log(card);
+    // console.log(card);
 
     currentSeatOfDOMPlayer.requestedCard = card;
     console.log(currentSeatOfDOMPlayer);
@@ -293,52 +293,105 @@ export default class GameTable extends Component {
   setsChecker = (i) => {
     const { players } = this.state;
     //const books = []; //place books in state?
+    // client side validation then send book to server
 
-    players.map(player => {
-      //if it's my turn
-      if (player.currentPlayer === true) {
-        console.log("player's hand:", player.playerHand)
-        //creates a new book arr
-        const book = player.playerHand.filter(
-          cards =>
-            cards.value === 1 ||
-            cards.value === 2 ||
-            cards.value === 3 ||
-            cards.value === 4 ||
-            cards.value === 5 ||
-            cards.value === 6 ||
-            cards.value === 7 ||
-            cards.value === 8 ||
-            cards.value === 9 ||
-            cards.value === 10 ||
-            cards.value === 11 ||
-            cards.value === 12 ||
-            cards.value === 13
-        )
-        //book length counter
-        const count = book.length
-        console.log("count:", count)
-        //should be if count === 4, but just greater than 2 is for testing
-        if (count >= 2) {
-          console.log("Nice, You made a book!\n", book)
-          //alerts user that they made a book
-          alert("Nice you made a book!")
+    const playerCards = currentSeatOfDOMPlayer.playerHand;
+    const cardsInHand = {};
+    // card.value and card.suit
+    
+    // create hashmap
+    // each value, and indexes of each
+    for (let i = 0; i < playerCards.length; i++) {
+      if (cardsInHand[playerCards[i].value]) {
+        // assuming 2 is our limit for now
+        // cardsInHand[playerCards[i].value].count++;
+        // we dont actually need this ^
+        cardsInHand[playerCards[i].value].push(i)
+      } else {
+        cardsInHand[playerCards[i].value] = [i]
+      }
+    }
 
-          //to-do: update player's hand, maybe with an updateHand function?
-
-          return book
-        }
-        else {
-          console.log("no books yet")
+    const serverObj = [];
+    console.log(cardsInHand);
+    for (var value in cardsInHand) {
+      if (cardsInHand[value].length > 1) {
+        for (let i = 0; i < playerCards.length; i++) {
+          if (playerCards[i].value == value) {
+            serverObj.push(playerCards.splice(i, 1)[0])
+            i--;
+          }
         }
       }
+    }
+    // currentSeat is updated, since playerCards is a reference
+    console.log(currentSeatOfDOMPlayer.playerHand);
 
-    })
+    // do SOMETHING with serverObj
+    console.log(serverObj);
+
+    /*
+    socket.emit('book found', {
+      serverObj, // two or more card objects
+      userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
+    }
+    */
+
+     const updatedPlayers = [...this.state.players];
+     updatedPlayers[
+       currentSeatOfDOMPlayer.playerSeat - 1
+     ] = currentSeatOfDOMPlayer;
+
+     this.setState({
+       players: updatedPlayers,
+     });
 
 
-    this.setState({
-      players,
-    });
+    // players.map(player => {
+    //   //if it's my turn
+    //   if (player.currentPlayer === true) {
+    //     console.log("player's hand:", player.playerHand)
+    //     //creates a new book arr
+  //       const book = currentSeatOfDOMPlayer.playerHand.filter(
+  //         cards =>
+  //           cards.value === 1 ||
+  //           cards.value === 2 ||
+  //           cards.value === 3 ||
+  //           cards.value === 4 ||
+  //           cards.value === 5 ||
+  //           cards.value === 6 ||
+  //           cards.value === 7 ||
+  //           cards.value === 8 ||
+  //           cards.value === 9 ||
+  //           cards.value === 10 ||
+  //           cards.value === 11 ||
+  //           cards.value === 12 ||
+  //           cards.value === 13
+  //       )
+  //       //book length counter
+  //       const count = book.length
+  //       console.log("count:", count)
+  //       //should be if count === 4, but just greater than 2 is for testing
+  //       if (count >= 2) {
+  //         console.log("Nice, You made a book!\n", book)
+  //         //alerts user that they made a book
+  //         alert("Nice you made a book!")
+
+  //         //to-do: update player's hand, maybe with an updateHand function?
+  //         console.log(book);
+  //         return book
+  //       }
+  //       else {
+  //         console.log("no books yet")
+  //       }
+      
+
+    
+
+
+  //   this.setState({
+  //     players,
+  //   });
   }
 
   startGame = () => {
