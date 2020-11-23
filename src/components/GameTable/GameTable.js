@@ -39,6 +39,7 @@ export default class GameTable extends Component {
         playerName: '',
         playerSeat: 3,
         playerHand: [],
+        books: [],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -47,6 +48,7 @@ export default class GameTable extends Component {
         playerName: '',
         playerSeat: 4,
         playerHand: [],
+        books: [],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -348,52 +350,6 @@ export default class GameTable extends Component {
       players: updatedPlayers,
     });
 
-
-    // players.map(player => {
-    //   //if it's my turn
-    //   if (player.currentPlayer === true) {
-    //     console.log("player's hand:", player.playerHand)
-    //     //creates a new book arr
-    //       const book = currentSeatOfDOMPlayer.playerHand.filter(
-    //         cards =>
-    //           cards.value === 1 ||
-    //           cards.value === 2 ||
-    //           cards.value === 3 ||
-    //           cards.value === 4 ||
-    //           cards.value === 5 ||
-    //           cards.value === 6 ||
-    //           cards.value === 7 ||
-    //           cards.value === 8 ||
-    //           cards.value === 9 ||
-    //           cards.value === 10 ||
-    //           cards.value === 11 ||
-    //           cards.value === 12 ||
-    //           cards.value === 13
-    //       )
-    //       //book length counter
-    //       const count = book.length
-    //       console.log("count:", count)
-    //       //should be if count === 4, but just greater than 2 is for testing
-    //       if (count >= 2) {
-    //         console.log("Nice, You made a book!\n", book)
-    //         //alerts user that they made a book
-    //         alert("Nice you made a book!")
-
-    //         //to-do: update player's hand, maybe with an updateHand function?
-    //         console.log(book);
-    //         return book
-    //       }
-    //       else {
-    //         console.log("no books yet")
-    //       }
-
-
-
-
-
-    //   this.setState({
-    //     players,
-    //   });
   }
 
   startGame = () => {
@@ -405,20 +361,34 @@ export default class GameTable extends Component {
       alert('Not enough players in room, need 2 or more');
     }
   };
-
   endGame = () => {
-    if (/*if totalBooks === 13*/) {
+    const { totalBooks } = this.state.players.books
+    if (totalBooks.length === 13) {
       //display end game & winner (if player has highest books)
-      endGame === true
-      //stop socket connection?
-      socket.off('end of game', players); //probably not players?
-      //alert players that the game has ended
+      this.setState({
+        endGame: true
+      });
+      //displayWinner()
+      //to-do: stop socket connection?
+      //alert players that the game has ended...implement a displayWinner func
       alert('The game has ended')
     }
-    else {
-      //game is inProgress
-    }
+    // else {
+    //   //game is inProgress
+    //   //probably dont need this^
+    // }
   };
+
+  displayWinner = () => {
+    const { playerBooks } = this.state.players.books
+    const winnerPopUp = `Congrats you have won!`
+    if (playerBooks.length > 2) {
+      return winnerPopUp
+    }
+  }
+
+
+
 
   requestCard = () => {
     console.log('hi');
@@ -453,12 +423,14 @@ export default class GameTable extends Component {
 
 
   render() {
-    const { players, seated } = this.state;
+    const { players, seated, endGame } = this.state;
     const count = this.countPlayers();
+    //if it's the end of game display x, otherwise display the game btns and table
+    //gameChatLog is always displayed
     return (
       <>
         { endGame ? (
-          <div className='winner-display'>The winner is {/*player*/}. The game has ended. <button>Restart</button></div>
+          <div className='winner-display'>The winner is someone! The game is over now. <button>Rematch</button></div>
         ) : (
             <>
               <Section className="game-table">
@@ -506,20 +478,21 @@ export default class GameTable extends Component {
               >
                 Draw
         </Button>
-              <ChatLog
-                match={this.props.match}
-                onChatMessageSubmit={this.onChatMessageSubmit}
-                askAnotherPlayer={this.askOtherPlayer}
-                requestedCard={
-                  currentSeatOfDOMPlayer ? currentSeatOfDOMPlayer.requestedCard : ''
-                }
-                yesResponse={this.yesResponse}
-                noResponse={this.noResponse}
-                upperState={this.state.chatLog}
-                chatRenders={this.state.chatRenders}
-              />
             </>
           )}
+        <ChatLog
+          match={this.props.match}
+          onChatMessageSubmit={this.onChatMessageSubmit}
+          askAnotherPlayer={this.askOtherPlayer}
+          requestedCard={
+            currentSeatOfDOMPlayer ? currentSeatOfDOMPlayer.requestedCard : ''
+          }
+          yesResponse={this.yesResponse}
+          noResponse={this.noResponse}
+          upperState={this.state.chatLog}
+          chatRenders={this.state.chatRenders}
+        />
+
       </>
     );
   }
