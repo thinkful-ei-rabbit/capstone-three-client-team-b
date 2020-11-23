@@ -221,6 +221,11 @@ export default class GameTable extends Component {
         players: updatedPlayers,
       });
     })
+
+    socket.on('game end', (someinfo) => {
+      // someinfo that we'll do something vague
+
+    })
   };
 
   onChatMessageSubmit = (event) => {
@@ -359,7 +364,7 @@ export default class GameTable extends Component {
     const playerCards = currentSeatOfDOMPlayer.playerHand;
     const cardsInHand = {};
     // card.value and card.suit
-
+    
     // create hashmap
     // each value, and indexes of each
     for (let i = 0; i < playerCards.length; i++) {
@@ -372,11 +377,11 @@ export default class GameTable extends Component {
         cardsInHand[playerCards[i].value] = [i]
       }
     }
-
+    
     const booksObj = [];
     // console.log(cardsInHand);
     for (var value in cardsInHand) {
-      if (cardsInHand[value].length > 1) {
+      if (cardsInHand[value].length > 3) {
         for (let i = 0; i < playerCards.length; i++) {
           if (playerCards[i].value == value) {
             booksObj.push(playerCards.splice(i, 1)[0])
@@ -400,9 +405,10 @@ export default class GameTable extends Component {
       */
 
       const updatedPlayers = [...this.state.players];
-      updatedPlayers[
-        currentSeatOfDOMPlayer.playerSeat - 1
-      ] = currentSeatOfDOMPlayer;
+      currentSeatOfDOMPlayer.books.push(booksObj);
+
+      updatedPlayers[currentSeatOfDOMPlayer.playerSeat - 1] = currentSeatOfDOMPlayer;
+
 
       this.setState({
         players: updatedPlayers,
@@ -412,52 +418,6 @@ export default class GameTable extends Component {
     }
 
     this.nextTurn();
-
-    // players.map(player => {
-    //   //if it's my turn
-    //   if (player.currentPlayer === true) {
-    //     console.log("player's hand:", player.playerHand)
-    //     //creates a new book arr
-    //       const book = currentSeatOfDOMPlayer.playerHand.filter(
-    //         cards =>
-    //           cards.value === 1 ||
-    //           cards.value === 2 ||
-    //           cards.value === 3 ||
-    //           cards.value === 4 ||
-    //           cards.value === 5 ||
-    //           cards.value === 6 ||
-    //           cards.value === 7 ||
-    //           cards.value === 8 ||
-    //           cards.value === 9 ||
-    //           cards.value === 10 ||
-    //           cards.value === 11 ||
-    //           cards.value === 12 ||
-    //           cards.value === 13
-    //       )
-    //       //book length counter
-    //       const count = book.length
-    //       console.log("count:", count)
-    //       //should be if count === 4, but just greater than 2 is for testing
-    //       if (count >= 2) {
-    //         console.log("Nice, You made a book!\n", book)
-    //         //alerts user that they made a book
-    //         alert("Nice you made a book!")
-
-    //         //to-do: update player's hand, maybe with an updateHand function?
-    //         console.log(book);
-    //         return book
-    //       }
-    //       else {
-    //         console.log("no books yet")
-    //       }
-
-
-
-
-
-    //   this.setState({
-    //     players,
-    //   });
   }
 
   startGame = () => {
