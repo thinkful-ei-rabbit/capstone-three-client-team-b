@@ -15,7 +15,7 @@ class TableList extends React.Component {
     });
 
     socket.on('list response', (list) => {
-      console.log(list);
+      console.log('list', list);
       const list1 = [];
       let index = 0;
       for (var game in list) {
