@@ -77,6 +77,7 @@ export default class GameTable extends Component {
       count++;
       this.setState({
         chatLog: {
+          ...this.state.chatLog,
           messages: [...this.state.chatLog.messages, msg],
           connected: true
         },
@@ -98,24 +99,24 @@ export default class GameTable extends Component {
     });
 
     socket.on('seat chosen', (retObj) => {
-        // console.log(retObj);
+      // console.log(retObj);
 
-        const updatedPlayers = [...this.state.players];
+      const updatedPlayers = [...this.state.players];
 
-        updatedPlayers[retObj.seat - 1].playerName = retObj.name;
+      updatedPlayers[retObj.seat - 1].playerName = retObj.name;
 
-        this.setState({players: updatedPlayers})
+      this.setState({ players: updatedPlayers })
     })
 
 
     socket.on('game start RESPONSE', (hand) => {
-      console.log(hand);
+      // console.log(hand);
       // DO SOMETHING WITH hand
       // yikes?
       // const player = currentSeatOfDOMPlayer
 
       currentSeatOfDOMPlayer.playerHand = hand.hand;
-      console.log(currentSeatOfDOMPlayer);
+      // console.log(currentSeatOfDOMPlayer);
 
       const updatedPlayers = [...this.state.players];
 
@@ -148,6 +149,23 @@ export default class GameTable extends Component {
       console.log(`${requested} did not have a ${rankReq}, sorry ${asker}.`);
     });
 
+    socket.on('draw card denied', msg => {
+      alert(msg);
+    })
+
+    socket.on('draw card fulfilled', (cardObj) => {
+      currentSeatOfDOMPlayer.playerHand.push(cardObj.card);
+      const updatedPlayers = [...this.state.players];
+
+      updatedPlayers[
+        currentSeatOfDOMPlayer.playerSeat - 1
+      ] = currentSeatOfDOMPlayer;
+
+      this.setState({
+        players: updatedPlayers,
+      });
+    })
+
     socket.on('correct rank return', (gameObj) => {
       const { requested, asker, rankReq, CARD } = gameObj;
       currentSeatOfDOMPlayer.playerHand.push(CARD[0]);
@@ -168,6 +186,50 @@ export default class GameTable extends Component {
       // display next turn
       console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
     });
+
+    socket.on('other player turn', (retObj) => {
+      // console.log(retObj);
+      const name = retObj.playerName;
+
+      const updatedPlayers = [...this.state.players]
+
+      const playerToUpdate = this.state.players.find(el => el.playerName === name);
+      playerToUpdate.currentPlayer = true;
+
+      const indexOfPlayerToUpdate = this.state.players.indexOf(playerToUpdate);
+
+      updatedPlayers[indexOfPlayerToUpdate] = playerToUpdate;
+
+      this.setState({
+        players: updatedPlayers,
+      })
+    })
+
+    socket.on('your turn', () => {
+      // console.log(currentSeatOfDOMPlayer);
+      
+      const updatedPlayers = [...this.state.players];
+      
+      // make sure all players are false before setting current dom seat true
+      updatedPlayers.forEach(el => {
+        el.currentPlayer = false;
+      })
+
+      currentSeatOfDOMPlayer.currentPlayer = true;
+
+      updatedPlayers[
+        currentSeatOfDOMPlayer.playerSeat - 1
+      ] = currentSeatOfDOMPlayer;
+
+      this.setState({
+        players: updatedPlayers,
+      });
+    })
+
+    socket.on('game end', (someinfo) => {
+      // someinfo that we'll do something vague
+
+    })
   };
 
   onChatMessageSubmit = (event) => {
@@ -271,7 +333,7 @@ export default class GameTable extends Component {
     // console.log(card);
 
     currentSeatOfDOMPlayer.requestedCard = card;
-    console.log(currentSeatOfDOMPlayer);
+    // console.log(currentSeatOfDOMPlayer);
 
     const updatedPlayers = [...this.state.players];
 
@@ -290,7 +352,11 @@ export default class GameTable extends Component {
     });
   };
 
-  gofish = () => { };
+  gofish = () => {
+    socket.emit('draw a card from the deck');
+
+    this.nextTurn()
+  };
 
   countPlayers = () => { };
 
@@ -315,87 +381,47 @@ export default class GameTable extends Component {
         cardsInHand[playerCards[i].value] = [i]
       }
     }
-
-    const serverObj = [];
-    console.log(cardsInHand);
+    
+    const booksObj = [];
+    // console.log(cardsInHand);
     for (var value in cardsInHand) {
-      if (cardsInHand[value].length > 1) {
+      if (cardsInHand[value].length > 3) {
         for (let i = 0; i < playerCards.length; i++) {
           if (playerCards[i].value == value) {
-            serverObj.push(playerCards.splice(i, 1)[0])
+            booksObj.push(playerCards.splice(i, 1)[0])
             i--;
           }
         }
       }
     }
     // currentSeat is updated, since playerCards is a reference
-    console.log(currentSeatOfDOMPlayer.playerHand);
+    // console.log(currentSeatOfDOMPlayer.playerHand);
 
     // do SOMETHING with serverObj
-    console.log(serverObj);
+    console.log(booksObj);
 
-    /*
-    socket.emit('book found', {
-      serverObj, // two or more card objects
-      userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
+    if (booksObj.length >= 1) {
+      /*
+      socket.emit('book found', {
+        booksObj, // two or more card objects
+        userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
+      }
+      */
+
+      const updatedPlayers = [...this.state.players];
+      currentSeatOfDOMPlayer.books.push(booksObj);
+
+      updatedPlayers[currentSeatOfDOMPlayer.playerSeat - 1] = currentSeatOfDOMPlayer;
+
+
+      this.setState({
+        players: updatedPlayers,
+      });
+    } else {
+      alert('no books found');
     }
-    */
 
-     const updatedPlayers = [...this.state.players];
-     updatedPlayers[
-       currentSeatOfDOMPlayer.playerSeat - 1
-     ] = currentSeatOfDOMPlayer;
-
-     this.setState({
-       players: updatedPlayers,
-     });
-
-
-    // players.map(player => {
-    //   //if it's my turn
-    //   if (player.currentPlayer === true) {
-    //     console.log("player's hand:", player.playerHand)
-    //     //creates a new book arr
-  //       const book = currentSeatOfDOMPlayer.playerHand.filter(
-  //         cards =>
-  //           cards.value === 1 ||
-  //           cards.value === 2 ||
-  //           cards.value === 3 ||
-  //           cards.value === 4 ||
-  //           cards.value === 5 ||
-  //           cards.value === 6 ||
-  //           cards.value === 7 ||
-  //           cards.value === 8 ||
-  //           cards.value === 9 ||
-  //           cards.value === 10 ||
-  //           cards.value === 11 ||
-  //           cards.value === 12 ||
-  //           cards.value === 13
-  //       )
-  //       //book length counter
-  //       const count = book.length
-  //       console.log("count:", count)
-  //       //should be if count === 4, but just greater than 2 is for testing
-  //       if (count >= 2) {
-  //         console.log("Nice, You made a book!\n", book)
-  //         //alerts user that they made a book
-  //         alert("Nice you made a book!")
-
-  //         //to-do: update player's hand, maybe with an updateHand function?
-  //         console.log(book);
-  //         return book
-  //       }
-  //       else {
-  //         console.log("no books yet")
-  //       }
-      
-
-    
-
-
-  //   this.setState({
-  //     players,
-  //   });
+    this.nextTurn();
   }
 
   startGame = () => {
@@ -408,14 +434,11 @@ export default class GameTable extends Component {
     }
   };
 
-  requestCard = () => {
-    console.log('hi');
-  };
 
   claimSeat = (seat) => {
-      let roomPlayers = this.state.chatLog.players;
-      let name = this.context.userData.player;
-      let players = [...this.state.players];
+    let roomPlayers = this.state.chatLog.players;
+    let name = this.context.userData.player;
+    let players = [...this.state.players];
     let player = {
       ...players[seat - 1],
       playerName: this.context.userData.player,
@@ -428,21 +451,45 @@ export default class GameTable extends Component {
         playerName: this.context.userData.player,
       };
     }
+    
     players[seat - 1] = player;
     this.setState({
       players,
       seated: true,
     });
 
-    console.log(name, seat, roomPlayers)
+    // console.log(name, seat, roomPlayers)
     socket.emit('claim seat', { name, seat, roomPlayers });
   }
 
+  nextTurn = () => {
+    // actions one can take in a turn?
+    // players may ask another player
+    // in response to that, 
+    // they may draw a card or check for sets
+    // both of those must setState currentTurn false
+    currentSeatOfDOMPlayer.currentPlayer = false;
 
-  
+    const updatedPlayers = [...this.state.players];
+    updatedPlayers[
+      currentSeatOfDOMPlayer.playerSeat - 1
+    ] = currentSeatOfDOMPlayer;
+
+    this.setState({
+      players: updatedPlayers,
+    });
+
+    socket.emit('next turn');
+    
+    // socket.id and indexing in the server
+
+  }
+
+
   render() {
     const { players, seated } = this.state;
     const count = this.countPlayers();
+    const currentPlayerTurn = this.state.players.find(el => el.currentPlayer === true);
     return (
       <>
         <Section className="game-table">
@@ -459,9 +506,14 @@ export default class GameTable extends Component {
             );
           })}
         </Section>
-
+        <div>
+          {(currentPlayerTurn) ? `${currentPlayerTurn.playerName}'s turn` : ''}
+        </div>
         <Button
-          disabled={this.state.inProgress === false}
+          disabled={
+            this.state.inProgress === false ||
+            currentSeatOfDOMPlayer.currentPlayer === false
+          }
           onClick={() => this.setsChecker()}
         >
           Do I have any sets?
@@ -484,7 +536,7 @@ export default class GameTable extends Component {
           Start Game
         </Button>
         <Button
-          disabled={this.state.inProgress === false}
+          disabled={this.state.inProgress === false || currentSeatOfDOMPlayer.currentPlayer === false}
           onClick={this.gofish}
         >
           Draw
