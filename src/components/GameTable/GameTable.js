@@ -279,7 +279,7 @@ export default class GameTable extends Component {
     e.preventDefault();
     const requestedId = e.target['to-ask-id'].value;
     const requestedName = this.state.chatLog.players.find(el => el.id === requestedId).playerName
-    console.log(requestedName);
+    // console.log(requestedName);
     const rankReq = e.target['rank-requested'].value;
     const user_id = this.state.self_info.socket_id;
     const name = this.context.userData.player;
