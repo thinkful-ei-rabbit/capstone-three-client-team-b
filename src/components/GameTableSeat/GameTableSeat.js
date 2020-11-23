@@ -32,16 +32,18 @@ export default class GameTableSeat extends Component {
       <div className={`player-seat-${player.playerSeat}-${count}player`}>
         <h2>{player.playerName}</h2>
         <div className="player-hand">
-          {player.playerHand.map((card) => {
+          { player.handCount }
+          {
+            /* {player.handCount.map((card, index) => {
             return (
               <div
                 className="player-card-opponent"
-                key={card.value + card.suit}
+                key={index}
               >
                 back
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     );
