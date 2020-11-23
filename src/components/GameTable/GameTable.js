@@ -16,6 +16,7 @@ export default class GameTable extends Component {
   static contextType = UserContext;
 
   state = {
+    user: '',
     players: [
       {
         playerName: '',
@@ -58,6 +59,7 @@ export default class GameTable extends Component {
     ready: false,
     chatLog: {
       messages: [],
+      connected: false
     },
   };
 
@@ -69,12 +71,14 @@ export default class GameTable extends Component {
 
     let count = 0;
     socket.on('messageResponse', (msg) => {
+      console.log(msg)
       // individual message response
-      msg = <div key={count}>{msg}</div>;
+    msg = <div key={count}>{msg.user}: {msg.value}</div>;
       count++;
       this.setState({
         chatLog: {
           messages: [...this.state.chatLog.messages, msg],
+          connected: true
         },
       });
     });
@@ -172,6 +176,7 @@ export default class GameTable extends Component {
     const userObj = {
       value: event.target['input-message'].value,
       room,
+      user: this.state.user
     };
 
     socket.emit('serverMessage', userObj);
@@ -252,14 +257,13 @@ export default class GameTable extends Component {
     const playerName = this.context.userData.player;
     const user_id = this.context.userData.id;
     const avatarLink = this.context.userData.avatar;
-
     const userObj = {
       room,
       playerName,
       user_id,
       avatarLink,
     };
-
+    this.setState({ user: playerName})
     socket.emit('joinServer', userObj);
   };
 
