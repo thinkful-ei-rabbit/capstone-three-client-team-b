@@ -32,6 +32,7 @@ class ChatLog extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ connected: true })
     // console.log(this.props.upperState)
     // socket.on('serverResponse', (retObj) => {
     //     this.setState({
@@ -145,7 +146,7 @@ class ChatLog extends React.Component {
         </form>
         <form onSubmit={(e) => this.props.askAnotherPlayer(e)}>
           <input placeholder="id of player" type="text" id="to-ask-id" />
-          <input placeholder="rank requested" type="text" id="rank-requested" value={this.props.requestedCard} readOnly/>
+          <input placeholder="rank requested" type="text" id="rank-requested" value={this.props.requestedCard} readOnly />
           <button type="submit">Ask Other Player</button>
         </form>
         {this.state.asked && (

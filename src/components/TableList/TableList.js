@@ -32,6 +32,7 @@ export default class TableList extends Component {
     });
 
     socket.on('list response', (list) => {
+      console.log('list', list);
       const list1 = [];
       let index = 0;
       for (let game in list) {
