@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 import { Button } from '../Utils/Utils';
+import UserContext from '../../contexts/UserContext';
 
 import './GameTableSeat.css';
 
 export default class GameTableSeat extends Component {
+  static contextType = UserContext;
+
   renderLoggedInUser = (player) => {
-    return player.playerHand.map((card) => {
+    return player.playerHand.map((card, index) => {
       return (
-        <div
-          className="player-card"
-          key={card.value + card.suit}
-          onClick={() => this.props.requestCard()}
-        >
-          {card.value}
-          {card.suit}
+        <div key={index}>
+          <input
+            type="radio"
+            className="player-card"
+            id={card.value + card.suit}
+            value={card.value}
+            onChange={(e) => this.props.onCardChoice(e.target.value)}
+          />
+          <label>
+            {card.value}
+            {card.suit}
+          </label>
         </div>
       );
     });
@@ -40,10 +48,17 @@ export default class GameTableSeat extends Component {
   };
 
   render() {
-    const { player, count } = this.props;
+    const { player, seated, count } = this.props;
     return (
       <>
-        {player.playerSeat === 1 ? (
+        {!player.playerName && !seated ? (
+          <button
+            value={player.playerSeat}
+            onClick={(e) => this.props.claimSeat(e.target.value)}
+          >
+            claim seat {player.playerSeat}
+          </button>
+        ) : player.playerName === this.context.userData.player ? (
           <div className={`player-seat-${player.playerSeat}`}>
             <div className="player-hand">{this.renderLoggedInUser(player)}</div>
             <h2>{player.playerName}</h2>
