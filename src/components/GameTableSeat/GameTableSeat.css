@@ -1,21 +1,11 @@
-.player-seat-1 {
-  position: absolute;
-  bottom: 0;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-}
-
-.player-hand {
+/* .player-hand {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.player-card,
-.player-card-opponent {
+,
+-opponent {
   margin: 0 2px;
   border: 1px solid black;
   background-color: white;
@@ -28,7 +18,7 @@
   text-align: center;
 }
 
-.player-card:hover {
+:hover {
   -moz-transform: translate(-2px, -5px);
   -ms-transform: translate(-2px, -5px);
   -o-transform: translate(-2px, -5px);
@@ -37,15 +27,287 @@
   box-shadow: #000 2px 5px 10px;
 }
 
-.player-card[type="radio"] {
+[type='radio'] {
   appearance: none;
 }
 
-.player-card[type="radio"]:checked {
+[type='radio']:checked {
   -moz-transform: translate(-2px, -5px);
   -ms-transform: translate(-2px, -5px);
   -o-transform: translate(-2px, -5px);
   -webkit-transform: translate(-2px, -5px);
   transform: translate(-2px, -5px);
   box-shadow: #000 2px 5px 10px;
+} */
+
+.card {
+  display: inline-block;
+  width: 3.3em;
+  height: 4.6em;
+  border: 1px solid #666;
+  border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  -webkit-border-radius: 0.3em;
+  -khtml-border-radius: 0.3em;
+  padding: 0.25em;
+  margin: 0 0.5em 0.5em 0;
+  text-align: center;
+  font-size: 1.2em; /* @change: adjust this value to make bigger or smaller cards */
+  font-weight: normal;
+  font-family: Arial, sans-serif;
+  position: relative;
+  background-color: #fff;
+  -moz-box-shadow: 0.2em 0.2em 0.5em #333;
+  -webkit-box-shadow: 0.2em 0.2em 0.5em #333;
+  box-shadow: 0.2em 0.2em 0.5em #333;
+}
+
+a.card {
+  text-decoration: none;
+}
+/* selected and hover state */
+a.card:hover,
+a.card:active,
+a.card:focus,
+label.card:hover,
+strong .card {
+  bottom: 1em;
+}
+label.card {
+  cursor: pointer;
+}
+
+/* hand (in your hand)
+********************************************************************/
+
+ul.hand {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 1.5em 0;
+  position: relative;
+  clear: both;
+}
+ul.hand {
+  margin-bottom: 3.5em;
+}
+ul.hand {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  float: left;
+}
+
+ul.hand {
+  height: 8em;
+}
+ul.hand li {
+  position: absolute;
+}
+ul.hand li {
+  bottom: 0;
+}
+ul.hand li:nth-child(1) {
+  left: 0;
+}
+ul.hand li:nth-child(2) {
+  left: 1.1em;
+}
+ul.hand li:nth-child(3) {
+  left: 2.2em;
+}
+ul.hand li:nth-child(4) {
+  left: 3.3em;
+}
+ul.hand li:nth-child(5) {
+  left: 4.4em;
+}
+ul.hand li:nth-child(6) {
+  left: 5.5em;
+}
+ul.hand li:nth-child(7) {
+  left: 6.6em;
+}
+ul.hand li:nth-child(8) {
+  left: 7.7em;
+}
+ul.hand li:nth-child(9) {
+  left: 8.8em;
+}
+ul.hand li:nth-child(10) {
+  left: 9.9em;
+}
+ul.hand li:nth-child(11) {
+  left: 11em;
+}
+ul.hand li:nth-child(12) {
+  left: 12.1em;
+}
+ul.hand li:nth-child(13) {
+  left: 13.2em;
+}
+
+ul.hand li:nth-child(14) {
+  left: 14.3em;
+}
+ul.hand li:nth-child(15) {
+  left: 15.4em;
+}
+ul.hand li:nth-child(16) {
+  left: 16.5em;
+}
+ul.hand li:nth-child(17) {
+  left: 17.6em;
+}
+ul.hand li:nth-child(18) {
+  left: 18.7em;
+}
+ul.hand li:nth-child(19) {
+  left: 19.8em;
+}
+ul.hand li:nth-child(20) {
+  left: 20.9em;
+}
+ul.hand li:nth-child(21) {
+  left: 22em;
+}
+ul.hand li:nth-child(22) {
+  left: 23.1em;
+}
+ul.hand li:nth-child(23) {
+  left: 24.2em;
+}
+ul.hand li:nth-child(24) {
+  left: 25.3em;
+}
+ul.hand li:nth-child(25) {
+  left: 26.4em;
+}
+ul.hand li:nth-child(26) {
+  left: 27.5em;
+}
+
+/* rotate cards if rotateHand option is on */
+.rotateHand ul.hand li:nth-child(1) {
+  -moz-transform: translate(1.9em, 0.9em) rotate(-42deg);
+  -webkit-transform: translate(1.9em, 0.9em) rotate(-42deg);
+  -o-transform: translate(1.9em, 0.9em) rotate(-42deg);
+  transform: translate(1.9em, 0.9em) rotate(-42deg);
+}
+.rotateHand ul.hand li:nth-child(2) {
+  -moz-transform: translate(1.5em, 0.5em) rotate(-33deg);
+  -webkit-transform: translate(1.5em, 0.5em) rotate(-33deg);
+  -o-transform: translate(1.5em, 0.5em) rotate(-33deg);
+  transform: translate(1.5em, 0.5em) rotate(-33deg);
+}
+.rotateHand ul.hand li:nth-child(3) {
+  -moz-transform: translate(1.1em, 0.3em) rotate(-24deg);
+  -webkit-transform: translate(1.1em, 0.3em) rotate(-24deg);
+  -o-transform: translate(1.1em, 0.3em) rotate(-24deg);
+  transform: translate(1.1em, 0.3em) rotate(-24deg);
+}
+.rotateHand ul.hand li:nth-child(4) {
+  -moz-transform: translate(0.7em, 0.2em) rotate(-15deg);
+  -webkit-transform: translate(0.7em, 0.2em) rotate(-15deg);
+  -o-transform: translate(0.7em, 0.2em) rotate(-15deg);
+  transform: translate(0.7em, 0.2em) rotate(-15deg);
+}
+.rotateHand ul.hand li:nth-child(5) {
+  -moz-transform: translate(0.3em, 0.1em) rotate(-6deg);
+  -webkit-transform: translate(0.3em, 0.1em) rotate(-6deg);
+  -o-transform: translate(0.3em, 0.1em) rotate(-6deg);
+  transform: translate(0.3em, 0.1em) rotate(-6deg);
+}
+.rotateHand ul.hand li:nth-child(6) {
+  -moz-transform: translate(-0.1em, 0.1em) rotate(3deg);
+  -webkit-transform: translate(-0.1em, 0.1em) rotate(3deg);
+  -o-transform: translate(-0.1em, 0.1em) rotate(3deg);
+  transform: translate(-0.1em, 0.1em) rotate(3deg);
+}
+.rotateHand ul.hand li:nth-child(7) {
+  -moz-transform: translate(-0.5em, 0.2em) rotate(12deg);
+  -webkit-transform: translate(-0.5em, 0.2em) rotate(12deg);
+  -o-transform: translate(-0.5em, 0.2em) rotate(12deg);
+  transform: translate(-0.5em, 0.2em) rotate(12deg);
+}
+.rotateHand ul.hand li:nth-child(8) {
+  -moz-transform: translate(-0.9em, 0.3em) rotate(21deg);
+  -webkit-transform: translate(-0.9em, 0.3em) rotate(21deg);
+  -o-transform: translate(-0.9em, 0.3em) rotate(21deg);
+  transform: translate(-0.9em, 0.3em) rotate(21deg);
+}
+.rotateHand ul.hand li:nth-child(9) {
+  -moz-transform: translate(-1.3em, 0.6em) rotate(30deg);
+  -webkit-transform: translate(-1.3em, 0.6em) rotate(30deg);
+  -o-transform: translate(-1.3em, 0.6em) rotate(30deg);
+  transform: translate(-1.3em, 0.6em) rotate(30deg);
+}
+.rotateHand ul.hand li:nth-child(10) {
+  -moz-transform: translate(-1.7em, 1em) rotate(39deg);
+  -webkit-transform: translate(-1.7em, 1em) rotate(39deg);
+  -o-transform: translate(-1.7em, 1em) rotate(39deg);
+  transform: translate(-1.7em, 1em) rotate(39deg);
+}
+.rotateHand ul.hand li:nth-child(11) {
+  -moz-transform: translate(-2.2em, 1.5em) rotate(48deg);
+  -webkit-transform: translate(-2.2em, 1.5em) rotate(48deg);
+  -o-transform: translate(-2.2em, 1.5em) rotate(48deg);
+  transform: translate(-2.2em, 1.5em) rotate(48deg);
+}
+.rotateHand ul.hand li:nth-child(12) {
+  -moz-transform: translate(-2.8em, 2.1em) rotate(57deg);
+  -webkit-transform: translate(-2.8em, 2.1em) rotate(57deg);
+  -o-transform: translate(-2.8em, 2.1em) rotate(57deg);
+  transform: translate(-2.8em, 2.1em) rotate(57deg);
+}
+.rotateHand ul.hand li:nth-child(13) {
+  -moz-transform: translate(-3.5em, 2.8em) rotate(66deg);
+  -webkit-transform: translate(-3.5em, 2.8em) rotate(66deg);
+  -o-transform: translate(-3.5em, 2.8em) rotate(66deg);
+  transform: translate(-3.5em, 2.8em) rotate(66deg);
+}
+
+@media all and (min-width: 600px) {
+  .player-seat-1 {
+    display: flex;
+    justify-content: space-between;
+    grid-row: 4;
+    grid-column: 2 / 4;
+  }
+  .player-seat-2 {
+    display: flex;
+    justify-content: space-between;
+    grid-row: 2 / 4;
+    grid-column: 1;
+  }
+  .player-seat-3 {
+    display: flex;
+    justify-content: space-between;
+    grid-row: 1;
+    grid-column: 2 / 4;
+  }
+  .player-seat-4 {
+    display: flex;
+    justify-content: space-between;
+    grid-row: 2 / 4;
+    grid-column: 4;
+  }
+  .center {
+    margin: auto auto;
+    grid-row: 2/4;
+    grid-column: 2/4;
+  }
+  .hand {
+    flex: 2;
+  }
+  .name {
+    flex: 1;
+  }
+  img.player-avatar {
+    max-width: 100px;
+  }
+  .claim-seat-button {
+    margin: auto auto;
+    height: 40px;
+    width: 200px;
+  }
 }

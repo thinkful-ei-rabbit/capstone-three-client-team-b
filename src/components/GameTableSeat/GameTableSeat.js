@@ -10,26 +10,21 @@ export default class GameTableSeat extends Component {
   renderLoggedInUser = (player) => {
     return player.playerHand.map((card, index) => {
       return (
-        <div key={index}>
-          <input
-            type="radio"
-            className="player-card"
-            id={card.value + card.suit}
-            value={card.value}
-            onChange={(e) => this.props.onCardChoice(e.target.value)}
-          />
-          <label>
-            {card.value}
-            {card.suit}
-          </label>
-        </div>
+        <>
+          <li key={index}>
+            <a className="card">
+              <span className="rank">{card.value}</span>
+              <span className="suit">{card.suit}</span>
+            </a>
+          </li>
+        </>
       );
     });
   };
 
   renderOtherPlayers = (player, count) => {
     return (
-      <div className={`player-seat-${player.playerSeat}-${count}player`}>
+      <div className={`player-seat-${player.playerSeat}`}>
         <h2>{player.playerName}</h2>
         <div className="player-hand">
           { player.handCount }
@@ -50,20 +45,28 @@ export default class GameTableSeat extends Component {
   };
 
   render() {
-    const { player, seated, count } = this.props;
+    const { player, seated, count, avatar } = this.props;
     return (
       <>
         {!player.playerName && !seated ? (
           <button
             value={player.playerSeat}
             onClick={(e) => this.props.claimSeat(e.target.value)}
+            className={`player-seat-${player.playerSeat} claim-seat-button`}
           >
             claim seat {player.playerSeat}
           </button>
         ) : player.playerName === this.context.userData.player ? (
-          <div className={`player-seat-${player.playerSeat}`}>
-            <div className="player-hand">{this.renderLoggedInUser(player)}</div>
-            <h2>{player.playerName}</h2>
+          <div className={`player-seat-${player.playerSeat} rotateHand`}>
+            <ul className="hand">{this.renderLoggedInUser(player)}</ul>
+            <div className="name">
+              <h2 className="name">{player.playerName}</h2>
+              <img
+                className="player-avatar"
+                src={this.context.userData.avatar}
+                alt="player avatar"
+              />
+            </div>
           </div>
         ) : (
           this.renderOtherPlayers(player, count)
