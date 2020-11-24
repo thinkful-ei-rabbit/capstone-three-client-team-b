@@ -596,7 +596,7 @@ export default class GameTable extends Component {
   };
 
   render() {
-    const { players, seated } = this.state;
+    const { players, seated, endGame, winner } = this.state;
     const count = this.countPlayers();
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
