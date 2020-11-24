@@ -78,11 +78,12 @@ export default class GameTable extends Component {
 
     let count = 0;
     socket.on('messageResponse', (msg) => {
-      console.log(msg);
       // individual message response
+      let feedback = document.getElementById('feedback')
+      feedback.innerHTML = ''
       msg = (
         <div key={count}>
-          {msg.user}: {msg.value}
+          <strong>{msg.user}</strong>: {msg.value}
         </div>
       );
       count++;
@@ -275,6 +276,12 @@ export default class GameTable extends Component {
       });
     });
 
+    socket.on('typing', (data) => {
+      let feedback = document.getElementById('feedback')
+      console.log(data)
+      feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>'
+    })
+
     socket.on('game end', () => {
       // arbitrary number of books collected by server,
       // client side displays
@@ -295,6 +302,7 @@ export default class GameTable extends Component {
     };
 
     socket.emit('serverMessage', userObj);
+    event.target['input-message'].value = '';
   };
 
   askOtherPlayer = (e) => {
@@ -440,6 +448,14 @@ export default class GameTable extends Component {
 
     this.nextTurn();
   };
+
+  handleKeyPress = () => {
+    const user = this.state.user
+
+    socket.emit('typing', user)
+  }
+
+  countPlayers = () => { };
 
   setsChecker = (i) => {
     const { players } = this.state;
@@ -629,6 +645,45 @@ export default class GameTable extends Component {
           <div className="winner-display">
             The winner is {winner}! The game is over now.
             <br />
+
+            <Button
+              disabled={this.state.inProgress === true}
+              onClick={() => this.gameReadyCheck()}
+            >
+              Ready
+            </Button>
+            <Button
+              disabled={
+                this.state.ready === false || this.state.inProgress === true
+              }
+              onClick={() => this.startGame()}
+            >
+              Start Game
+            </Button>
+            <Button
+              disabled={
+                this.state.inProgress === false ||
+                currentSeatOfDOMPlayer.currentPlayer === false
+              }
+              onClick={this.gofish}
+            >
+              Draw
+            </Button>
+            <ChatLog
+              handleKeyPress={this.handleKeyPress}
+              match={this.props.match}
+              onChatMessageSubmit={this.onChatMessageSubmit}
+              askAnotherPlayer={this.askOtherPlayer}
+              requestedCard={
+                currentSeatOfDOMPlayer
+                  ? currentSeatOfDOMPlayer.requestedCard
+                  : ''
+              }
+              yesResponse={this.yesResponse}
+              noResponse={this.noResponse}
+              upperState={this.state.chatLog}
+              chatRenders={this.state.chatRenders}
+            />
             <button>Rematch</button>
           </div>
         ) : (
