@@ -262,13 +262,6 @@ export default class GameTable extends Component {
       });
     });
 
-
-
-
-
-
-
-
     socket.on('game end', (someinfo) => {
       // someinfo that we'll do something vague
     });
@@ -698,7 +691,10 @@ export default class GameTable extends Component {
                   requestedPlayer={
                     currentSeatOfDOMPlayer
                       ? currentSeatOfDOMPlayer.requestedPlayer
-                      : ''
+                      : { 
+                        playerName: '',
+                        id: '',
+                    }
                   }
                   yesResponse={this.yesResponse}
                   noResponse={this.noResponse}
