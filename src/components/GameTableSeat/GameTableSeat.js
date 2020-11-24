@@ -14,10 +14,9 @@ export default class GameTableSeat extends Component {
 
       return (
         <>
-          <li key={index}
-            style={{ backgroundImage: `${imageLocation}` }}
-          >
-            <a className="card"
+          <li key={index} style={{ backgroundImage: `${imageLocation}` }}>
+            <a
+              className="card"
               onClick={() => this.props.onCardChoice(card.value)}
             >
               <span className="rank">{card.value}</span>
@@ -35,8 +34,7 @@ export default class GameTableSeat extends Component {
         <h2>{player.playerName}</h2>
         <div className="player-hand">
           {player.handCount}
-          {
-            /* {player.handCount.map((card, index) => {
+          {/* {player.handCount.map((card, index) => {
             return (
               <div
                 className="player-card-opponent"
@@ -52,7 +50,7 @@ export default class GameTableSeat extends Component {
   };
 
   render() {
-    const { player, seated, count, avatar } = this.props;
+    const { player, seated, count } = this.props;
     return (
       <>
         {!player.playerName && !seated ? (
@@ -76,8 +74,8 @@ export default class GameTableSeat extends Component {
             </div>
           </div>
         ) : (
-              this.renderOtherPlayers(player, count)
-            )}
+          this.renderOtherPlayers(player, count)
+        )}
       </>
     );
   }
