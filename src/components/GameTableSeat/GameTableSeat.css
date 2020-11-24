@@ -304,10 +304,35 @@ ul.hand li:nth-child(26) {
   }
   img.player-avatar {
     max-width: 100px;
+    border: #000 solid 1px;
+    border-radius: 10px;
   }
+
+  h2.name {
+    margin: 0;
+  }
+
   .claim-seat-button {
     margin: auto auto;
-    height: 40px;
-    width: 200px;
+    height: 80px;
+    width: 80px;
+    align-items: center;
+    border-radius: 50%;
+    border: #000 solid 1px;
+    font-size: 3rem;
+    box-shadow: #000 5px 5px 10px;
+  }
+
+  .claim-seat-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: #000 1px 1px 2px;
+  }
+
+  .claim-seat-button:focus {
+    outline: none;
+  }
+
+  .plus {
+    margin-left: 18px;
   }
 }
