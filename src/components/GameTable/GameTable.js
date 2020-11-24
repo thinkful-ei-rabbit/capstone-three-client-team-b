@@ -380,16 +380,16 @@ export default class GameTable extends Component {
   };
 
   displayWinner = () => {
-    // const { playerBooks } = this.state.players.books
-    // const winnerPopUp = `Congrats you have won!`
-    // if (playerBooks.length > 2) {
-    //   return winnerPopUp
-    // }
+    const { players } = this.state
     for (let i = 0; i < this.players.length; i++) {
-      if (this.state.players[i].books.length > 2) {
-        return this.state.players.playerName[i]
+      const winner = ''
+      if (players[i].books.length > 2) {
+        return players.playerName[i]
       }
     }
+    this.setState({
+      winner: this.state
+    });
 
   }
 
