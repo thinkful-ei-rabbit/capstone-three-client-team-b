@@ -13,8 +13,20 @@ code {
 }
 
 @media all and (min-width: 600px) {
+  body,
   html {
-    width: 800px;
-    margin: 0 auto;
+    margin: 0;
+    height: 100%;
+  }
+
+  .App,
+  #root {
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  main {
+    height: 100%;
   }
 }

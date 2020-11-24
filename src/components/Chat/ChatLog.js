@@ -34,88 +34,7 @@ class ChatLog extends React.Component {
 
   componentDidMount() {
     this.setState({ connected: true })
-    // console.log(this.props.upperState)
-    // socket.on('serverResponse', (retObj) => {
-    //     this.setState({
-    //         self: (this.state.self) ? this.state.self : retObj.self,
-    //         room: retObj.room,
-    //         players: retObj.players,
-    //         connected: true,
-    //         messages: [...this.state.messages, retObj.message],
-    //     })
-    // })
-    // socket.on('gameFull', (message) => {
-    //     alert(message);
-    // })
-    // socket.on('rank request from player', (requestObj) => {
-    //     this.setState({ asked: requestObj })
-    // })
-    // socket.on('go fish', (reqObj) => {
-    //     const { asker, requested, rankReq } = reqObj;
-    //     console.log(`${requested} did not have a ${rankReq}, sorry ${asker}.`)
-    // })
-    // socket.on('correct rank return', (gameObj) => {
-    //     const { requested, asker, rankReq, CARD } = gameObj;
-    //     // gameObj returned,
-    //     // requested, asker(self), reqRank, CARD
-    //     // add CARD to hand
-    //     // check for books
-    //     // display next turn
-    //     console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
-    // })
-    // map out server calls for tomorrow
-    // CLIENT RESPONSES =======
-    /*
-        
-                    CLIENT EMITS ============
-                    socket.emit('request rank from player', () => {
-                        user_id
-                        requestId (socket.id)
-                        requestedRank
-                    })
-        
-                    socket.emit('rank request denial', () => {
-                        const requested = requestObj.user_id;
-                        const asker = requestObj.request_id;
-                        const reqRank = requestObj.requested_rank;
-        
-        
-                        requested does NOT have aany reqRank's, asker must go fish
-                    })
-                    socket.emit('rank request accept', () => {
-                        requested, asker, reqRank
-                        user DOES have card
-        
-                        requested gives asker CARD, asked for reqRank
-        
-                    })
-        
-        
-                    socket.emit('next turn click', () => {
-        
-                    })
-        
-                */
   }
-
-  // onChatMessageSubmit = (event) => {
-  //     event.preventDefault();
-  //     const room = this.props.match.params.game_id;
-  //     console.log(room);
-  //     const userObj = {
-  //         value: event.target['input-message'].value,
-  //         room
-  //     }
-
-  //     socket.emit('serverMessage', userObj);
-  // }
-
-  // onJoinServerClick = () => {
-  //     const room = this.props.match.params.game_id;
-  //     /* ROOM ID WILL BE BASED ON THIS ^ */
-  //     const playerName = this.context.userData.player;
-  //     const user_id = this.context.userData.id; // context.user.user_id
-  //     const avatarLink = this.context.userData.avatar; // context.user.avatarLink
 
   render() {
     let players = [];
@@ -125,7 +44,7 @@ class ChatLog extends React.Component {
         players = this.state.players.map((el, index) => {
           // el.id, el.name, .room
           return (
-            <div key={index}>
+            <div key={index} onClick={() => this.props.onPlayerChoice(el)}>
               {el.playerName}, {el.id}
             </div>
           );
@@ -149,7 +68,7 @@ class ChatLog extends React.Component {
           </button>
         </form>
         <form onSubmit={(e) => this.props.askAnotherPlayer(e)}>
-          <input placeholder="id of player" type="text" id="to-ask-id" />
+          <input placeholder="name of player" type="text" id="to-ask-id" value={this.props.requestedPlayer.playerName} readOnly />
           <input placeholder="rank requested" type="text" id="rank-requested" value={this.props.requestedCard} readOnly />
           <button type="submit">Ask Other Player</button>
         </form>

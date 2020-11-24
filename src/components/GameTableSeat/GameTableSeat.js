@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from '../Utils/Utils';
 import UserContext from '../../contexts/UserContext';
+import images from '../../images/images.js';
 
 import './GameTableSeat.css';
 
@@ -9,13 +9,16 @@ export default class GameTableSeat extends Component {
 
   renderLoggedInUser = (player) => {
     return player.playerHand.map((card, index) => {
+      const suitValue = card.suit + card.value;
+
       return (
         <>
-          <li key={index}>
-            <a className="card">
-              <span className="rank">{card.value}</span>
-              <span className="suit">{card.suit}</span>
-            </a>
+          <li
+            key={index}
+            className="card"
+            onClick={() => this.props.onCardChoice(card.value)}
+          >
+            <img src={images[suitValue]} alt="card value" />
           </li>
         </>
       );
@@ -27,9 +30,8 @@ export default class GameTableSeat extends Component {
       <div className={`player-seat-${player.playerSeat}`}>
         <h2>{player.playerName}</h2>
         <div className="player-hand">
-          { player.handCount }
-          {
-            /* {player.handCount.map((card, index) => {
+          {player.handCount}
+          {/* {player.handCount.map((card, index) => {
             return (
               <div
                 className="player-card-opponent"
@@ -45,7 +47,7 @@ export default class GameTableSeat extends Component {
   };
 
   render() {
-    const { player, seated, count, avatar } = this.props;
+    const { player, seated } = this.props;
     return (
       <>
         {!player.playerName && !seated ? (
@@ -54,7 +56,7 @@ export default class GameTableSeat extends Component {
             onClick={(e) => this.props.claimSeat(e.target.value)}
             className={`player-seat-${player.playerSeat} claim-seat-button`}
           >
-            claim seat {player.playerSeat}
+            +
           </button>
         ) : player.playerName === this.context.userData.player ? (
           <div className={`player-seat-${player.playerSeat} rotateHand`}>
@@ -69,7 +71,7 @@ export default class GameTableSeat extends Component {
             </div>
           </div>
         ) : (
-          this.renderOtherPlayers(player, count)
+          this.renderOtherPlayers(player)
         )}
       </>
     );
