@@ -17,7 +17,7 @@ export default class GameTable extends Component {
   state = {
     players: [
       {
-        playerName: '',
+        playerName: 'a',
         playerSeat: 1,
         playerHand: [],
         books: [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -26,7 +26,7 @@ export default class GameTable extends Component {
         requestedCard: '',
       },
       {
-        playerName: '',
+        playerName: 'b',
         playerSeat: 2,
         playerHand: [],
         books: [],
@@ -35,7 +35,7 @@ export default class GameTable extends Component {
         requestedCard: '',
       },
       {
-        playerName: '',
+        playerName: 'c',
         playerSeat: 3,
         playerHand: [],
         books: [],
@@ -44,7 +44,7 @@ export default class GameTable extends Component {
         requestedCard: '',
       },
       {
-        playerName: '',
+        playerName: 'd',
         playerSeat: 4,
         playerHand: [],
         books: [],
@@ -61,7 +61,7 @@ export default class GameTable extends Component {
       messages: [],
     },
     endGame: true,
-    winner: '',
+    winner: 'test',
   };
 
   componentDidMount = () => {
@@ -362,34 +362,76 @@ export default class GameTable extends Component {
     }
   };
   endGame = () => {
-    const { totalBooks } = this.state.players.books
-    if (totalBooks.length === 9) {
-      //display end game & winner (if player has highest books)
-      this.setState({
-        endGame: true
-      });
-      //displayWinner()
-      //to-do: stop socket connection?
-      //alert players that the game has ended...implement a displayWinner func
-      alert('The game has ended')
+    console.log("this ran first")
+    const { players } = this.state
+
+    //const totalBooks = this.state.players.books
+    for (let i = 0; i < players.length; i++) {
+      if (players[i].books.length > 8) {
+        //display end game & winner (if player has highest books)
+        this.setState({
+          endGame: true
+        });
+        this.displayWinner()
+        //to-do: stop socket connection?
+        //alert players that the game has ended...implement a displayWinner func
+        alert(`The game has ended. The winner is ${this.state.winner}!`)
+      }
+      // else {
+      //   //game is inProgress
+      //   //probably dont need this^
+      // }
     }
-    // else {
-    //   //game is inProgress
-    //   //probably dont need this^
-    // }
-  };
+  }
 
   displayWinner = () => {
+    console.log("this ran first 2")
+
     const { players } = this.state
-    for (let i = 0; i < this.players.length; i++) {
-      const winner = ''
-      if (players[i].books.length > 2) {
-        return players.playerName[i]
+    for (let i = 0; i < players.length; i++) {
+      //if player 0 wins
+      if (players[0].books.length > players[1].books.length &&
+        players[0].books.length > players[2].books.length &&
+        players[0].books.length > players[3].books.length) {
+        //console.log(players.playerName[0])
+        this.setState({
+          winner: players[0].playerName
+        });
+        //console.log(players.playerName[0])
+
+        return players[0].playerName
+      }
+      //if player 1 wins
+      else if (players[1].books.length > players[0].books.length &&
+        players[1].books.length > players[2].books.length &&
+        players[1].books.length > players[3].books.length) {
+        console.log(players[1].playerName)
+
+        this.setState({
+          winner: players[1].playerName
+        });
+        return players[1].playerName
+      }
+      //if player 2 wins
+      else if (players[2].books.length > players[0].books.length &&
+        players[2].books.length > players[1].books.length &&
+        players[2].books.length > players[3].books.length) {
+        this.setState({
+          winner: players[2].playerName
+        });
+        return players[2].playerName
+      }
+      //if player 3 wins
+      else {
+        this.setState({
+          winner: players[3].playerName
+        });
+        return players[3].playerName
       }
     }
-    this.setState({
-      winner: this.state
-    });
+    console.log("this ran")
+
+
 
   }
 
@@ -431,12 +473,18 @@ export default class GameTable extends Component {
   render() {
     const { players, seated, endGame, winner } = this.state;
     const count = this.countPlayers();
+
     //if it's the end of game display x, otherwise display the game btns and table
     //gameChatLog is always displayed
     return (
       <>
         { endGame === true ? (
-          <div className='winner-display'>The winner is {winner}! The game is over now. <br /><button>Rematch</button></div>
+          <div className='winner-display'>
+            {onchange = this.endGame()}
+            The winner is {winner}! The game is over now.
+            <br />
+            <button>Rematch</button>
+          </div>
         ) : (
             <>
               <Section className="game-table">
