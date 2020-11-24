@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Deck from '../Deck/Deck';
 import { Section, Button } from '../Utils/Utils';
 import UserContext from '../../contexts/UserContext';
 import GameTableSeat from '../GameTableSeat/GameTableSeat';
@@ -79,8 +78,8 @@ export default class GameTable extends Component {
     let count = 0;
     socket.on('messageResponse', (msg) => {
       // individual message response
-      let feedback = document.getElementById('feedback')
-      feedback.innerHTML = ''
+      let feedback = document.getElementById('feedback');
+      feedback.innerHTML = '';
       msg = (
         <div key={count}>
           <strong>{msg.user}</strong>: {msg.value}
@@ -215,7 +214,7 @@ export default class GameTable extends Component {
     });
 
     socket.on('correct rank return', (gameObj) => {
-      const { requested, asker, rankReq, CARD } = gameObj;
+      const { CARD } = gameObj;
       currentSeatOfDOMPlayer.playerHand.push(CARD[0]);
 
       const updatedPlayers = [...this.state.players];
@@ -277,10 +276,11 @@ export default class GameTable extends Component {
     });
 
     socket.on('typing', (data) => {
-      let feedback = document.getElementById('feedback')
-      console.log(data)
-      feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>'
-    })
+      let feedback = document.getElementById('feedback');
+      console.log(data);
+      feedback.innerHTML =
+        '<p><em>' + data + ' is typing a message...</em></p>';
+    });
 
     socket.on('game end', () => {
       // arbitrary number of books collected by server,
@@ -450,15 +450,12 @@ export default class GameTable extends Component {
   };
 
   handleKeyPress = () => {
-    const user = this.state.user
+    const user = this.state.user;
 
-    socket.emit('typing', user)
-  }
-
-  countPlayers = () => { };
+    socket.emit('typing', user);
+  };
 
   setsChecker = (i) => {
-    const { players } = this.state;
     //const books = []; //place books in state?
     // client side validation then send book to server
 
@@ -645,7 +642,6 @@ export default class GameTable extends Component {
           <div className="winner-display">
             The winner is {winner}! The game is over now.
             <br />
-
             <Button
               disabled={this.state.inProgress === true}
               onClick={() => this.gameReadyCheck()}
