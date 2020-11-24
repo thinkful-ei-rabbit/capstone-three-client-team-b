@@ -62,7 +62,6 @@ export default class GameTable extends Component {
     deck: [],
     inProgress: false,
     seated: false,
-    ready: false,
     chatLog: {
       messages: [],
       connected: false,
@@ -431,12 +430,6 @@ export default class GameTable extends Component {
     });
   };
 
-  gameReadyCheck = () => {
-    this.setState({
-      ready: true,
-    });
-  };
-
   gofish = () => {
     const playerName = this.context.userData.player;
     const cardCount = currentSeatOfDOMPlayer.playerHand.length;
@@ -447,8 +440,6 @@ export default class GameTable extends Component {
 
     this.nextTurn();
   };
-
-  countPlayers = () => {};
 
   setsChecker = (i) => {
     const { players } = this.state;
@@ -629,7 +620,6 @@ export default class GameTable extends Component {
 
   render() {
     const { players, seated, endGame, winner } = this.state;
-    const count = this.countPlayers();
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
     );
@@ -648,7 +638,6 @@ export default class GameTable extends Component {
                 <GameTableSeat
                   key={index}
                   player={player}
-                  count={count}
                   onCardChoice={this.onCardChoice}
                   claimSeat={this.claimSeat}
                   seated={seated}
@@ -671,17 +660,8 @@ export default class GameTable extends Component {
                 Do I have any sets?
               </Button>
               <br />
-
               <Button
                 disabled={this.state.inProgress === true}
-                onClick={() => this.gameReadyCheck()}
-              >
-                Ready
-              </Button>
-              <Button
-                disabled={
-                  this.state.ready === false || this.state.inProgress === true
-                }
                 onClick={() => this.startGame()}
               >
                 Start Game
@@ -693,7 +673,7 @@ export default class GameTable extends Component {
                 }
                 onClick={this.gofish}
               >
-                Draw
+                Go Fish!
               </Button>
               <ChatLog
                 match={this.props.match}
