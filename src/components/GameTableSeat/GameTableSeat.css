@@ -42,8 +42,8 @@
 
 .card {
   display: inline-block;
-  width: 3.3em;
-  height: 4.6em;
+  width: 5.3em;
+  height: 8.1em;
   border: 1px solid #666;
   border-radius: 0.3em;
   -moz-border-radius: 0.3em;
@@ -269,24 +269,29 @@ ul.hand li:nth-child(26) {
 @media all and (min-width: 600px) {
   .player-seat-1 {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     grid-row: 4;
     grid-column: 2 / 4;
   }
   .player-seat-2 {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     grid-row: 2 / 4;
     grid-column: 1;
   }
   .player-seat-3 {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     grid-row: 1;
     grid-column: 2 / 4;
+    margin-top: 75px;
   }
   .player-seat-4 {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     grid-row: 2 / 4;
     grid-column: 4;
@@ -334,5 +339,9 @@ ul.hand li:nth-child(26) {
 
   .plus {
     margin-left: 18px;
+  }
+
+  img {
+    width: 100%;
   }
 }

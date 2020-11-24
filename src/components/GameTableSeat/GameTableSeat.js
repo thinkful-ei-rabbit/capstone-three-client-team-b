@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from '../Utils/Utils';
 import UserContext from '../../contexts/UserContext';
 import images from '../../images/images.js';
 
@@ -10,17 +9,17 @@ export default class GameTableSeat extends Component {
 
   renderLoggedInUser = (player) => {
     return player.playerHand.map((card, index) => {
-      const imageLocation = images[`${card.suit}${card.value}`];
+      const suitValue = card.suit + card.value;
 
       return (
         <>
-          <li key={index} style={{ backgroundImage: `${imageLocation}` }}>
+          <li key={index}>
             <a
+              href="#"
               className="card"
               onClick={() => this.props.onCardChoice(card.value)}
             >
-              <span className="rank">{card.value}</span>
-              <span className="suit">{card.suit}</span>
+              <img src={images[suitValue]} alt="card value" />
             </a>
           </li>
         </>
@@ -50,7 +49,7 @@ export default class GameTableSeat extends Component {
   };
 
   render() {
-    const { player, seated, count } = this.props;
+    const { player, seated } = this.props;
     return (
       <>
         {!player.playerName && !seated ? (
@@ -59,7 +58,7 @@ export default class GameTableSeat extends Component {
             onClick={(e) => this.props.claimSeat(e.target.value)}
             className={`player-seat-${player.playerSeat} claim-seat-button`}
           >
-            claim seat {player.playerSeat}
+            +
           </button>
         ) : player.playerName === this.context.userData.player ? (
           <div className={`player-seat-${player.playerSeat} rotateHand`}>
@@ -74,7 +73,7 @@ export default class GameTableSeat extends Component {
             </div>
           </div>
         ) : (
-          this.renderOtherPlayers(player, count)
+          this.renderOtherPlayers(player)
         )}
       </>
     );
