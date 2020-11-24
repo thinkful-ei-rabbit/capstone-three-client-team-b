@@ -183,8 +183,18 @@ export default class GameTable extends Component {
       this.setState({
         players: updatedPlayers,
       })
+    })
 
+    socket.on('update other player books', (userObj) => {
+      const updatedPlayers = [...this.state.players];
+      const toUpdate = updatedPlayers.find(el => el.playerName === userObj.playerName);
+      toUpdate.books = [...userObj.playerBooks];
 
+      updatedPlayers[toUpdate.playerSeat - 1] = toUpdate;
+      console.log(toUpdate);
+      this.setState({
+        players: updatedPlayers,
+      })
     })
 
     socket.on('draw card fulfilled', (cardObj) => {
@@ -262,8 +272,13 @@ export default class GameTable extends Component {
       });
     });
 
-    socket.on('game end', (someinfo) => {
-      // someinfo that we'll do something vague
+    socket.on('game end', () => {
+      // arbitrary number of books collected by server,
+      // client side displays
+      this.setState({
+        endGame: true,
+      })
+      this.displayWinner();
     });
   };
 
@@ -458,7 +473,7 @@ export default class GameTable extends Component {
     const booksObj = [];
     // console.log(cardsInHand);
     for (var value in cardsInHand) {
-      if (cardsInHand[value].length > 1) {
+      if (cardsInHand[value].length > 3) {
         for (let i = 0; i < playerCards.length; i++) {
           if (playerCards[i].value == value) {
             booksObj.push(playerCards.splice(i, 1)[0]);
@@ -519,6 +534,7 @@ export default class GameTable extends Component {
     console.log("this is running")
 
     const { players } = this.state
+    console.log(players);
     for (let i = 0; i < players.length; i++) {
       //if player 0 wins
       if (players[0].books.length > players[1].books.length &&
