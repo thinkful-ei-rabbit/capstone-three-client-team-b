@@ -62,13 +62,13 @@
   box-shadow: 0.2em 0.2em 0.5em #333;
 }
 
-a.card {
+li.card {
   text-decoration: none;
 }
 /* selected and hover state */
-a.card:hover,
-a.card:active,
-a.card:focus,
+li.card:hover,
+li.card:active,
+li.card:focus,
 label.card:hover,
 strong .card {
   bottom: 1em;

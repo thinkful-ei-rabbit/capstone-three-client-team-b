@@ -13,14 +13,12 @@ export default class GameTableSeat extends Component {
 
       return (
         <>
-          <li key={index}>
-            <a
-              href="#"
-              className="card"
-              onClick={() => this.props.onCardChoice(card.value)}
-            >
-              <img src={images[suitValue]} alt="card value" />
-            </a>
+          <li
+            key={index}
+            className="card"
+            onClick={() => this.props.onCardChoice(card.value)}
+          >
+            <img src={images[suitValue]} alt="card value" />
           </li>
         </>
       );
