@@ -20,7 +20,7 @@ export default class GameTable extends Component {
         playerName: 'a',
         playerSeat: 1,
         playerHand: [],
-        books: [],
+        books: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -29,7 +29,7 @@ export default class GameTable extends Component {
         playerName: 'b',
         playerSeat: 2,
         playerHand: [],
-        books: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        books: [11, 12, 13],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -350,6 +350,31 @@ export default class GameTable extends Component {
       players: updatedPlayers,
     });
 
+    // endGame = () => {
+    console.log("this ran first")
+    // const { players } = this.state
+
+    for (let i = 0; i < players.length; i++) {
+      if (players[i].books.length > 4) {
+        //display end game & winner (if player has highest books)
+        this.setState({
+          endGame: true
+        });
+        this.displayWinner()
+        console.log("test")
+
+        //to-do: stop socket connection?
+
+      }
+      // else {
+      //   //game is inProgress
+      //   //probably dont need this^
+      // }
+      // }
+    }
+
+
+
   }
 
   startGame = () => {
@@ -361,27 +386,39 @@ export default class GameTable extends Component {
       alert('Not enough players in room, need 2 or more');
     }
   };
-  //to-do endGame running w/o manually changing to true
-  endGame = () => {
-    console.log("this ran first")
-    const { players } = this.state
 
-    for (let i = 0; i < players.length; i++) {
-      if (players[i].books.length > 4) {
-        //display end game & winner (if player has highest books)
-        this.setState({
-          endGame: true
-        });
-        this.displayWinner()
-        //to-do: stop socket connection?
-        //alert players that the game has ended...implement a displayWinner func
-        alert(`The game has ended. The winner is ${this.state.winner}!`) //to-do fix winner update
-      }
-      // else {
-      //   //game is inProgress
-      //   //probably dont need this^
-      // }
+
+
+
+
+  requestCard = () => {
+    console.log('hi');
+  };
+
+  claimSeat = (seat) => {
+    let roomPlayers = this.state.chatLog.players;
+    let name = this.context.userData.player;
+    let players = [...this.state.players];
+    let player = {
+      ...players[seat - 1],
+      playerName: this.context.userData.player,
+    };
+    if (!currentSeatOfDOMPlayer) {
+      // current seat needed to update client hand without
+      // updating all others
+      currentSeatOfDOMPlayer = {
+        ...players[seat - 1],
+        playerName: this.context.userData.player,
+      };
     }
+    players[seat - 1] = player;
+    this.setState({
+      players,
+      seated: true,
+    });
+
+    console.log(name, seat, roomPlayers)
+    socket.emit('claim seat', { name, seat, roomPlayers });
   }
 
   displayWinner = () => {
@@ -425,46 +462,9 @@ export default class GameTable extends Component {
         });
         return players[3].playerName
       }
+
     }
-
-
-
   }
-
-
-
-
-  requestCard = () => {
-    console.log('hi');
-  };
-
-  claimSeat = (seat) => {
-    let roomPlayers = this.state.chatLog.players;
-    let name = this.context.userData.player;
-    let players = [...this.state.players];
-    let player = {
-      ...players[seat - 1],
-      playerName: this.context.userData.player,
-    };
-    if (!currentSeatOfDOMPlayer) {
-      // current seat needed to update client hand without
-      // updating all others
-      currentSeatOfDOMPlayer = {
-        ...players[seat - 1],
-        playerName: this.context.userData.player,
-      };
-    }
-    players[seat - 1] = player;
-    this.setState({
-      players,
-      seated: true,
-    });
-
-    console.log(name, seat, roomPlayers)
-    socket.emit('claim seat', { name, seat, roomPlayers });
-  }
-
-
 
   render() {
     const { players, seated, endGame, winner } = this.state;
@@ -474,15 +474,14 @@ export default class GameTable extends Component {
     //gameChatLog is always displayed
     return (
       <>
-        { endGame === true ? (
-          <div className='winner-display'>
-            {/* this gives inifinite updates- oh no! */}
-            {onchange = this.endGame()}
-            The winner is {winner}! The game is over now.
-            <br />
-            <button>Rematch</button>
-          </div>
-        ) : (
+        { endGame === true ?
+          (
+            <div className='winner-display'>
+              The winner is {winner}! The game is over now.
+              <br />
+              <button>Rematch</button>
+            </div>
+          ) : (
             <>
               <Section className="game-table">
 
