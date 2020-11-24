@@ -14,14 +14,13 @@ let currentSeatOfDOMPlayer;
 
 export default class GameTable extends Component {
   static contextType = UserContext;
-
   state = {
     players: [
       {
         playerName: '',
         playerSeat: 1,
         playerHand: [],
-        books: [],
+        books: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -61,7 +60,8 @@ export default class GameTable extends Component {
     chatLog: {
       messages: [],
     },
-    endGame: false,
+    endGame: true,
+    winner: '',
   };
 
   componentDidMount = () => {
@@ -363,7 +363,7 @@ export default class GameTable extends Component {
   };
   endGame = () => {
     const { totalBooks } = this.state.players.books
-    if (totalBooks.length === 13) {
+    if (totalBooks.length === 9) {
       //display end game & winner (if player has highest books)
       this.setState({
         endGame: true
@@ -380,11 +380,17 @@ export default class GameTable extends Component {
   };
 
   displayWinner = () => {
-    const { playerBooks } = this.state.players.books
-    const winnerPopUp = `Congrats you have won!`
-    if (playerBooks.length > 2) {
-      return winnerPopUp
+    // const { playerBooks } = this.state.players.books
+    // const winnerPopUp = `Congrats you have won!`
+    // if (playerBooks.length > 2) {
+    //   return winnerPopUp
+    // }
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.state.players[i].books.length > 2) {
+        return this.state.players.playerName[i]
+      }
     }
+
   }
 
 
@@ -423,14 +429,14 @@ export default class GameTable extends Component {
 
 
   render() {
-    const { players, seated, endGame } = this.state;
+    const { players, seated, endGame, winner } = this.state;
     const count = this.countPlayers();
     //if it's the end of game display x, otherwise display the game btns and table
     //gameChatLog is always displayed
     return (
       <>
-        { endGame ? (
-          <div className='winner-display'>The winner is someone! The game is over now. <button>Rematch</button></div>
+        { endGame === true ? (
+          <div className='winner-display'>The winner is {winner}! The game is over now. <br /><button>Rematch</button></div>
         ) : (
             <>
               <Section className="game-table">
