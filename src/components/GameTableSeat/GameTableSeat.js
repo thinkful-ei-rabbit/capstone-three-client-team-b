@@ -4,15 +4,28 @@ import UserContext from '../../contexts/UserContext';
 
 import './GameTableSeat.css';
 
+const suitReferences = {
+  'h': 'heart',
+  'c': 'club',
+  's': 'spade',
+  'd': 'diamond',
+}
+
 export default class GameTableSeat extends Component {
   static contextType = UserContext;
 
   renderLoggedInUser = (player) => {
     return player.playerHand.map((card, index) => {
+      const suitRef = suitReferences[card.suit];
+      const imageLocation = `../../images/${card.value}${suitRef}.png`;
+      
       return (
         <>
           <li key={index}>
-            <a className="card">
+            <a className="card"
+              onClick={() => this.props.onCardChoice(card.value)}
+              style={{backgroundImage: `url(${imageLocation})`}}
+            >
               <span className="rank">{card.value}</span>
               <span className="suit">{card.suit}</span>
             </a>

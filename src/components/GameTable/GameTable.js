@@ -19,21 +19,21 @@ export default class GameTable extends Component {
     user: '',
     players: [
       {
-        playerName: 'a',
+        playerName: '',
         avatarLink: '',
         playerSeat: 1,
         playerHand: [],
-        books: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        books: [],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
       },
       {
-        playerName: 'b',
+        playerName: '',
         avatarLink: '',
         playerSeat: 2,
         playerHand: [],
-        books: [11, 12, 13],
+        books: [],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -43,6 +43,7 @@ export default class GameTable extends Component {
         avatarLink: '',
         playerSeat: 3,
         playerHand: [],
+        books: [],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -52,6 +53,7 @@ export default class GameTable extends Component {
         avatarLink: '',
         playerSeat: 4,
         playerHand: [],
+        books: [],
         currentPlayer: false,
         requestedPlayer: '',
         requestedCard: '',
@@ -89,7 +91,6 @@ export default class GameTable extends Component {
         chatLog: {
           ...this.state.chatLog,
           messages: [...this.state.chatLog.messages, msg],
-          connected: true,
         },
       });
     });
@@ -287,10 +288,10 @@ export default class GameTable extends Component {
 
   askOtherPlayer = (e) => {
     e.preventDefault();
-    const requestedId = e.target['to-ask-id'].value;
+    const requestedId = currentSeatOfDOMPlayer.requestedPlayer.id;
     const requestedName = this.state.chatLog.players.find(el => el.id === requestedId).playerName
     // console.log(requestedName);
-    const rankReq = e.target['rank-requested'].value;
+    const rankReq = currentSeatOfDOMPlayer.requestedCard;
     const user_id = this.state.self_info.socket_id;
     const name = this.context.userData.player;
     const asker = {
@@ -401,6 +402,24 @@ export default class GameTable extends Component {
       players: updatedPlayers,
     });
   };
+  onPlayerChoice = (playerObj) => {
+    // console.log(card);
+
+   
+
+    currentSeatOfDOMPlayer.requestedPlayer = playerObj
+    // console.log(currentSeatOfDOMPlayer);
+
+    const updatedPlayers = [...this.state.players];
+
+    updatedPlayers[
+      currentSeatOfDOMPlayer.playerSeat - 1
+    ] = currentSeatOfDOMPlayer;
+
+    this.setState({
+      players: updatedPlayers,
+    });
+  };
 
   gameReadyCheck = () => {
     this.setState({
@@ -453,6 +472,7 @@ export default class GameTable extends Component {
             i--;
           }
         }
+        currentSeatOfDOMPlayer.books.push(value);
       }
     }
     // currentSeat is updated, since playerCards is a reference
@@ -467,6 +487,7 @@ export default class GameTable extends Component {
         // booksObj, // two or more card objects
         // userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
         cardsInBook: booksObj,
+        playerBooks: currentSeatOfDOMPlayer.books,
         playerName: currentSeatOfDOMPlayer.playerName,
         playerCardCount: currentSeatOfDOMPlayer.playerHand.length
       })
@@ -671,6 +692,12 @@ export default class GameTable extends Component {
                   requestedCard={
                     currentSeatOfDOMPlayer
                       ? currentSeatOfDOMPlayer.requestedCard
+                      : ''
+                  }
+                  onPlayerChoice={this.onPlayerChoice}
+                  requestedPlayer={
+                    currentSeatOfDOMPlayer
+                      ? currentSeatOfDOMPlayer.requestedPlayer
                       : ''
                   }
                   yesResponse={this.yesResponse}
