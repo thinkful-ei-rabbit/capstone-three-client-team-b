@@ -75,11 +75,12 @@ export default class GameTable extends Component {
 
     let count = 0;
     socket.on('messageResponse', (msg) => {
-      console.log(msg);
       // individual message response
+      let feedback = document.getElementById('feedback')
+      feedback.innerHTML = ''
       msg = (
         <div key={count}>
-          {msg.user}: {msg.value}
+          <strong>{msg.user}</strong>: {msg.value}
         </div>
       );
       count++;
@@ -123,18 +124,18 @@ export default class GameTable extends Component {
       // const player = currentSeatOfDOMPlayer
 
       // console.log(currentSeatOfDOMPlayer);
-      
+
       const updatedPlayers = [...this.state.players];
-      
+
       for (let i = 0; i < updatedPlayers.length; i++) {
         if (
           updatedPlayers[i].playerName !== currentSeatOfDOMPlayer.playerName &&
           updatedPlayers[i].playerName !== ''
-          ) {
+        ) {
           updatedPlayers[i].handCount = 7;
         }
       }
-      
+
       currentSeatOfDOMPlayer.playerHand = hand.hand;
 
       updatedPlayers[
@@ -177,7 +178,7 @@ export default class GameTable extends Component {
 
       updatedPlayers[toUpdate.playerSeat - 1] = toUpdate;
 
-      this.setState({ 
+      this.setState({
         players: updatedPlayers,
       })
 
@@ -259,12 +260,18 @@ export default class GameTable extends Component {
       });
     });
 
-
-
-
-
-
-
+    socket.on('typing', (data) => {
+      let feedback = document.getElementById('feedback')
+      console.log(data)
+      feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>'
+      // data = (<p><em> {data} is typing a message...</em></p>)
+      // this.setState({
+      //   chatLog: {
+      //     ...this.state.chatLog,
+      //     messages: [...this.state.chatLog.messages, data],
+      //   }
+      // })
+    })
 
     socket.on('game end', (someinfo) => {
       // someinfo that we'll do something vague
@@ -281,6 +288,7 @@ export default class GameTable extends Component {
     };
 
     socket.emit('serverMessage', userObj);
+    event.target['input-message'].value = '';
   };
 
   askOtherPlayer = (e) => {
@@ -417,7 +425,13 @@ export default class GameTable extends Component {
     this.nextTurn();
   };
 
-  countPlayers = () => {};
+  handleKeyPress = () => {
+    const user = this.state.user
+
+    socket.emit('typing', user)
+  }
+
+  countPlayers = () => { };
 
   setsChecker = (i) => {
     const { players } = this.state;
@@ -460,7 +474,7 @@ export default class GameTable extends Component {
     console.log(booksObj);
 
     if (booksObj.length >= 1) {
-      
+
       socket.emit('book found', {
         // booksObj, // two or more card objects
         // userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
@@ -468,7 +482,7 @@ export default class GameTable extends Component {
         playerName: currentSeatOfDOMPlayer.playerName,
         playerCardCount: currentSeatOfDOMPlayer.playerHand.length
       })
-      
+
 
       const updatedPlayers = [...this.state.players];
       currentSeatOfDOMPlayer.books = [...booksObj];
@@ -608,6 +622,7 @@ export default class GameTable extends Component {
               Draw
             </Button>
             <ChatLog
+              handleKeyPress={this.handleKeyPress}
               match={this.props.match}
               onChatMessageSubmit={this.onChatMessageSubmit}
               askAnotherPlayer={this.askOtherPlayer}

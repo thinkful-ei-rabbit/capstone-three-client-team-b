@@ -1,6 +1,7 @@
 import React from 'react';
 // import TokenService from '../../services/token-service';
 import UserContext from '../../contexts/UserContext';
+import './ChatLog.css'
 
 let socket;
 
@@ -137,9 +138,12 @@ class ChatLog extends React.Component {
     return (
       <div>
         <div>{this.state.room}</div>
-        <div>{messagesArr}</div>
+        <div id="chatBox">
+          <div id="message">{messagesArr}</div>
+          <div id="feedback"></div>
+        </div>
         <form onSubmit={(event) => this.props.onChatMessageSubmit(event)}>
-          <input type="text" id="input-message" />
+          <input onKeyPress={this.props.handleKeyPress} type="text" id="input-message" />
           <button disabled={!this.state.connected} type="submit">
             Send Message
           </button>
