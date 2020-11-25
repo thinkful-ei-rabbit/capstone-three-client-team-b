@@ -7,6 +7,12 @@ import './GameTableSeat.css';
 export default class GameTableSeat extends Component {
   static contextType = UserContext;
 
+  static defaultProps = {
+    player: {
+      playerName: '',
+    },
+  };
+
   renderLoggedInUser = (player) => {
     player.playerHand.sort(function (a, b) {
       return a.value - b.value;
@@ -62,7 +68,6 @@ export default class GameTableSeat extends Component {
 
   render() {
     const { player, seated } = this.props;
-    console.log(player)
     return (
       <>
         {!player.playerName && !seated ? (
