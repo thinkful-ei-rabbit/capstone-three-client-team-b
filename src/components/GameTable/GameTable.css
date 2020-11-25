@@ -2,7 +2,7 @@
   background-color: rgb(26, 88, 26);
   border: 1px solid rgb(26, 88, 26);
   color: white;
-  margin: 10px auto;
+  margin: 10px auto 0px;
   min-height: 100%;
   position: relative;
 }

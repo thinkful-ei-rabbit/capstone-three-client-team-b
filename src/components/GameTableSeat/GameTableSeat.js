@@ -12,40 +12,47 @@ export default class GameTableSeat extends Component {
       const suitValue = card.suit + card.value;
 
       return (
-        <>
-          <li
-            key={index}
-            className="card"
-            onClick={() => this.props.onCardChoice(card.value)}
-          >
+        <li
+          key={card.value + card.suit}
+          onClick={(e) => this.props.onCardChoice(card.value, e)}
+        >
+          <a className="card" href="#">
             <img src={images[suitValue]} alt="card value" />
-          </li>
-        </>
+          </a>
+        </li>
       );
     });
   };
 
-  renderOtherPlayers = (player, count) => {
+  renderOtherPlayers = (player) => {
+    let cardBacks = [];
+    for (let i = 0; i < player.handCount; i++) {
+      cardBacks.push(
+        <li key={i}>
+          <p className="card">
+            <img src={images.back} alt="back of playing card" />
+          </p>
+        </li>
+      );
+    }
     return (
-      <div className={`player-seat-${player.playerSeat}`}
-      onClick={() => this.props.onPlayerChoice(player)}
-      
-      >
-        <h2>{player.playerName}</h2>
-        <div className="player-hand">
-          {player.handCount}
-          {/* {player.handCount.map((card, index) => {
-            return (
-              <div
-                className="player-card-opponent"
-                key={index}
-              >
-                back
-              </div>
-            );
-          })} */}
-        </div>
-      </div>
+      <>
+        {player.playerName ? (
+          <div className={`player-seat-${player.playerSeat} rotateHand`}>
+            <div className="name">
+              <h2>{player.playerName}</h2>
+              <img
+                className="player-avatar"
+                src={player.avatarLink}
+                alt="player avatar"
+              />
+            </div>
+            <ul className="hand">{cardBacks}</ul>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </>
     );
   };
 
