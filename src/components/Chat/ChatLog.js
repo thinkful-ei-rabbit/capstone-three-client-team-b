@@ -37,6 +37,7 @@ class ChatLog extends React.Component {
   }
 
   render() {
+    console.log("PLAYERNAME", this.props)
     let players = [];
     let messagesArr = [];
     if (this.state) {
@@ -68,7 +69,7 @@ class ChatLog extends React.Component {
           </button>
         </form>
         <form onSubmit={(e) => this.props.askAnotherPlayer(e)}>
-          <input placeholder="name of player" type="text" id="to-ask-id" value={this.props.requestedPlayer.playerName} readOnly />
+          <input placeholder="name of player" type="text" id="to-ask-id" value={this.props.requestedPlayer ? this.props.requestedPlayer.playerName : ''} readOnly />
           <input placeholder="rank requested" type="text" id="rank-requested" value={this.props.requestedCard} readOnly />
           <button type="submit">Ask Other Player</button>
         </form>
