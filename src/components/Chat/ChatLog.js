@@ -54,6 +54,7 @@ class ChatLog extends React.Component {
         return <div key={index}>{el}</div>;
       });
     }
+    console.log(this.props.askDisabled);
     return (
       <div>
         <div>{this.state.room}</div>
@@ -68,9 +69,15 @@ class ChatLog extends React.Component {
           </button>
         </form>
         <form onSubmit={(e) => this.props.askAnotherPlayer(e)}>
-          <input placeholder="name of player" type="text" id="to-ask-id" value={this.props.requestedPlayer.playerName} readOnly />
-          <input placeholder="rank requested" type="text" id="rank-requested" value={this.props.requestedCard} readOnly />
-          <button type="submit">Ask Other Player</button>
+          <input placeholder="name of player" type="text" id="to-ask-id" value={this.props.requestedPlayer.playerName} readOnly
+          required
+           />
+          <input placeholder="rank requested" type="text" id="rank-requested" value={this.props.requestedCard} readOnly
+          required
+           />
+          <button type="submit"
+          disabled={this.props.askDisabled} 
+          >Ask Other Player</button>
         </form>
         {this.state.asked && (
           <div>

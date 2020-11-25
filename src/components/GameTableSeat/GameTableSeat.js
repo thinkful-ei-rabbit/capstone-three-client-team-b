@@ -27,7 +27,10 @@ export default class GameTableSeat extends Component {
 
   renderOtherPlayers = (player, count) => {
     return (
-      <div className={`player-seat-${player.playerSeat}`}>
+      <div className={`player-seat-${player.playerSeat}`}
+      onClick={() => this.props.onPlayerChoice(player)}
+      
+      >
         <h2>{player.playerName}</h2>
         <div className="player-hand">
           {player.handCount}
