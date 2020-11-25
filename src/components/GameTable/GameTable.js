@@ -403,7 +403,7 @@ export default class GameTable extends Component {
   };
 
   onPlayerJoin = () => {
-    const room = this.props.match.params.game_id;
+    const room = this.props.match ? this.props.match.params.game_id : '';
     /* ROOM ID WILL BE BASED ON THIS ^ */
     const playerName = this.context.userData.player;
     const user_id = this.context.userData.id;
