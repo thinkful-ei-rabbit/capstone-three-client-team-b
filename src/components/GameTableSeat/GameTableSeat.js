@@ -51,6 +51,7 @@ export default class GameTableSeat extends Component {
 
   render() {
     const { player, seated } = this.props;
+    console.log(player)
     return (
       <>
         {!player.playerName && !seated ? (
