@@ -109,11 +109,15 @@ export default class GameTable extends Component {
     });
 
     socket.on('seat chosen', (retObj) => {
-      // console.log(retObj);
+      const players = retObj.roomPlayers;
+      const oppPlayer = players.find(
+        (player) => player.playerName === retObj.name
+      );
 
       const updatedPlayers = [...this.state.players];
 
       updatedPlayers[retObj.seat - 1].playerName = retObj.name;
+      updatedPlayers[retObj.seat - 1].avatarLink = oppPlayer.avatarLink;
 
       this.setState({ players: updatedPlayers });
     });
@@ -405,8 +409,9 @@ export default class GameTable extends Component {
     socket.emit('joinServer', userObj);
   };
 
-  onCardChoice = (card) => {
+  onCardChoice = (card, e) => {
     // console.log(card);
+    e.preventDefault();
 
     currentSeatOfDOMPlayer.requestedCard = card;
     // console.log(currentSeatOfDOMPlayer);
@@ -644,14 +649,6 @@ export default class GameTable extends Component {
             <br />
             <Button
               disabled={this.state.inProgress === true}
-              onClick={() => this.gameReadyCheck()}
-            >
-              Ready
-            </Button>
-            <Button
-              disabled={
-                this.state.ready === false || this.state.inProgress === true
-              }
               onClick={() => this.startGame()}
             >
               Start Game
