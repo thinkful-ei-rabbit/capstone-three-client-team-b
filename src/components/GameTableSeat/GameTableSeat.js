@@ -8,7 +8,11 @@ export default class GameTableSeat extends Component {
   static contextType = UserContext;
 
   renderLoggedInUser = (player) => {
-    return player.playerHand.map((card, index) => {
+    player.playerHand.sort(function (a, b) {
+      return a.value - b.value;
+    });
+
+    return player.playerHand.map((card) => {
       const suitValue = card.suit + card.value;
 
       return (

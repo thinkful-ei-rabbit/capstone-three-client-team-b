@@ -177,7 +177,7 @@ export default class GameTable extends Component {
 
       this.setState({
         goFishDisabled: false,
-      })
+      });
     });
 
     socket.on('draw card denied', (msg) => {
@@ -346,7 +346,7 @@ export default class GameTable extends Component {
 
     this.setState({
       askDisabled: true,
-    })
+    });
   };
 
   yesResponse = () => {
@@ -441,7 +441,9 @@ export default class GameTable extends Component {
   };
   onPlayerChoice = (playerObj) => {
     if (!playerObj.id) {
-      const update = this.state.chatLog.players.find(el => el.playerName === playerObj.playerName);
+      const update = this.state.chatLog.players.find(
+        (el) => el.playerName === playerObj.playerName
+      );
       playerObj = update;
     }
     // console.log(card);
@@ -498,7 +500,6 @@ export default class GameTable extends Component {
         cardsInHand[playerCards[i].value] = [i];
       }
     }
-
 
     const booksObj = [];
     // console.log(cardsInHand);
@@ -662,10 +663,7 @@ export default class GameTable extends Component {
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
     );
-    console.log(this.state.askDisabled);
-    console.log(this.state.goFishDisabled);
-    
-    
+
     return (
       <>
         {endGame === true ? (
@@ -749,33 +747,33 @@ export default class GameTable extends Component {
               >
                 Go Fish!
               </Button>
-                <ChatLog
-                  match={this.props.match}
-                  onChatMessageSubmit={this.onChatMessageSubmit}
-                  askAnotherPlayer={this.askOtherPlayer}
-                  requestedCard={
-                    currentSeatOfDOMPlayer
-                      ? currentSeatOfDOMPlayer.requestedCard
-                      : ''
-                  }
-                  onPlayerChoice={this.onPlayerChoice}
-                  requestedPlayer={
-                    currentSeatOfDOMPlayer
-                      ? currentSeatOfDOMPlayer.requestedPlayer
-                      : {
+              <ChatLog
+                match={this.props.match}
+                onChatMessageSubmit={this.onChatMessageSubmit}
+                askAnotherPlayer={this.askOtherPlayer}
+                requestedCard={
+                  currentSeatOfDOMPlayer
+                    ? currentSeatOfDOMPlayer.requestedCard
+                    : ''
+                }
+                onPlayerChoice={this.onPlayerChoice}
+                requestedPlayer={
+                  currentSeatOfDOMPlayer
+                    ? currentSeatOfDOMPlayer.requestedPlayer
+                    : {
                         playerName: '',
                         id: '',
                       }
-                  }
-                  askDisabled={this.state.askDisabled}
-                  yesResponse={this.yesResponse}
-                  noResponse={this.noResponse}
-                  upperState={this.state.chatLog}
-                  chatRenders={this.state.chatRenders}
-                />
-              </div>
-            </Section>
-          )}
+                }
+                askDisabled={this.state.askDisabled}
+                yesResponse={this.yesResponse}
+                noResponse={this.noResponse}
+                upperState={this.state.chatLog}
+                chatRenders={this.state.chatRenders}
+              />
+            </div>
+          </Section>
+        )}
       </>
     );
   }
