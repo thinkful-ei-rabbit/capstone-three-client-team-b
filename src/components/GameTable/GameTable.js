@@ -261,7 +261,7 @@ export default class GameTable extends Component {
       const playerToUpdate = this.state.players.find(
         (el) => el.playerName === name
       );
-      
+
       playerToUpdate.currentPlayer = true;
 
       updatedPlayers[prevPlayer.playerSeat - 1] = prevPlayer;
@@ -290,8 +290,8 @@ export default class GameTable extends Component {
 
       this.setState({
         players: updatedPlayers,
-        goFishDisabled: true,
-        askDisabled: false,
+        goFishDisabled: (currentSeatOfDOMPlayer.playerHand.length > 0) ? true : false,
+        askDisabled: (currentSeatOfDOMPlayer.playerHand.length > 0) ? false : true,
       });
     });
 
@@ -510,15 +510,15 @@ export default class GameTable extends Component {
 
     const booksObj = [];
     // console.log(cardsInHand);
-    for (var value in cardsInHand) {
-      if (cardsInHand[value].length > 3) {
+    for (var val in cardsInHand) {
+      if (cardsInHand[val].length > 3) {
         for (let i = 0; i < playerCards.length; i++) {
-          if (playerCards[i].value == value) {
+          if (playerCards[i].value == val) {
             booksObj.push(playerCards.splice(i, 1)[0]);
             i--;
           }
         }
-        currentSeatOfDOMPlayer.books.push(value);
+        currentSeatOfDOMPlayer.books.push(val);
       }
     }
     // currentSeat is updated, since playerCards is a reference
@@ -538,7 +538,7 @@ export default class GameTable extends Component {
       });
 
       const updatedPlayers = [...this.state.players];
-      currentSeatOfDOMPlayer.books = [...booksObj];
+      // currentSeatOfDOMPlayer.books = [...booksObj];
 
       updatedPlayers[
         currentSeatOfDOMPlayer.playerSeat - 1
