@@ -1,62 +1,66 @@
+.chat-box-container {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 #chatBox {
-    height: 200px;
-    width: 290px;
-    border: solid #ddd 1px;
-    background: #f9f9f9;
-    overflow: auto;
-    margin: auto;
-    border-radius: 2px;
+  height: 200px;
+  width: 100%;
+  border: solid #ddd 1px;
+  color: #fff;
+  overflow: auto;
+  margin: auto;
+  border-radius: 2px;
 }
 
-#feedback{
-    color: #aaa;
-    padding: 14px, 0px;
-    margin: 0 20px;
+#feedback {
+  color: #aaa;
+  padding: 14px, 0px;
+  margin: 0 20px;
 }
 
-#message{
-    padding: 14px, 0px;
-    margin: 0 20px;
-    border-bottom: 1px solid #e9e9e9;
-    color: #555;
+#message {
+  padding: 14px, 0px;
+  margin: 0 20px;
+  border-bottom: 1px solid #e9e9e9;
+  color: #555;
 }
 
-#message strong{
-    color: #575ed8
+#message strong {
+  color: #575ed8;
 }
 
 .askOtherPlayer_form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 8px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  width: 100%;
 }
 
 .askOtherPlayer_form input {
-    text-align: center;
-    margin-top: 1px;
-    margin-bottom: 1px;
+  text-align: center;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 
 .being-asked-box {
-    margin-top: 3px;
-    padding: 8px;
-    background-color: rgb(255, 255, 75);
-    border-radius: 12px;
-    color: black;
+  margin-top: 3px;
+  padding: 8px;
+  background-color: rgb(255, 255, 75);
+  border-radius: 12px;
+  color: black;
 }
 
 .ChatLog-and-game-inputs {
-    margin-top: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .chatLog-server-message-form {
-    /* display: flex; */
-    width: 100%;
-    /* justify-content: center; */
-    padding-top: 3px;
+  /* display: flex; */
+  width: 100%;
+  /* justify-content: center; */
+  padding-top: 3px;
 }
