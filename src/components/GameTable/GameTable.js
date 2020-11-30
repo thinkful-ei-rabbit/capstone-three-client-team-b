@@ -177,7 +177,12 @@ export default class GameTable extends Component {
 
       this.setState({
         goFishDisabled: false,
+<<<<<<< HEAD
+        askDisabled: true,
+      })
+=======
       });
+>>>>>>> 5d23426c6b044108c4403414c8aeaa4235758472
     });
 
     socket.on('draw card denied', (msg) => {
@@ -244,6 +249,9 @@ export default class GameTable extends Component {
       // check for books
       // display next turn
       // console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
+      this.setState({
+        askDisabled: false,
+      })
     });
 
     socket.on('other player turn', (retObj) => {
@@ -544,11 +552,20 @@ export default class GameTable extends Component {
       alert('no books found');
     }
 
-    this.nextTurn();
+    // this.nextTurn();
+    // setsChecker should not end turn
   };
 
   startGame = () => {
     const { players } = this.state.chatLog;
+    // validate all seated
+    const playerSeats = this.state.players;
+    const allSeated = playerSeats.filter(el => el.playerName !== '').length === players.length;
+
+    
+    if (!allSeated) {
+      return alert('Wait for everyone to choose their seat.');
+    }
 
     if (players.length > 1) {
       socket.emit('start game', players);
@@ -559,6 +576,7 @@ export default class GameTable extends Component {
 
   displayWinner = () => {
     console.log('this is running');
+    let winner = '';
 
     const { players } = this.state;
     console.log(players);
@@ -569,11 +587,12 @@ export default class GameTable extends Component {
         players[0].books.length > players[2].books.length &&
         players[0].books.length > players[3].books.length
       ) {
+        winner = players[0].playerName;
         this.setState({
           winner: players[0].playerName,
         });
 
-        return players[0].playerName;
+        // return players[0].playerName;
       }
       //if player 1 wins
       else if (
@@ -581,10 +600,11 @@ export default class GameTable extends Component {
         players[1].books.length > players[2].books.length &&
         players[1].books.length > players[3].books.length
       ) {
+        winner = players[1].playerName;
         this.setState({
           winner: players[1].playerName,
         });
-        return players[1].playerName;
+        // return players[1].playerName;
       }
       //if player 2 wins
       else if (
@@ -592,19 +612,28 @@ export default class GameTable extends Component {
         players[2].books.length > players[1].books.length &&
         players[2].books.length > players[3].books.length
       ) {
+        winner = players[2].playerName;
         this.setState({
           winner: players[2].playerName,
         });
-        return players[2].playerName;
+        // return players[2].playerName;
       }
       //if player 3 wins
       else {
+        winner = players[3].playerName;
         this.setState({
           winner: players[3].playerName,
         });
-        return players[3].playerName;
+        // return players[3].playerName;
       }
     }
+
+    DOMwon = (winner === currentSeatOfDOMPlayer.playerName) ? true : false;
+    socket.emit('game end database update', {
+      user_id: this.context.userData.id,
+      booksCollected: currentSeatOfDOMPlayer.books.length,
+      win: DOMwon,
+    })
   };
 
   claimSeat = (seat) => {
@@ -663,7 +692,11 @@ export default class GameTable extends Component {
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
     );
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> 5d23426c6b044108c4403414c8aeaa4235758472
     return (
       <>
         {endGame === true ? (
