@@ -623,7 +623,7 @@ export default class GameTable extends Component {
       }
     }
 
-    DOMwon = (winner === currentSeatOfDOMPlayer.playerName) ? true : false;
+    const DOMwon = (winner === currentSeatOfDOMPlayer.playerName) ? true : false;
     socket.emit('game end database update', {
       user_id: this.context.userData.id,
       booksCollected: currentSeatOfDOMPlayer.books.length,
