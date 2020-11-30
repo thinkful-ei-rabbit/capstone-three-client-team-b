@@ -177,12 +177,7 @@ export default class GameTable extends Component {
 
       this.setState({
         goFishDisabled: false,
-<<<<<<< HEAD
-        askDisabled: true,
-      })
-=======
       });
->>>>>>> 5d23426c6b044108c4403414c8aeaa4235758472
     });
 
     socket.on('draw card denied', (msg) => {
@@ -692,11 +687,6 @@ export default class GameTable extends Component {
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
     );
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 5d23426c6b044108c4403414c8aeaa4235758472
     return (
       <>
         {endGame === true ? (
