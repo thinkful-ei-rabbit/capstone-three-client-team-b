@@ -5,6 +5,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(240, 199, 94);  
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: white;
+  color: rgb(240, 199, 94);
+  border-radius: 3px;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.container {
+  margin-top: 200px;
+  color: white;
+}
+
+a:link, a:visited {
+  background-color: white;
+  color: black;
+  border: 2px solid rgb(255, 204, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  background-color: rgb(255, 204, 0);
+  color: white;
 }
 
 code {
