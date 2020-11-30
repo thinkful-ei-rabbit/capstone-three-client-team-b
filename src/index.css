@@ -5,6 +5,64 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffa02c;  
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  border-radius: 3px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: white;
+  color: #ffa02c;
+  border-radius: 3px;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  justify-self: center;
+  color: white;
+  max-width: 500px;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+p {
+  font-size: 28px;
+  padding: 0 20px;
+  text-align: left;
+  margin: 10px;
+}
+
+a:link, a:visited {
+  background-color: white;
+  color: black;
+  border: 2px solid rgb(255, 204, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  background-color: rgb(255, 204, 0);
+  color: white;
 }
 
 code {
