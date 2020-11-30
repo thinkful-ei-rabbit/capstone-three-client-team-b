@@ -253,7 +253,11 @@ export default class GameTable extends Component {
       const updatedPlayers = [...this.state.players];
       // previous turn
       const prevPlayer = this.state.players.find(el => el.currentPlayer === true);
-      prevPlayer.currentPlayer = false;
+      
+      if (prevPlayer) {
+        prevPlayer.currentPlayer = false;
+        updatedPlayers[prevPlayer.playerSeat - 1] = prevPlayer;
+      }
 
       // console.log(retObj);
       const name = retObj.playerName;
@@ -264,7 +268,6 @@ export default class GameTable extends Component {
 
       playerToUpdate.currentPlayer = true;
 
-      updatedPlayers[prevPlayer.playerSeat - 1] = prevPlayer;
       updatedPlayers[playerToUpdate.playerSeat - 1] = playerToUpdate;
 
       this.setState({
