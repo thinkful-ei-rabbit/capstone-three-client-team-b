@@ -173,6 +173,7 @@ export default class GameTable extends Component {
 
       this.setState({
         goFishDisabled: false,
+        askDisabled: true,
       })
     });
 
@@ -240,6 +241,9 @@ export default class GameTable extends Component {
       // check for books
       // display next turn
       // console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
+      this.setState({
+        askDisabled: false,
+      })
     });
 
     socket.on('other player turn', (retObj) => {
@@ -540,11 +544,20 @@ export default class GameTable extends Component {
       alert('no books found');
     }
 
-    this.nextTurn();
+    // this.nextTurn();
+    // setsChecker should not end turn
   };
 
   startGame = () => {
     const { players } = this.state.chatLog;
+    // validate all seated
+    const playerSeats = this.state.players;
+    const allSeated = playerSeats.filter(el => el.playerName !== '').length === players.length;
+
+    
+    if (!allSeated) {
+      return alert('Wait for everyone to choose their seat.');
+    }
 
     if (players.length > 1) {
       socket.emit('start game', players);
@@ -660,9 +673,6 @@ export default class GameTable extends Component {
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
     );
-    console.log(this.state.askDisabled);
-    console.log(this.state.goFishDisabled);
-    
     
     return (
       <>

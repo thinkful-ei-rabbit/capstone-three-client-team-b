@@ -1,6 +1,6 @@
 #chatBox {
     height: 200px;
-    width: 100%;
+    width: 290px;
     border: solid #ddd 1px;
     background: #f9f9f9;
     overflow: auto;
@@ -23,4 +23,40 @@
 
 #message strong{
     color: #575ed8
+}
+
+.askOtherPlayer_form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.askOtherPlayer_form input {
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.being-asked-box {
+    margin-top: 3px;
+    padding: 8px;
+    background-color: rgb(255, 255, 75);
+    border-radius: 12px;
+    color: black;
+}
+
+.ChatLog-and-game-inputs {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatLog-server-message-form {
+    /* display: flex; */
+    width: 100%;
+    /* justify-content: center; */
+    padding-top: 3px;
 }
