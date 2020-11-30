@@ -28,13 +28,24 @@ body {
   padding: 10px 20px;
 }
 
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .container {
-  margin-top: 200px;
+  justify-self: center;
   color: white;
-  max-width: 700px;
+  max-width: 500px;
+}
+
+h1 {
+  font-size: 60px;
 }
 
 p {
+  font-size: 28px;
   padding: 0 20px;
   text-align: left;
   margin: 10px;
