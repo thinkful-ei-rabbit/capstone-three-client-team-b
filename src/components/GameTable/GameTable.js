@@ -253,7 +253,7 @@ export default class GameTable extends Component {
       const updatedPlayers = [...this.state.players];
       // previous turn
       const prevPlayer = this.state.players.find(el => el.currentPlayer === true);
-      
+
       if (prevPlayer) {
         prevPlayer.currentPlayer = false;
         updatedPlayers[prevPlayer.playerSeat - 1] = prevPlayer;
@@ -306,11 +306,10 @@ export default class GameTable extends Component {
     });
 
     socket.on('game end', () => {
+      console.log('game END')
       // arbitrary number of books collected by server,
       // client side displays
-      this.setState({
-        endGame: true,
-      });
+      
       this.displayWinner();
     });
   };
@@ -629,6 +628,10 @@ export default class GameTable extends Component {
         // return players[3].playerName;
       }
     }
+
+    this.setState({
+      endGame: true,
+    })
 
     const DOMwon = (winner === currentSeatOfDOMPlayer.playerName) ? true : false;
     socket.emit('game end database update', {
