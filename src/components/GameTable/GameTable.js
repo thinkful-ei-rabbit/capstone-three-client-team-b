@@ -250,19 +250,22 @@ export default class GameTable extends Component {
     });
 
     socket.on('other player turn', (retObj) => {
+      const updatedPlayers = [...this.state.players];
+      // previous turn
+      const prevPlayer = this.state.players.find(el => el.currentPlayer === true);
+      prevPlayer.currentPlayer = false;
+
       // console.log(retObj);
       const name = retObj.playerName;
-
-      const updatedPlayers = [...this.state.players];
 
       const playerToUpdate = this.state.players.find(
         (el) => el.playerName === name
       );
+      
       playerToUpdate.currentPlayer = true;
 
-      const indexOfPlayerToUpdate = this.state.players.indexOf(playerToUpdate);
-
-      updatedPlayers[indexOfPlayerToUpdate] = playerToUpdate;
+      updatedPlayers[prevPlayer.playerSeat - 1] = prevPlayer;
+      updatedPlayers[playerToUpdate.playerSeat - 1] = playerToUpdate;
 
       this.setState({
         players: updatedPlayers,
