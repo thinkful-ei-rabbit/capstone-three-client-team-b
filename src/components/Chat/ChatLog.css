@@ -1,26 +1,30 @@
+.chat-box-container {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 #chatBox {
-    height: 200px;
-    width: 100%;
-    border: solid #ddd 1px;
-    background: #f9f9f9;
-    overflow: auto;
-    margin: auto;
-    border-radius: 2px;
+  height: 200px;
+  width: 100%;
+  border: solid #ddd 1px;
+  color: #fff;
+  overflow: auto;
+  margin: auto;
+  border-radius: 2px;
 }
 
-#feedback{
-    color: #aaa;
-    padding: 14px, 0px;
-    margin: 0 20px;
+#feedback {
+  color: #aaa;
+  padding: 14px, 0px;
+  margin: 0 20px;
 }
 
-#message{
-    padding: 14px, 0px;
-    margin: 0 20px;
-    border-bottom: 1px solid #e9e9e9;
-    color: #555;
+#message {
+  padding: 14px, 0px;
+  margin: 0 20px;
+  border-bottom: 1px solid #e9e9e9;
+  color: #555;
 }
 
-#message strong{
-    color: #575ed8
+#message strong {
+  color: #575ed8;
 }

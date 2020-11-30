@@ -57,9 +57,11 @@ class ChatLog extends React.Component {
     return (
       <div>
         <div>{this.state.room}</div>
-        <div id="chatBox">
-          <div id="message">{messagesArr}</div>
-          <div id="feedback"></div>
+        <div className="chat-box-container">
+          <div id="chatBox">
+            <div id="message">{messagesArr}</div>
+            <div id="feedback"></div>
+          </div>
         </div>
         <form onSubmit={(event) => this.props.onChatMessageSubmit(event)}>
           <input

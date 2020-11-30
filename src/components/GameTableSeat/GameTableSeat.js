@@ -43,6 +43,7 @@ export default class GameTableSeat extends Component {
       <>
         {player.playerName ? (
           <div className={`player-seat-${player.playerSeat} rotateHand`}>
+            <ul className="hand">{cardBacks}</ul>
             <div className="name">
               <h2>{player.playerName}</h2>
               <img
@@ -50,8 +51,10 @@ export default class GameTableSeat extends Component {
                 src={player.avatarLink}
                 alt="player avatar"
               />
+              <div className="books-container">
+                <p className="books">sets: {this.props.player.books.length}</p>
+              </div>
             </div>
-            <ul className="hand">{cardBacks}</ul>
           </div>
         ) : (
           <div></div>
@@ -82,6 +85,10 @@ export default class GameTableSeat extends Component {
                 src={this.context.userData.avatar}
                 alt="player avatar"
               />
+              {}
+              <div className="books-container">
+                <p className="books">sets: {this.props.player.books.length}</p>
+              </div>
             </div>
           </div>
         ) : (
