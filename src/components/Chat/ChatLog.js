@@ -61,51 +61,15 @@ class ChatLog extends React.Component {
           <div id="message">{messagesArr}</div>
           <div id="feedback"></div>
         </div>
-<<<<<<< HEAD
         <form className='chatLog-server-message-form'
         onSubmit={(event) => this.props.onChatMessageSubmit(event)}>
           <input onKeyPress={this.props.handleKeyPress} type="text" id="input-message"
             placeholder='Chat!'
-=======
-        <form onSubmit={(event) => this.props.onChatMessageSubmit(event)}>
-          <input
-            onKeyPress={this.props.handleKeyPress}
-            type="text"
-            id="input-message"
->>>>>>> 5d23426c6b044108c4403414c8aeaa4235758472
           />
           <button disabled={!this.state.connected} type="submit">
             Send Message
           </button>
         </form>
-<<<<<<< HEAD
-=======
-        <form onSubmit={(e) => this.props.askAnotherPlayer(e)}>
-          <input
-            placeholder="name of player"
-            type="text"
-            id="to-ask-id"
-            value={
-              this.props.requestedPlayer
-                ? this.props.requestedPlayer.playerName
-                : ''
-            }
-            readOnly
-            required
-          />
-          <input
-            placeholder="rank requested"
-            type="text"
-            id="rank-requested"
-            value={this.props.requestedCard}
-            readOnly
-            required
-          />
-          <button type="submit" disabled={this.props.askDisabled}>
-            Ask Other Player
-          </button>
-        </form>
->>>>>>> 5d23426c6b044108c4403414c8aeaa4235758472
         {this.state.asked && (
           <div className='being-asked-box'>
             <div>

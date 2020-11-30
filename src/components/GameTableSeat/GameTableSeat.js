@@ -48,7 +48,9 @@ export default class GameTableSeat extends Component {
     return (
       <>
         {player.playerName ? (
-          <div className={`player-seat-${player.playerSeat} rotateHand`}>
+          <div className={`player-seat-${player.playerSeat} rotateHand`}
+          onClick={() => this.props.onPlayerChoice(player)}
+          >
             <div className="name">
               <h2>{player.playerName}</h2>
               <img
