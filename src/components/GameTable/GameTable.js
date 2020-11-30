@@ -686,8 +686,8 @@ export default class GameTable extends Component {
               Draw
             </Button>
             <ChatLog
-              handleKeyPress={this.handleKeyPress}
               match={this.props.match}
+              handleKeyPress={this.handleKeyPress}
               onChatMessageSubmit={this.onChatMessageSubmit}
               askAnotherPlayer={this.askOtherPlayer}
               requestedCard={
@@ -749,6 +749,7 @@ export default class GameTable extends Component {
               </Button>
               <ChatLog
                 match={this.props.match}
+                handleKeyPress={this.handleKeyPress}
                 onChatMessageSubmit={this.onChatMessageSubmit}
                 askAnotherPlayer={this.askOtherPlayer}
                 requestedCard={
