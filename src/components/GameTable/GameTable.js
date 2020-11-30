@@ -177,7 +177,8 @@ export default class GameTable extends Component {
 
       this.setState({
         goFishDisabled: false,
-      });
+        askDisabled: true,
+      })
     });
 
     socket.on('draw card denied', (msg) => {
@@ -236,6 +237,7 @@ export default class GameTable extends Component {
 
       this.setState({
         players: updatedPlayers,
+        askDisabled: false,
       });
       // gameObj returned,
       // requested, asker(self), reqRank, CARD
@@ -244,9 +246,7 @@ export default class GameTable extends Component {
       // check for books
       // display next turn
       // console.log(`${requested} DID have a ${rankReq}! Good guess, ${asker}!`);
-      this.setState({
-        askDisabled: false,
-      })
+      
     });
 
     socket.on('other player turn', (retObj) => {
@@ -287,6 +287,7 @@ export default class GameTable extends Component {
 
       this.setState({
         players: updatedPlayers,
+        goFishDisabled: true,
         askDisabled: false,
       });
     });
@@ -687,6 +688,8 @@ export default class GameTable extends Component {
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
     );
+    
+
     return (
       <>
         {endGame === true ? (
@@ -733,6 +736,7 @@ export default class GameTable extends Component {
                 <GameTableSeat
                   key={index}
                   player={player}
+                  onPlayerChoice={this.onPlayerChoice}
                   onCardChoice={this.onCardChoice}
                   claimSeat={this.claimSeat}
                   seated={seated}
@@ -763,8 +767,7 @@ export default class GameTable extends Component {
               </Button>
               <Button
                 disabled={
-                  this.state.inProgress === false ||
-                  currentSeatOfDOMPlayer.currentPlayer === false
+                  this.state.goFishDisabled
                 }
                 onClick={this.gofish}
               >
