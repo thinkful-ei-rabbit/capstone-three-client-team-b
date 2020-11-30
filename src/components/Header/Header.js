@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
+import Logo from '../Logo/Logo';
 import './Header.css';
 
 class Header extends Component {
@@ -18,6 +19,7 @@ class Header extends Component {
         <Link onClick={this.handleLogoutClick} to="/">
           Logout
         </Link>
+        <Link to="/">Home</Link>
       </div>
     );
   }
@@ -25,8 +27,8 @@ class Header extends Component {
   renderLoginLink() {
     return (
       <div className="header-links">
-        <Link to="/login">Log in|</Link>
-        <Link to="/register">Register|</Link>
+        <Link to="/login">Log in</Link>
+        <Link to="/register">Register</Link>
         <Link to="/">Home</Link>
       </div>
     );
@@ -36,11 +38,12 @@ class Header extends Component {
     return (
       <>
         <nav className="Header">
-          <h1>{/* insert logo and app name */}</h1>
+          <h1><Logo /></h1>
           {TokenService.hasAuthToken()
             ? this.renderLogoutLink()
             : this.renderLoginLink()}
         </nav>
+        
         <div className="box">
           <div className="wave -one"></div>
           <div className="wave -two"></div>
