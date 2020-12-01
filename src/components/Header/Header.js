@@ -19,6 +19,8 @@ class Header extends Component {
         <Link onClick={this.handleLogoutClick} to="/">
           Logout
         </Link>
+        <Link to="/rules">Rules</Link>
+        <Link to="/game">Play</Link>
         <Link to="/">Home</Link>
       </div>
     );

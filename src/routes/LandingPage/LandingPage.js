@@ -1,7 +1,6 @@
 import React from 'react';
 import { Section } from '../../components/Utils/Utils';
 import { Link } from 'react-router-dom';
-
 import './LandingPage.css';
 
 export default function LandingPage() {
@@ -11,15 +10,16 @@ export default function LandingPage() {
     .concat();
   return (
     <Section>
-      <div className="container">
+      <div className="container pop">
         <h1>Ahoy there!</h1>
         <p>Welcome to GoFish.io.</p>
         <p>
           Here you can play the classic card game “Go Fish” online with up to 3
-          other friends in an online environment.
+          other friends at a virtual table.
         </p>
         <p>GoFish.io is a collaborative project built by {nameString}</p>
-        <p>.</p>
+        <br/>
+        <br/>
         <Link to="/register">Register</Link>
       </div>
     </Section>
