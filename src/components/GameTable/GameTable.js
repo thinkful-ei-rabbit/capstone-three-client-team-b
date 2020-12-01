@@ -512,7 +512,7 @@ export default class GameTable extends Component {
     const booksObj = [];
     // console.log(cardsInHand);
     for (var val in cardsInHand) {
-      if (cardsInHand[val].length > 3) {
+      if (cardsInHand[val].length >= 4) {
         for (let i = 0; i < playerCards.length; i++) {
           if (playerCards[i].value == val) {
             booksObj.push(playerCards.splice(i, 1)[0]);
