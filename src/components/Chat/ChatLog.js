@@ -55,27 +55,41 @@ class ChatLog extends React.Component {
       });
     }
     return (
-      <div className='ChatLog-and-game-inputs'>
+      <div className="ChatLog-and-game-inputs">
         <div>{this.state.room}</div>
-        <div className="chat-box-container">
-          <div id="chatBox">
-            <div id="message">{messagesArr}</div>
-            <div id="feedback"></div>
-          </div>
-        </div>
-        <form className='chatLog-server-message-form'
-        onSubmit={(event) => this.props.onChatMessageSubmit(event)}>
-          <input onKeyPress={this.props.handleKeyPress} type="text" id="input-message"
-            placeholder='Chat!'
-          />
-          <button disabled={!this.state.connected} type="submit">
-            Send Message
-          </button>
-        </form>
-        {this.state.asked && (
-          <div className='being-asked-box'>
+        {this.props.chatVisible ? (
+          <div className="chat-box-container">
+            <div id="chatBox">
+              <div id="message">{messagesArr}</div>
+              <div id="feedback"></div>
+            </div>
+            <form
+              className="chatLog-server-message-form"
+              onSubmit={(event) => this.props.onChatMessageSubmit(event)}
+            >
+              <input
+                onKeyPress={this.props.handleKeyPress}
+                type="text"
+                id="input-message"
+                placeholder="Chat!"
+              />
+              <button disabled={!this.state.connected} type="submit">
+                Send
+              </button>
+            </form>
             <div>
-            {this.state.asked.asker.name} is asking for a {this.state.asked.rankReq}, do you have one?
+              Players in room: {players.length}
+              {players}
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
+        {this.state.asked && (
+          <div className="being-asked-box">
+            <div>
+              {this.state.asked.asker.name} is asking for a{' '}
+              {this.state.asked.rankReq}, do you have one?
             </div>
             <div>
               <button onClick={() => this.props.yesResponse()}>Yes</button>
@@ -83,25 +97,34 @@ class ChatLog extends React.Component {
             </div>
           </div>
         )}
-        <form className='askOtherPlayer_form'
-          onSubmit={(e) => this.props.askAnotherPlayer(e)}
-        >
-          <input placeholder="Select another player!" type="text" id="to-ask-id" value={this.props.requestedPlayer.playerName} readOnly
-            required
-          />
-          <input placeholder="Select Card from your hand!" type="text" id="rank-requested" value={this.props.requestedCard} readOnly
-            required
-          />
-          <button type="submit"
-            disabled={this.props.askDisabled}
+        {!this.props.askDisabled ? (
+          <form
+            className="askOtherPlayer_form"
+            onSubmit={(e) => this.props.askAnotherPlayer(e)}
           >
-            Ask Other Player
-          </button>
-        </form>
-        <div>
-          Players in room: {players.length}
-          {players}
-        </div>
+            <input
+              placeholder="Select another player!"
+              type="text"
+              id="to-ask-id"
+              value={this.props.requestedPlayer.playerName}
+              readOnly
+              required
+            />
+            <input
+              placeholder="Select Card from your hand!"
+              type="text"
+              id="rank-requested"
+              value={this.props.requestedCard}
+              readOnly
+              required
+            />
+            <button type="submit" disabled={this.props.askDisabled}>
+              Ask Other Player
+            </button>
+          </form>
+        ) : (
+          ''
+        )}
       </div>
     );
   }

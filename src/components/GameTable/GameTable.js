@@ -17,9 +17,9 @@ export default class GameTable extends Component {
     super(props);
     if (window.performance) {
       if (performance.navigation.type == 1) {
-        window.location.href = "/game";
+        window.location.href = '/game';
       }
-    }    
+    }
   }
   static contextType = UserContext;
 
@@ -68,6 +68,7 @@ export default class GameTable extends Component {
     deck: [],
     inProgress: false,
     seated: false,
+    chatVisible: false,
     chatLog: {
       messages: [],
       connected: false,
@@ -82,7 +83,6 @@ export default class GameTable extends Component {
       path: config.SOCKET_PATH,
       // path will be based on url
     });
-
 
     let count = 0;
     socket.on('messageResponse', (msg) => {
@@ -106,20 +106,19 @@ export default class GameTable extends Component {
     this.onPlayerJoin();
 
     socket.on('server join denial', () => {
-      window.location.href = "/game";
+      window.location.href = '/game';
       alert('This game has already started');
-    })
+    });
 
     socket.on('serverResponse', (retObj) => {
       // reset seats on everyone
       if (!this.state.inProgress) {
-
         currentSeatOfDOMPlayer = null;
         this.state.players.forEach((el, index) => {
           el.playerName = '';
           el.email = '';
-        })
-        
+        });
+
         this.setState({
           seated: false,
           self_info: this.state.self_info ? this.state.self_info : retObj.self,
@@ -141,7 +140,7 @@ export default class GameTable extends Component {
           },
         });
       }
-      });
+    });
 
     socket.on('seat chosen', (retObj) => {
       const players = retObj.roomPlayers;
@@ -254,6 +253,8 @@ export default class GameTable extends Component {
       this.setState({
         players: updatedPlayers,
       });
+
+      this.setsChecker();
     });
 
     socket.on('correct rank return', (gameObj) => {
@@ -269,6 +270,9 @@ export default class GameTable extends Component {
         players: updatedPlayers,
         askDisabled: false,
       });
+
+      this.setsChecker();
+
       // gameObj returned,
       // requested, asker(self), reqRank, CARD
 
@@ -346,7 +350,6 @@ export default class GameTable extends Component {
       this.displayWinner();
     });
   };
-
 
   onChatMessageSubmit = (event) => {
     event.preventDefault();
@@ -522,7 +525,7 @@ export default class GameTable extends Component {
     socket.emit('typing', user);
   };
 
-  setsChecker = (i) => {
+  setsChecker = () => {
     //const books = []; //place books in state?
     // client side validation then send book to server
 
@@ -579,12 +582,7 @@ export default class GameTable extends Component {
       this.setState({
         players: updatedPlayers,
       });
-    } else {
-      alert('no books found');
     }
-
-    // this.nextTurn();
-    // setsChecker should not end turn
   };
 
   startGame = () => {
@@ -733,6 +731,14 @@ export default class GameTable extends Component {
     // socket.id and indexing in the server
   };
 
+  handleShowChat = () => {
+    const chatVisible = !this.state.chatVisible;
+
+    this.setState({
+      chatVisible,
+    });
+  };
+
   render() {
     const { players, seated, endGame, winner } = this.state;
     const currentPlayerTurn = this.state.players.find(
@@ -789,34 +795,28 @@ export default class GameTable extends Component {
                 />
               );
             })}
+            <div>
+              <Button
+                onClick={() => this.handleShowChat()}
+                className="chat-toggle"
+              >
+                &#128488;
+              </Button>
+            </div>
             <div className="center">
-              <div>
+              <div className="player-turn-announce">
                 {currentPlayerTurn
                   ? `${currentPlayerTurn.playerName}'s turn`
                   : ''}
               </div>
-              <Button
-                disabled={
-                  this.state.inProgress === false ||
-                  currentSeatOfDOMPlayer.currentPlayer === false
-                }
-                onClick={() => this.setsChecker()}
-              >
-                Do I have any sets?
-              </Button>
-              <br />
-              <Button
-                disabled={this.state.inProgress === true}
-                onClick={() => this.startGame()}
-              >
-                Start Game
-              </Button>
-              <Button
-                disabled={this.state.goFishDisabled}
-                onClick={this.gofish}
-              >
-                Go Fish!
-              </Button>
+              <div id="feedback"></div>
+              {!this.state.inProgress ? (
+                <Button onClick={() => this.startGame()}>Start Game</Button>
+              ) : !this.state.goFishDisabled ? (
+                <Button onClick={this.gofish}>Go Fish!</Button>
+              ) : (
+                <div></div>
+              )}
               <ChatLog
                 match={this.props.match}
                 handleKeyPress={this.handleKeyPress}
@@ -841,6 +841,7 @@ export default class GameTable extends Component {
                 noResponse={this.noResponse}
                 upperState={this.state.chatLog}
                 chatRenders={this.state.chatRenders}
+                chatVisible={this.state.chatVisible}
               />
             </div>
           </Section>

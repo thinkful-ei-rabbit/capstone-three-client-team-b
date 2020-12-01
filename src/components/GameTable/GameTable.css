@@ -2,9 +2,28 @@
   background-color: rgb(26, 88, 26);
   border: 1px solid rgb(26, 88, 26);
   color: white;
-  margin: 10px auto 0px;
+  margin: 10px auto 0;
+  padding: 0 0 10px;
   min-height: 100%;
   position: relative;
+}
+
+.chat-toggle {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.chat-toggle:focus {
+  outline: none;
+}
+
+.player-turn-announce {
+  font-size: 40px;
 }
 
 @media all and (min-width: 600px) {
