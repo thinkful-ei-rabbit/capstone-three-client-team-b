@@ -316,10 +316,6 @@ ul.hand li:nth-child(26) {
     width: 3.5em;
     height: 5.35em;
   }
-
-  img {
-    width: 100%;
-  }
 }
 
 @media all and (min-width: 700px) {
@@ -332,11 +328,6 @@ ul.hand li:nth-child(26) {
     width: 1.5em;
     font-size: 2.5rem;
   }
-
-  img {
-    width: 100%;
-  }
-
   .card {
     width: 4em;
     height: 6.11em;
@@ -355,13 +346,10 @@ ul.hand li:nth-child(26) {
     width: 1.75em;
     font-size: 3rem;
   }
-
-  img {
-    width: 100%;
-  }
-
   .card {
     width: 5.3em;
     height: 8.1em;
+  }
+  .react-gravatar {
   }
 }

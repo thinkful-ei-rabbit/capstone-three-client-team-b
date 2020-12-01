@@ -25,7 +25,6 @@ export class UserProvider extends Component {
         id: jwtPayload.user_id,
         player: jwtPayload.playerName,
         email: jwtPayload.sub,
-        avatar: jwtPayload.avatarLink,
       };
 
     this.state = state;
@@ -50,7 +49,6 @@ export class UserProvider extends Component {
       id: jwtPayload.user_id,
       player: jwtPayload.playerName,
       email: jwtPayload.sub,
-      avatar: jwtPayload.avatarLink,
     });
   };
 

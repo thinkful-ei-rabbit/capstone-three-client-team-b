@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserContext from '../../contexts/UserContext';
 import images from '../../images/images.js';
+import Gravatar from 'react-gravatar';
 
 import './GameTableSeat.css';
 
@@ -55,11 +56,7 @@ export default class GameTableSeat extends Component {
             <ul className="hand">{cardBacks}</ul>
             <div className="name">
               <h2>{player.playerName}</h2>
-              <img
-                className="player-avatar"
-                src={player.avatarLink}
-                alt="player avatar"
-              />
+              <Gravatar email={this.props.player.email} size={75} />
               <div className="books-container">
                 <p className="books">sets: {this.props.player.books.length}</p>
               </div>
@@ -89,11 +86,7 @@ export default class GameTableSeat extends Component {
             <ul className="hand">{this.renderLoggedInUser(player)}</ul>
             <div className="name">
               <h2 className="name">{player.playerName}</h2>
-              <img
-                className="player-avatar"
-                src={this.context.userData.avatar}
-                alt="player avatar"
-              />
+              <Gravatar email={this.context.userData.email} size={75} />
               {}
               <div className="books-container">
                 <p className="books">sets: {this.props.player.books.length}</p>
