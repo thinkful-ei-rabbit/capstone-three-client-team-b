@@ -710,10 +710,24 @@ export default class GameTable extends Component {
 
     return (
       <>
+
+
+
+
+
         {endGame === true ? (
+
+
+
+
+
           <div className="winner-display">
             The winner is {winner}! The game is over now.
             <br />
+
+
+
+
             <Button
               disabled={this.state.inProgress === true}
               onClick={() => this.startGame()}
@@ -729,7 +743,7 @@ export default class GameTable extends Component {
             >
               Draw
             </Button>
-            <ChatLog
+            {/* <ChatLog
               match={this.props.match}
               handleKeyPress={this.handleKeyPress}
               onChatMessageSubmit={this.onChatMessageSubmit}
@@ -744,79 +758,100 @@ export default class GameTable extends Component {
               noResponse={this.noResponse}
               upperState={this.state.chatLog}
               chatRenders={this.state.chatRenders}
-            />
-            <button>Rematch</button>
+            /> */}
+            {/* <button>Rematch</button> */}
           </div>
+
+
+
+
+
         ) : (
-          <Section className="game-table">
-            {players.map((player, index) => {
-              return (
-                <GameTableSeat
-                  key={index}
-                  player={player}
+
+
+
+
+
+            <Section className="game-table">
+              {players.map((player, index) => {
+                return (
+                  <GameTableSeat
+                    key={index}
+                    player={player}
+                    onPlayerChoice={this.onPlayerChoice}
+                    onCardChoice={this.onCardChoice}
+                    claimSeat={this.claimSeat}
+                    seated={seated}
+                  />
+                );
+              })}
+              <div className="center">
+                <div>
+                  {currentPlayerTurn
+                    ? `${currentPlayerTurn.playerName}'s turn`
+                    : ''}
+                </div>
+                <Button
+                  disabled={
+                    this.state.inProgress === false ||
+                    currentSeatOfDOMPlayer.currentPlayer === false
+                  }
+                  onClick={() => this.setsChecker()}
+                >
+                  Do I have any sets?
+              </Button>
+                <br />
+                <Button
+                  disabled={this.state.inProgress === true}
+                  onClick={() => this.startGame()}
+                >
+                  Start Game
+              </Button>
+                <Button
+                  disabled={this.state.goFishDisabled}
+                  onClick={this.gofish}
+                >
+                  Go Fish!
+              </Button>
+                <ChatLog
+                  match={this.props.match}
+                  handleKeyPress={this.handleKeyPress}
+                  onChatMessageSubmit={this.onChatMessageSubmit}
+                  askAnotherPlayer={this.askOtherPlayer}
+                  requestedCard={
+                    currentSeatOfDOMPlayer
+                      ? currentSeatOfDOMPlayer.requestedCard
+                      : ''
+                  }
                   onPlayerChoice={this.onPlayerChoice}
-                  onCardChoice={this.onCardChoice}
-                  claimSeat={this.claimSeat}
-                  seated={seated}
-                />
-              );
-            })}
-            <div className="center">
-              <div>
-                {currentPlayerTurn
-                  ? `${currentPlayerTurn.playerName}'s turn`
-                  : ''}
-              </div>
-              <Button
-                disabled={
-                  this.state.inProgress === false ||
-                  currentSeatOfDOMPlayer.currentPlayer === false
-                }
-                onClick={() => this.setsChecker()}
-              >
-                Do I have any sets?
-              </Button>
-              <br />
-              <Button
-                disabled={this.state.inProgress === true}
-                onClick={() => this.startGame()}
-              >
-                Start Game
-              </Button>
-              <Button
-                disabled={this.state.goFishDisabled}
-                onClick={this.gofish}
-              >
-                Go Fish!
-              </Button>
-              <ChatLog
-                match={this.props.match}
-                handleKeyPress={this.handleKeyPress}
-                onChatMessageSubmit={this.onChatMessageSubmit}
-                askAnotherPlayer={this.askOtherPlayer}
-                requestedCard={
-                  currentSeatOfDOMPlayer
-                    ? currentSeatOfDOMPlayer.requestedCard
-                    : ''
-                }
-                onPlayerChoice={this.onPlayerChoice}
-                requestedPlayer={
-                  currentSeatOfDOMPlayer
-                    ? currentSeatOfDOMPlayer.requestedPlayer
-                    : {
+                  requestedPlayer={
+                    currentSeatOfDOMPlayer
+                      ? currentSeatOfDOMPlayer.requestedPlayer
+                      : {
                         playerName: '',
                         id: '',
                       }
-                }
-                askDisabled={this.state.askDisabled}
-                yesResponse={this.yesResponse}
-                noResponse={this.noResponse}
-                upperState={this.state.chatLog}
-                chatRenders={this.state.chatRenders}
-              />
-            </div>
-          </Section>
-        )}
+                  }
+                  askDisabled={this.state.askDisabled}
+                  yesResponse={this.yesResponse}
+                  noResponse={this.noResponse}
+                  upperState={this.state.chatLog}
+                  chatRenders={this.state.chatRenders}
+                />
+              </div>
+            </Section>
+
+
+
+
+
+          )
+        }
+
+
+
+
+
       </>
     );
   }
