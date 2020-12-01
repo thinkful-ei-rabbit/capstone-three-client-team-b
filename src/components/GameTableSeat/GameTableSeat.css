@@ -8,7 +8,6 @@
   -webkit-border-radius: 0.3em;
   -khtml-border-radius: 0.3em;
   padding: 0.25em;
-  margin: 0 0.5em 0.5em 0;
   position: relative;
   background-color: #fff;
   -moz-box-shadow: 0.2em 0.2em 0.5em #333;
@@ -16,8 +15,16 @@
   box-shadow: 0.2em 0.2em 0.5em #333;
 }
 
-a.card {
+.card-image {
+  width: 100%;
+}
+
+a.card,
+a.card:link,
+a.card:visited {
   text-decoration: none;
+  padding: 0;
+  border: none;
 }
 /* selected and hover state */
 a.card:hover,
@@ -37,7 +44,6 @@ label.card {
 ul.hand {
   list-style-type: none;
   padding: 0;
-  margin: 0 0 3.5em 1em;
   position: relative;
   clear: both;
   vertical-align: middle;
@@ -230,6 +236,18 @@ ul.hand li:nth-child(26) {
   -webkit-transform: translate(-3.5em, 2.8em) rotate(66deg);
   -o-transform: translate(-3.5em, 2.8em) rotate(66deg);
   transform: translate(-3.5em, 2.8em) rotate(66deg);
+}
+.rotateHand ul.hand li:nth-child(14) {
+  -moz-transform: translate(-4.2em, 3.5em) rotate(75deg);
+  -webkit-transform: translate(-4.2em, 3.5em) rotate(75deg);
+  -o-transform: translate(-4.2em, 3.5em) rotate(75deg);
+  transform: translate(-4.2em, 3.5em) rotate(75deg);
+}
+.rotateHand ul.hand li:nth-child(15) {
+  -moz-transform: translate(-4.2em, 3.5em) rotate(84deg);
+  -webkit-transform: translate(-4.2em, 3.5em) rotate(84deg);
+  -o-transform: translate(-4.2em, 3.5em) rotate(84deg);
+  transform: translate(-4.2em, 3.5em) rotate(84deg);
 }
 
 @media all and (min-width: 600px) {

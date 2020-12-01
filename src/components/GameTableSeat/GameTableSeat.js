@@ -28,7 +28,11 @@ export default class GameTableSeat extends Component {
           onClick={(e) => this.props.onCardChoice(card.value, e)}
         >
           <a className="card" href="#">
-            <img src={images[suitValue]} alt="card value" />
+            <img
+              src={images[suitValue]}
+              alt="card value"
+              className="card-image"
+            />
           </a>
         </li>
       );
@@ -41,7 +45,11 @@ export default class GameTableSeat extends Component {
       cardBacks.push(
         <li key={i}>
           <p className="card">
-            <img src={images.back} alt="back of playing card" />
+            <img
+              src={images.back}
+              alt="back of playing card"
+              className="card-image"
+            />
           </p>
         </li>
       );
