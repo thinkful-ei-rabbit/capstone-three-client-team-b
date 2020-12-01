@@ -13,6 +13,7 @@
   -moz-box-shadow: 0.2em 0.2em 0.5em #333;
   -webkit-box-shadow: 0.2em 0.2em 0.5em #333;
   box-shadow: 0.2em 0.2em 0.5em #333;
+  font-size: 16px;
 }
 
 .card-image {
@@ -36,6 +37,12 @@ strong .card {
 }
 label.card {
   cursor: pointer;
+}
+.books {
+  font-size: 16px;
+}
+.react-gravatar {
+  margin-top: 10px;
 }
 
 /* hand (in your hand)
@@ -367,7 +374,5 @@ ul.hand li:nth-child(26) {
   .card {
     width: 5.3em;
     height: 8.1em;
-  }
-  .react-gravatar {
   }
 }
