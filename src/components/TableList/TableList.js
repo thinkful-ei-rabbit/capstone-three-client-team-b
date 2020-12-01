@@ -13,7 +13,7 @@ export default class TableList extends Component {
   };
 
   componentDidMount() {
-    let interval = setInterval(this.refreshList, 1000);
+    let interval = setInterval(this.refreshList, 5000);
     this.setState({ interval: interval });
   }
 
@@ -57,7 +57,6 @@ export default class TableList extends Component {
   };
 
   onJoinServerClick = (game) => {
-    
     this.props.history.push(`/game/${game}`);
   };
 

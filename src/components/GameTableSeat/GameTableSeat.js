@@ -63,7 +63,7 @@ export default class GameTableSeat extends Component {
           >
             <ul className="hand">{cardBacks}</ul>
             <div className="name">
-              <h2 className="name">{player.playerName}</h2>
+              <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.props.player.email} size={75} />
               <div className="books-container">
                 <p className="books">sets: {this.props.player.books.length}</p>
@@ -93,7 +93,7 @@ export default class GameTableSeat extends Component {
           <div className={`player-seat-${player.playerSeat} rotateHand`}>
             <ul className="hand">{this.renderLoggedInUser(player)}</ul>
             <div className="name">
-              <h2 className="name">{player.playerName}</h2>
+              <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.context.userData.email} size={75} />
               {}
               <div className="books-container">
