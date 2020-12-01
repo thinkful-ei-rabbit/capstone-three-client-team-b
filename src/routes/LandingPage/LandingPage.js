@@ -7,9 +7,8 @@ import './LandingPage.css';
 export default function LandingPage() {
   const designers = ['Caleb,', 'Harry,', 'Malik,', 'Michael,', 'and Jason.'];
   const nameString = designers
-    .map((name) => <strong>{name + ' '}</strong>)
+    .map((name) => <strong key={name}>{name + ' '}</strong>)
     .concat();
-  console.log(nameString);
   return (
     <Section>
       <div className="container">

@@ -13,6 +13,7 @@
   -moz-box-shadow: 0.2em 0.2em 0.5em #333;
   -webkit-box-shadow: 0.2em 0.2em 0.5em #333;
   box-shadow: 0.2em 0.2em 0.5em #333;
+  font-size: 16px;
 }
 
 .card-image {
@@ -36,6 +37,19 @@ strong .card {
 }
 label.card {
   cursor: pointer;
+}
+.books-container {
+  border: 3px solid #fff;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  width: fit-content;
+  margin: 10px auto 0;
+  padding: 0 10px;
+}
+.books {
+  font-size: 16px;
+}
+.react-gravatar {
+  margin-top: 10px;
 }
 
 /* hand (in your hand)
@@ -244,10 +258,10 @@ ul.hand li:nth-child(26) {
   transform: translate(-4.2em, 3.5em) rotate(75deg);
 }
 .rotateHand ul.hand li:nth-child(15) {
-  -moz-transform: translate(-4.2em, 3.5em) rotate(84deg);
-  -webkit-transform: translate(-4.2em, 3.5em) rotate(84deg);
-  -o-transform: translate(-4.2em, 3.5em) rotate(84deg);
-  transform: translate(-4.2em, 3.5em) rotate(84deg);
+  -moz-transform: translate(-5em, 4.3em) rotate(84deg);
+  -webkit-transform: translate(-5em, 4.3em) rotate(84deg);
+  -o-transform: translate(-5em, 4.3em) rotate(84deg);
+  transform: translate(-5em, 4.3em) rotate(84deg);
 }
 
 @media all and (min-width: 600px) {
@@ -290,13 +304,6 @@ ul.hand li:nth-child(26) {
   .name {
     flex: 1;
     margin: auto;
-  }
-  .books-container {
-    border: 3px solid #fff;
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    width: fit-content;
-    margin: 10px auto 0;
-    padding: 0 10px;
   }
   img.player-avatar {
     max-width: 50px;
@@ -367,7 +374,5 @@ ul.hand li:nth-child(26) {
   .card {
     width: 5.3em;
     height: 8.1em;
-  }
-  .react-gravatar {
   }
 }
