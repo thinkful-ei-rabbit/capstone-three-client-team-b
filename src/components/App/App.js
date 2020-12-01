@@ -12,6 +12,7 @@ import GameTable from '../GameTable/GameTable';
 import './App.css';
 
 export default class App extends Component {
+  
   state = { hasError: false };
 
   render() {

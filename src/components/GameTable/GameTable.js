@@ -12,6 +12,14 @@ let socket;
 let currentSeatOfDOMPlayer;
 
 export default class GameTable extends Component {
+  constructor(props) {
+    super(props);
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        window.location.href = "/game";
+      }
+    }    
+  }
   static contextType = UserContext;
 
   state = {
@@ -69,11 +77,11 @@ export default class GameTable extends Component {
 
   componentDidMount = () => {
     // alert('Claim a seat before you play!')
-
     socket = socketClient(`${config.API_SOCKET_ENDPOINT}`, {
       path: config.SOCKET_PATH,
       // path will be based on url
     });
+
 
     let count = 0;
     socket.on('messageResponse', (msg) => {
@@ -96,17 +104,43 @@ export default class GameTable extends Component {
 
     this.onPlayerJoin();
 
+    socket.on('server join denial', () => {
+      window.location.href = "/game";
+      alert('This game has already started');
+    })
+
     socket.on('serverResponse', (retObj) => {
-      this.setState({
-        self_info: this.state.self_info ? this.state.self_info : retObj.self,
-        chatLog: {
-          room: retObj.room,
-          players: retObj.players,
-          connected: true,
-          messages: [...this.state.chatLog.messages, retObj.message],
-        },
+      // reset seats on everyone
+      if (!this.state.inProgress) {
+
+        currentSeatOfDOMPlayer = null;
+        this.state.players.forEach((el, index) => {
+          el.playerName = '';
+          el.email = '';
+        })
+        
+        this.setState({
+          seated: false,
+          self_info: this.state.self_info ? this.state.self_info : retObj.self,
+          chatLog: {
+            room: retObj.room,
+            players: retObj.players,
+            connected: true,
+            messages: [...this.state.chatLog.messages, retObj.message],
+          },
+        });
+      } else {
+        this.setState({
+          self_info: this.state.self_info ? this.state.self_info : retObj.self,
+          chatLog: {
+            room: retObj.room,
+            players: retObj.players,
+            connected: true,
+            messages: [...this.state.chatLog.messages, retObj.message],
+          },
+        });
+      }
       });
-    });
 
     socket.on('seat chosen', (retObj) => {
       const players = retObj.roomPlayers;
@@ -312,6 +346,7 @@ export default class GameTable extends Component {
       this.displayWinner();
     });
   };
+
 
   onChatMessageSubmit = (event) => {
     event.preventDefault();
