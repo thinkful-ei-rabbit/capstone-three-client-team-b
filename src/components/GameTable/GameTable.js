@@ -5,6 +5,7 @@ import GameTableSeat from '../GameTableSeat/GameTableSeat';
 import ChatLog from '../Chat/ChatLog';
 import socketClient from 'socket.io-client';
 import config from '../../config';
+import { Link } from 'react-router-dom'
 
 import './GameTable.css';
 
@@ -743,22 +744,19 @@ export default class GameTable extends Component {
         {endGame === true ? (
           <div className="winner-display">
             The winner is {winner}! The game is over now.
-            <br />
-            <Button
-              disabled={this.state.inProgress === true}
+            <br/>
+            <br/>
+            <Link to="/game">Return to lobby</Link>
+            {/* <Button
               onClick={() => this.startGame()}
             >
               Start Game
             </Button>
             <Button
-              disabled={
-                this.state.goFishDisabled === true ||
-                currentSeatOfDOMPlayer.currentPlayer === false
-              }
               onClick={this.gofish}
             >
               Draw
-            </Button>
+            </Button> */}
             {/* <ChatLog
               match={this.props.match}
               handleKeyPress={this.handleKeyPress}
