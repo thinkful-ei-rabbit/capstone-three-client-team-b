@@ -63,7 +63,7 @@ export default class GameTableSeat extends Component {
           >
             <ul className="hand">{cardBacks}</ul>
             <div className="name">
-              <h2>{player.playerName}</h2>
+              <h2 className="name">{player.playerName}</h2>
               <Gravatar email={this.props.player.email} size={75} />
               <div className="books-container">
                 <p className="books">sets: {this.props.player.books.length}</p>

@@ -17,8 +17,10 @@ export default class RegisterPage extends Component {
   render() {
     return (
       <Section className="RegisterPage">
+        <div className="container pop">
         <h2>Register</h2>
         <RegisterForm onRegistrationSuccess={this.handleRegistrationSuccess} />
+        </div>
       </Section>
     );
   }
