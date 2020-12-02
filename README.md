@@ -1,10 +1,3 @@
-# Go Fish Client
-
-This app allows users to play a fun game of Go Fish.
-Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-deploy.vercel.app/ 'Go Fish Live Link')
-
-<!-- https://capstone-3-client-deploy.vercel.app/  -->
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
@@ -14,6 +7,13 @@ Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-de
 
 <!-- [![MIT License][license-shield]][license-url] -->
 <!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
+
+# Go Fish Client
+
+This app allows users to play a fun game of Go Fish.
+Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-deploy.vercel.app/ 'Go Fish Live Link')
+
+<!-- https://capstone-3-client-deploy.vercel.app/  -->
 
 ### Demo Accounts:
 
@@ -143,7 +143,7 @@ npm start
 <!-- ### We're working dilligently to incorporate these next user stories! -->
 
 - Returning users can view and edit their profile
-- All users can view a leaderboard
+- All users can view the leaderboard
 
 ## About the Devs
 
