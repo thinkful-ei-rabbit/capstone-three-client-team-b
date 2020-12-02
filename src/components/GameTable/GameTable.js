@@ -546,7 +546,7 @@ export default class GameTable extends Component {
     // console.log(cardsInHand);
     for (var val in cardsInHand) {
       // iterate through hashmap: cardsInHand[val] = [...indices]
-      if (cardsInHand[val].length >= 4) {
+      if (cardsInHand[val].length >= 2) {
         // 4 of the same value is a book
         for (let i = 0; i < playerCards.length; i++) {
           // loop through player hand
@@ -568,7 +568,7 @@ export default class GameTable extends Component {
         // booksObj, // guaranteed to have at least 4 card objects
         // userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
         cardsInBook: booksObj,
-        playerBook: [currentSeatOfDOMPlayer.books[0]],
+        playerBooks: currentSeatOfDOMPlayer.books,
         playerName: currentSeatOfDOMPlayer.playerName,
         playerCardCount: currentSeatOfDOMPlayer.playerHand.length,
       });

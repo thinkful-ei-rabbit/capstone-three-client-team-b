@@ -106,7 +106,7 @@ class ChatLog extends React.Component {
               placeholder="Select another player!"
               type="text"
               id="to-ask-id"
-              value={this.props.requestedPlayer.playerName}
+              value={this.props.requestedPlayer.playerName || ''}
               readOnly
               required
             />
@@ -114,7 +114,7 @@ class ChatLog extends React.Component {
               placeholder="Select Card from your hand!"
               type="text"
               id="rank-requested"
-              value={this.props.requestedCard}
+              value={this.props.requestedCard || ''}
               readOnly
               required
             />
