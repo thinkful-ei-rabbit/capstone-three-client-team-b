@@ -155,13 +155,13 @@ To Thinkful's Engineering Immersion Course TAs, instructors and mentors!
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [contributors-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/graphs/contributors
-[live-app-shield]: https://img.shields.io/github/stars/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[live-app-shield]: https://img.shields.io/github/stars/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [live-app-url]: https://capstone-3-client-deploy.vercel.app/
-[forks-shield]: https://img.shields.io/github/forks/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [forks-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/network/members
-[issues-shield]: https://img.shields.io/github/issues/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [issues-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/issues
 
 <!-- [license-shield]: https://img.shields.io/github/license/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
@@ -169,4 +169,4 @@ To Thinkful's Engineering Immersion Course TAs, instructors and mentors!
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/caleb-jackson-cabe/ -->
 
-<!-- [jsconfig-docs]: https://code.visualstudio.com/docs/languages/jsconfig -->
+[jsconfig-docs]: https://code.visualstudio.com/docs/languages/jsconfig
