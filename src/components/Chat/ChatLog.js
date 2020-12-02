@@ -72,12 +72,12 @@ class ChatLog extends React.Component {
                 type="text"
                 id="input-message"
                 placeholder="Chat!"
-              />
+              /> <br/>
               <button disabled={!this.state.connected} type="submit">
                 Send
               </button>
             </form>
-            <div>
+            <div className="roomPlayers">
               Players in room: {players.length}
               {players}
             </div>
