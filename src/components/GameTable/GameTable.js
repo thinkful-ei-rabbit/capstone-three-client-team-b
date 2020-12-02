@@ -546,7 +546,7 @@ export default class GameTable extends Component {
     // console.log(cardsInHand);
     for (var val in cardsInHand) {
       // iterate through hashmap: cardsInHand[val] = [...indices]
-      if (cardsInHand[val].length >= 2) {
+      if (cardsInHand[val].length >= 4) {
         // 4 of the same value is a book
         for (let i = 0; i < playerCards.length; i++) {
           // loop through player hand
