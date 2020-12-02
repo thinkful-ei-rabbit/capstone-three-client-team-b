@@ -31,7 +31,7 @@ OR
 
 ## Table of Contents
 
-- [Demo Accounts](#Demo-Account)
+- [Demo Accounts](#Demo-Accounts)
 - [Quick App Demo](#Quick-App-Demo)
 <!-- - [A More Detailed Look](#A-More-Detailed-Look) -->
 - [Storytime](#Storytime)
