@@ -18,7 +18,7 @@ export default class GameTable extends Component {
   constructor(props) {
     super(props);
     if (window.performance) {
-      if (performance.navigation.type == 1) {
+      if (PerformanceNavigation.type == 1) {
         window.location.href = '/game';
       }
     }
@@ -553,6 +553,7 @@ export default class GameTable extends Component {
     // currentSeat is updated, since playerCards is a reference
 
     if (booksObj.length >= 1) {
+      alert('A book was set down!');
       socket.emit('book found', {
         // booksObj, // guaranteed to have at least 4 card objects
         // userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
@@ -568,10 +569,12 @@ export default class GameTable extends Component {
       updatedPlayers[
         currentSeatOfDOMPlayer.playerSeat - 1
       ] = currentSeatOfDOMPlayer;
+      
 
       this.setState({
         players: updatedPlayers,
       });
+      
     }
   };
 
