@@ -1,13 +1,15 @@
+html,
 body {
   margin: 0;
   font-family: 'Architects Daughter', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffa02c;
+  height: 100%;
 }
 
 input:focus {
-  background-color: #ebb572;  
+  background-color: #ebb572;
 }
 
 .input-label {
@@ -100,9 +102,12 @@ button {
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  font-family: 'Architects Daughter', cursive;
 }
 
-button:hover, button:active {
+button:hover,
+button:active {
   background-color: rgb(255, 204, 0);
   color: white;
 }
@@ -114,7 +119,8 @@ code {
 
 @media all and (min-width: 600px) {
   body,
-  html {
+  html,
+  main {
     margin: 0;
     height: 100%;
   }
@@ -124,9 +130,5 @@ code {
     position: relative;
     height: 100%;
     min-height: 100%;
-  }
-
-  main {
-    height: 100%;
   }
 }

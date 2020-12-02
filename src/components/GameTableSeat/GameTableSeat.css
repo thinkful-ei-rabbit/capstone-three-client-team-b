@@ -38,29 +38,80 @@ strong .card {
 label.card {
   cursor: pointer;
 }
-.books-container {
+.player {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+}
+
+.player-seat-4 .player,
+.player-seat-2 .player {
+  flex-direction: column;
+}
+.player-seat-4 .name,
+.player-seat-2 .name {
+  margin: auto;
+}
+
+.books {
+  font-size: 14px;
+  line-height: 14px;
   border: 3px solid #fff;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   width: fit-content;
-  margin: 10px auto 0;
+  margin: auto auto;
   padding: 0 10px;
+  white-space: nowrap;
+  vertical-align: middle;
 }
-.books {
-  font-size: 16px;
+
+.name {
+  flex: 1;
+  margin: auto 10px;
+  overflow: visible;
+  white-space: nowrap;
 }
 .react-gravatar {
   margin-top: 10px;
+  visibility: hidden;
+  height: 0px;
+  width: 0px;
+}
+
+.hand {
+  flex: 1;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+}
+
+.claim-seat-button {
+  margin: auto auto;
+  height: 1.25em;
+  width: 1.25em;
+  border-radius: 50%;
+  border: #000 solid 1px;
+  font-size: 2rem;
+  box-shadow: #000 5px 5px 10px;
+  align-items: center;
+  padding: 0;
 }
 
 /* hand (in your hand)
 ********************************************************************/
-
 ul.hand {
   list-style-type: none;
-  padding: 0;
   position: relative;
+  padding: 0;
   clear: both;
-  vertical-align: middle;
+  margin: 0 0 20px 0;
+  white-space: nowrap;
+}
+
+.player-seat-3 ul.hand {
+  margin: 10px 0 50px 0;
 }
 
 ul.hand li {
@@ -264,32 +315,84 @@ ul.hand li:nth-child(26) {
   transform: translate(-5em, 4.3em) rotate(84deg);
 }
 
-@media all and (min-width: 600px) {
+.player-seat-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-row: 4;
+  grid-column: 2 / 4;
+}
+
+.player-seat-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
+}
+.player-seat-3 {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  grid-row: 1;
+  grid-column: 2 / 4;
+}
+.player-seat-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-row: 2 / 3;
+  grid-column: 3 / end;
+}
+.center {
+  margin: auto auto;
+  grid-row: 3;
+  grid-column: 2/4;
+}
+
+h2.name {
+  margin: 0;
+}
+
+.claim-seat-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: #000 1px 1px 2px;
+}
+
+.claim-seat-button:focus {
+  outline: none;
+}
+
+.plus {
+  margin-left: 18px;
+}
+.card {
+  width: 3.5em;
+  height: 5.35em;
+}
+
+@media all and (min-width: 700px) {
   .player-seat-1 {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     grid-row: 4;
     grid-column: 2 / 4;
   }
   .player-seat-2 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     grid-row: 2 / 4;
     grid-column: 1;
   }
   .player-seat-3 {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     grid-row: 1;
     grid-column: 2 / 4;
   }
   .player-seat-4 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     grid-row: 2 / 4;
     grid-column: 4;
   }
@@ -298,54 +401,37 @@ ul.hand li:nth-child(26) {
     grid-row: 2/4;
     grid-column: 2/4;
   }
-  .hand {
-    flex: 1;
+
+  .player {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
   }
+
+  .player-seat-1 .player,
+  .player-seat-3 .player {
+    flex-direction: column;
+  }
+
+  .player-seat-2 .name,
+  .player-seat-4 .name {
+    margin: inherit;
+  }
+
+  .player-seat-1 ul.hand {
+    margin-bottom: 20px;
+  }
+
+  .books {
+    font-size: 16px;
+    margin: 20px auto;
+  }
+
   .name {
-    flex: 1;
+    flex: 0;
     margin: auto;
-  }
-  img.player-avatar {
-    max-width: 50px;
-  }
-
-  h2.name {
-    margin: 0;
-  }
-
-  .claim-seat-button {
-    margin: auto auto;
-    height: 1.25em;
-    width: 1.25em;
-    border-radius: 50%;
-    border: #000 solid 1px;
-    font-size: 2rem;
-    box-shadow: #000 5px 5px 10px;
-    line-height: 1.75em;
-    align-items: center;
-  }
-
-  .claim-seat-button:active {
-    transform: translate(2px, 2px);
-    box-shadow: #000 1px 1px 2px;
-  }
-
-  .claim-seat-button:focus {
-    outline: none;
-  }
-
-  .plus {
-    margin-left: 18px;
-  }
-  .card {
-    width: 3.5em;
-    height: 5.35em;
-  }
-}
-
-@media all and (min-width: 700px) {
-  img.player-avatar {
-    max-width: 75px;
+    overflow: visible;
+    white-space: nowrap;
   }
 
   .claim-seat-button {
@@ -357,15 +443,15 @@ ul.hand li:nth-child(26) {
     width: 4em;
     height: 6.11em;
   }
+  .react-gravatar {
+    visibility: visible;
+    margin: 0 auto;
+    height: 75px;
+    width: 75px;
+  }
 }
 
 @media all and (min-width: 800px) {
-  img.player-avatar {
-    max-width: 100px;
-    border: #000 solid 1px;
-    border-radius: 10px;
-  }
-
   .claim-seat-button {
     height: 1.75em;
     width: 1.75em;
