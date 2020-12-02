@@ -5,16 +5,24 @@ Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-de
 
 <!-- https://capstone-3-client-deploy.vercel.app/  -->
 
+[![Contributors][contributors-shield]][contributors-url]
+[![Live App][live-app-shield]][live-app-url]
+[![Forks][forks-shield]][forks-url]
+[![Issues][issues-shield]][issues-url]
+
+<!-- [![MIT License][license-shield]][license-url] -->
+<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
+
 ### Demo Accounts:
 
-<!-- - username: Miles Morales -->
+<!-- - playerName: Miles Morales -->
 
 - email address: miles@gmail.com
 - password: Foobar!123
 
 OR
 
-<!-- - username: Frozone -->
+<!-- - playerName: Frozone -->
 
 - email address: FroZone@incredibles.com
 - password: Boobaz!123
@@ -132,8 +140,8 @@ npm start
 
 <!-- ### We're working dilligently to incorporate these next user stories! -->
 
-- Returning users can edit their profile
-- Users can view a score board
+- Returning users can view and edit their profile
+- All users can view a leaderboard
 
 ## About the Devs
 
@@ -142,3 +150,23 @@ npm start
 ## Special Thanks
 
 To Thinkful's Engineering Immersion Course TAs, instructors and mentors!
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[contributors-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/graphs/contributors
+[live-app-shield]: https://img.shields.io/github/stars/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[live-app-url]: https://capstone-3-client-deploy.vercel.app/
+[forks-shield]: https://img.shields.io/github/forks/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[forks-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/network/members
+[issues-shield]: https://img.shields.io/github/issues/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[issues-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/issues
+
+<!-- [license-shield]: https://img.shields.io/github/license/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[license-url]: https://github.com/GIT-USERNAME-HERE/REPO-NAME-HERE/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/caleb-jackson-cabe/ -->
+
+<!-- [jsconfig-docs]: https://code.visualstudio.com/docs/languages/jsconfig -->
