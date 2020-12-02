@@ -70,10 +70,10 @@ Fun tidbits:
 - These playing cards were custom made!
 
   Here's an example of the backside:
-  [Back of Playing Card](https://imgur.com/a/gct0JEY)
+  [Back of Playing Card](https://imgur.com/a/DsvJQsq)
 
   Here's an example of the frontside:
-  [Front of Playing Card](https://imgur.com/a/nVWjIKN)
+  [Front of Playing Card](https://imgur.com/a/y39ssVi)
 
 ## Tech Stack
 
