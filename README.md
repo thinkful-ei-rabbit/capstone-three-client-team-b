@@ -158,7 +158,7 @@ To Thinkful's Engineering Immersion Course TAs, instructors and mentors!
 
 [contributors-shield]: https://img.shields.io/github/contributors/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [contributors-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/graphs/contributors
-[live-app-shield]: https://img.shields.io/github/live-app/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
+[live-app-shield]: https://img.shields.io/github/website/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [live-app-url]: https://capstone-3-client-deploy.vercel.app/
 [stars-shield]: https://img.shields.io/github/stars/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [stars-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/stargazers
