@@ -68,6 +68,8 @@ Fun tidbits:
 
 - This app utilizes socket.io technology. It was our first time incorporating this tech and we're really excited to see the game in production mode!
 
+- The player avatars were created using [gravatar (globally recognized avatars)](https://www.npmjs.com/package/gravatar)
+
 - These playing cards were custom made!
 
   - Here's an example of the backside:
@@ -75,8 +77,6 @@ Fun tidbits:
 
   - Here's an example of the frontside:
     [Front of Playing Card](https://imgur.com/a/y39ssVi)
-
-- The player avatars were created using [gravatar (globally recognized avatars)](https://www.npmjs.com/package/gravatar)
 
 ## Tech Stack
 
