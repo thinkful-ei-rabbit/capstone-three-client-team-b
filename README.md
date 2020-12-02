@@ -1,70 +1,181 @@
-# Getting Started with Create React App
+[![Contributors][contributors-shield]][contributors-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Forks][forks-shield]][forks-url]
+[![Issues][issues-shield]][issues-url]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- [![Live App][live-app-shield]][live-app-url] -->
 
-## Available Scripts
+<!-- [![MIT License][license-shield]][license-url] -->
+<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
-In the project directory, you can run:
+# Go Fish Client
 
-### `npm start`
+This app allows users to play a fun game of Go Fish.
+Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-deploy.vercel.app/ 'Go Fish Live Link')
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- https://capstone-3-client-deploy.vercel.app/  -->
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Demo Accounts:
 
-### `npm test`
+<!-- - playerName: Miles Morales -->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- email address: miles@gmail.com
+- password: Foobar!123
 
-### `npm run build`
+OR
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- - playerName: Frozone -->
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- email address: FroZone@incredibles.com
+- password: Boobaz!123
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Table of Contents
 
-### `npm run eject`
+- [Demo Accounts](#Demo-Accounts)
+- [Quick App Demo](#Quick-App-Demo)
+<!-- - [A More Detailed Look](#A-More-Detailed-Look) -->
+- [Storytime](#Storytime)
+- [Tech Stack](#Tech-Stack)
+  - [Front End](#Front-End)
+  - [Testing](#Testing)
+  - [Production](#Production)
+- [Getting Started](#Getting-Started)
+  - [Server Setup](#Server-Setup)
+- [Upcoming Features](#Upcoming-Features)
+- [About the Devs](#About-the-Devs)
+- [Special Thanks](#Special-Thanks)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Quick App Demo
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![giphy](https://media.giphy.com/media/AUJnEt2yVTnyfViugs/giphy.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<!-- ## A More Detailed Look
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### These links show screenshots of the app with the components they're referencing labeled as well.
 
-## Learn More
+Note: component names are listed in the green boxes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [GAME TABLE](https://imgur.com/a/I0Ag4tv)
+- [CHAT](https://imgur.com/a/k8Repzt)
+- [LOGIN](https://imgur.com/a/MHjs696)
+- [REGISTRATION FORM](https://imgur.com/a/NoXozEx) -->
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Storytime
 
-### Code Splitting
+Go Fish is a classic children's card game where users try to win the most books (a matching set of cards). Throughout the game, users can chat with one another. Also, the chat box displays updates of what's going on in the game. For example, if player 1 asks player 3 for a card. Then the chat box will display whether or not player 3 told player 1 to go fish. The term "go fish" refers to when users have to draw a card from the deck. Currently, users can also see a card be added to other player's hands. Within the game, users are only displayed their own cards [note: other users' cards are not displayed in state, for you devs who might be wondering ;)] Overall, this was an exciting project to start, because we had no prior experience to building a gaming application, but we took on the challenge! We have a few [upcoming users stories](#Upcoming-Features) that we're excited to implement as well!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Fun tidbits:
 
-### Analyzing the Bundle Size
+- This app utilizes socket.io technology. It was our first time incorporating this tech and we're really excited to see the game in production mode!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- The player avatars were created using [gravatar (globally recognized avatars)](https://www.npmjs.com/package/gravatar)
 
-### Making a Progressive Web App
+- These playing cards were custom made!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  - Here's an example of the backside:
+    [Back of Playing Card](https://imgur.com/a/DsvJQsq)
 
-### Advanced Configuration
+  - Here's an example of the frontside:
+    [Front of Playing Card](https://imgur.com/a/y39ssVi)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Tech Stack
 
-### Deployment
+### Front End
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- React
+  - Create React App
+  - React Router
+- Socket.io
+- HTML5
+- CSS3
 
-### `npm run build` fails to minify
+### Testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Jest (Smoke tests)
+
+### Production
+
+- Deployed via Vercel
+
+## Getting Started
+
+Clone this repository to your local machine
+
+```
+git clone https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b.git Go-Fish-client
+```
+
+Change directory into the cloned repository
+
+```
+cd capstone-three-client-team-b
+```
+
+Make a fresh start of the git history for this project
+
+```
+rm -rf .git && git init
+```
+
+Install the node dependencies
+
+```
+npm install
+```
+
+### Server Setup
+
+Follow the [setup](https://github.com/thinkful-ei-rabbit/capstone-three-server-team-b) instructions to get `Go Fish Server` up and running.
+
+## Scripts to get started
+
+Run the tests
+
+```
+npm t
+```
+
+Start the application
+
+```
+npm start
+```
+
+## Upcoming Features
+
+<!-- ### We're working dilligently to incorporate these next user stories! -->
+
+- Returning users can view and edit their profile
+- All users can view the leaderboard
+
+## About the Devs
+
+-[Caleb](https://github.com/cabejackson) -[Harry](https://github.com/fumbl3b) -[Jason](https://github.com/zompocalypse) -[Malik](https://github.com/M-DeJean) -[Michael](https://github.com/michaeljsliger)
+
+## Special Thanks
+
+To Thinkful's Engineering Immersion Course TAs, instructors and mentors!
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
+[contributors-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/graphs/contributors
+
+<!-- [live-app-shield]: https://img.shields.io/github/website/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
+[live-app-url]: https://capstone-3-client-deploy.vercel.app/ -->
+
+[stars-shield]: https://img.shields.io/github/stars/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
+[stars-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/stargazers
+[forks-shield]: https://img.shields.io/github/forks/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
+[forks-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/network/members
+[issues-shield]: https://img.shields.io/github/issues/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
+[issues-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/issues
+
+<!-- [license-shield]: https://img.shields.io/github/license/GIT-USERNAME-HERE/REPO-NAME-HERE.svg?style=flat-square
+[license-url]: https://github.com/GIT-USERNAME-HERE/REPO-NAME-HERE/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/caleb-jackson-cabe/ -->
+
+[jsconfig-docs]: https://code.visualstudio.com/docs/languages/jsconfig
