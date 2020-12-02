@@ -382,8 +382,18 @@ export default class GameTable extends Component {
       rankReq,
     });
 
-    // diisable ask function so user cannot ask more than once
+    currentSeatOfDOMPlayer.requestedCard = '';
+    // console.log(currentSeatOfDOMPlayer);
+
+    const updatedPlayers = [...this.state.players];
+
+    updatedPlayers[
+      currentSeatOfDOMPlayer.playerSeat - 1
+    ] = currentSeatOfDOMPlayer;
+
+    // disable ask function so user cannot ask more than once
     this.setState({
+      players: updatedPlayers,
       askDisabled: true,
     });
   };
@@ -558,7 +568,7 @@ export default class GameTable extends Component {
         // booksObj, // guaranteed to have at least 4 card objects
         // userinfo (this.state.self_info.socket_id, or just socket.id, and/or this.context.username)
         cardsInBook: booksObj,
-        playerBooks: currentSeatOfDOMPlayer.books,
+        playerBook: [currentSeatOfDOMPlayer.books[0]],
         playerName: currentSeatOfDOMPlayer.playerName,
         playerCardCount: currentSeatOfDOMPlayer.playerHand.length,
       });
