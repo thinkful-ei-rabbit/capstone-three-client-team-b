@@ -67,13 +67,16 @@ Go Fish is a classic children's card game where users try to win the most books 
 Fun tidbits:
 
 - This app utilizes socket.io technology. It was our first time incorporating this tech and we're really excited to see the game in production mode!
+
 - These playing cards were custom made!
 
-  Here's an example of the backside:
-  [Back of Playing Card](https://imgur.com/a/DsvJQsq)
+        Here's an example of the backside:
+        [Back of Playing Card](https://imgur.com/a/DsvJQsq)
 
-  Here's an example of the frontside:
-  [Front of Playing Card](https://imgur.com/a/y39ssVi)
+        Here's an example of the frontside:
+        [Front of Playing Card](https://imgur.com/a/y39ssVi)
+
+- The player avatars were created using [gravatar (globally recognized avatars)] (#https://www.npmjs.com/package/gravatar)
 
 ## Tech Stack
 
