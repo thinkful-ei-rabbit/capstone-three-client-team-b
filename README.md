@@ -62,7 +62,7 @@ Note: component names are listed in the green boxes
 
 ## Storytime
 
-Go Fish is a classic children's card game where users try to win the most books (a matching set of cards). Throughout the game, users can chat with one another. Also, the chat box displays updates of what's going on in the game. For example, if player 1 asks player 3 for a card. Then the chat box will display whether or not player 3 told player 1 to go fish. The term "go fish" refers to when users have to draw a card from the deck. Currently, users can also see a card be added to other player's hands. Within the game, users are only displayed their own cards [note: other users' cards are not displayed in state, for you devs who might be wondering ;)] Overall, this was an exciting project to start, because we had no prior experience to building a gaming application, but we took on the challenge! We have a few [upcoming users stories](#Upcoming-Featuress) that we're excited to implement as well!
+Go Fish is a classic children's card game where users try to win the most books (a matching set of cards). Throughout the game, users can chat with one another. Also, the chat box displays updates of what's going on in the game. For example, if player 1 asks player 3 for a card. Then the chat box will display whether or not player 3 told player 1 to go fish. The term "go fish" refers to when users have to draw a card from the deck. Currently, users can also see a card be added to other player's hands. Within the game, users are only displayed their own cards [note: other users' cards are not displayed in state, for you devs who might be wondering ;)] Overall, this was an exciting project to start, because we had no prior experience to building a gaming application, but we took on the challenge! We have a few [upcoming users stories](#Upcoming-Features) that we're excited to implement as well!
 
 Fun tidbits:
 
@@ -147,7 +147,7 @@ npm start
 
 ## About the Devs
 
--[Caleb](https://github.com/cabejackson) -[Harry](https://github.com/cabejackson) -[Jason](https://github.com/cabejackson) -[Malik](https://github.com/cabejackson) -[Michael](https://github.com/cabejackson)
+-[Caleb](https://github.com/cabejackson) -[Harry](https://github.com/fumbl3b) -[Jason](https://github.com/zompocalypse) -[Malik](https://github.com/M-DeJean) -[Michael](https://github.com/michaeljsliger)
 
 ## Special Thanks
 
