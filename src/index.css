@@ -4,6 +4,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffa02c;
+  background-image: url("./images/flavor/bg-wave.png");
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 40vw;
 }
 
 input:focus {
@@ -15,6 +20,12 @@ input:focus {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+}
+
+.img-container {
+  display: block;
+  position: fixed;
+
 }
 
 .logo-container {
@@ -50,7 +61,7 @@ section {
 }
 
 .pop {
-  background-color: rgba(255, 250, 205, 0.543);
+  background-color: rgb(245, 216, 141);
   padding: 30px;
   border-radius: 6px;
   margin: 30px 0;
