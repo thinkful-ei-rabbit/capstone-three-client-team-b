@@ -6,12 +6,11 @@ Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-de
 <!-- https://capstone-3-client-deploy.vercel.app/  -->
 
 [![Contributors][contributors-shield]][contributors-url]
-
-<!-- [![Live App][live-app-shield]][live-app-url] -->
-
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
 [![Issues][issues-shield]][issues-url]
+
+<!-- [![Live App][live-app-shield]][live-app-url] -->
 
 <!-- [![MIT License][license-shield]][license-url] -->
 <!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
