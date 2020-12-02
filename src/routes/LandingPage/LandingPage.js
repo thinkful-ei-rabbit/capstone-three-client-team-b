@@ -1,6 +1,7 @@
 import React from 'react';
 import { Section } from '../../components/Utils/Utils';
 import { Link } from 'react-router-dom';
+import fishy from '../../images/flavor/fishy.png'
 import './LandingPage.css';
 
 export default function LandingPage() {
@@ -10,6 +11,7 @@ export default function LandingPage() {
     .concat();
   return (
     <Section>
+
       <div className="container pop">
         <h1>Ahoy there!</h1>
         <p>Welcome to GoFish.io.</p>
@@ -18,8 +20,9 @@ export default function LandingPage() {
           other friends at a virtual table.
         </p>
         <p>GoFish.io is a collaborative project built by {nameString}</p>
-        <br/>
-        <br/>
+          <br />
+          <br />
+        <img src={fishy} style={{ width: 150 }} alt='fish' />
         <Link to="/register">Register</Link>
       </div>
     </Section>
