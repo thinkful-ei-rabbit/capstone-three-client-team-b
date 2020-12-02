@@ -62,12 +62,10 @@ export default class GameTableSeat extends Component {
             onClick={() => this.props.onPlayerChoice(player)}
           >
             <ul className="hand">{cardBacks}</ul>
-            <div className="name">
+            <div className="player">
               <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.props.player.email} size={75} />
-              <div className="books-container">
-                <p className="books">sets: {this.props.player.books.length}</p>
-              </div>
+              <p className="books">sets: {this.props.player.books.length}</p>
             </div>
           </div>
         ) : (
@@ -92,13 +90,10 @@ export default class GameTableSeat extends Component {
         ) : player.playerName === this.context.userData.player ? (
           <div className={`player-seat-${player.playerSeat} rotateHand`}>
             <ul className="hand">{this.renderLoggedInUser(player)}</ul>
-            <div className="name">
+            <div className="player">
               <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.context.userData.email} size={75} />
-              {}
-              <div className="books-container">
-                <p className="books">sets: {this.props.player.books.length}</p>
-              </div>
+              <p className="books">sets: {this.props.player.books.length}</p>
             </div>
           </div>
         ) : (
