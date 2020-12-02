@@ -1,7 +1,7 @@
 # Go Fish Client
 
 This app allows users to play a fun game of Go Fish.
-Here's the deployed version of `Go Fish`: [Go Fish](https://bookish-client.vercel.app/ 'Go Fish Live Link')
+Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-deploy.vercel.app/ 'Go Fish Live Link')
 
 <!-- https://capstone-3-client-deploy.vercel.app/  -->
 
@@ -21,7 +21,7 @@ OR
 
 ## Table of Contents
 
-- [Demo Account](#Demo-Account)
+- [Demo Accounts](#Demo-Account)
 - [Quick App Demo](#Quick-App-Demo)
 <!-- - [A More Detailed Look](#A-More-Detailed-Look) -->
 - [Storytime](#Storytime)
