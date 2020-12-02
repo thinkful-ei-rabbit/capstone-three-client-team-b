@@ -6,7 +6,9 @@ Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-de
 <!-- https://capstone-3-client-deploy.vercel.app/  -->
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Live App][live-app-shield]][live-app-url]
+
+<!-- [![Live App][live-app-shield]][live-app-url] -->
+
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
 [![Issues][issues-shield]][issues-url]
@@ -158,8 +160,10 @@ To Thinkful's Engineering Immersion Course TAs, instructors and mentors!
 
 [contributors-shield]: https://img.shields.io/github/contributors/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [contributors-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/graphs/contributors
-[live-app-shield]: https://img.shields.io/github/website/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
-[live-app-url]: https://capstone-3-client-deploy.vercel.app/
+
+<!-- [live-app-shield]: https://img.shields.io/github/website/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
+[live-app-url]: https://capstone-3-client-deploy.vercel.app/ -->
+
 [stars-shield]: https://img.shields.io/github/stars/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
 [stars-url]: https://github.com/thinkful-ei-rabbit/capstone-three-client-team-b/stargazers
 [forks-shield]: https://img.shields.io/github/forks/thinkful-ei-rabbit/capstone-three-client-team-b.svg?style=flat-square
