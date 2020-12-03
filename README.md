@@ -19,7 +19,7 @@ Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-de
 
 <!-- - playerName: Miles Morales -->
 
-- email address: miles@gmail.com
+- email address: SpiderMan@gmail.com
 - password: Foobar!123
 
 OR
