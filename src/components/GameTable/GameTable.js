@@ -99,7 +99,7 @@ export default class GameTable extends Component {
       this.setState({
         chatLog: {
           ...this.state.chatLog,
-          messages: [...this.state.chatLog.messages, msg],
+          messages: [msg, ...this.state.chatLog.messages],
         },
       });
     });

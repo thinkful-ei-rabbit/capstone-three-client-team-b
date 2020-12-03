@@ -20,7 +20,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App_header">
-          <Header />
+          <Route path={['/', '/rules', '/game']} exact component={Header} />
         </header>
         <main>
           <Switch>
