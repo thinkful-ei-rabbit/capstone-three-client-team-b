@@ -3,8 +3,6 @@ import React from 'react';
 import UserContext from '../../contexts/UserContext';
 import './ChatLog.css';
 
-let socket;
-
 class ChatLog extends React.Component {
   constructor(props) {
     super(props);
@@ -70,6 +68,7 @@ class ChatLog extends React.Component {
             <form
               className="chatLog-server-message-form"
               onSubmit={(event) => this.props.onChatMessageSubmit(event)}
+              autoComplete="off"
             >
               <input
                 onKeyPress={this.props.handleKeyPress}
@@ -107,7 +106,7 @@ class ChatLog extends React.Component {
               placeholder="Select another player!"
               type="text"
               id="to-ask-id"
-              value={this.props.requestedPlayer.playerName}
+              value={this.props.requestedPlayer.playerName || ''}
               readOnly
               required
             />
@@ -115,7 +114,7 @@ class ChatLog extends React.Component {
               placeholder="Select Card from your hand!"
               type="text"
               id="rank-requested"
-              value={this.props.requestedCard}
+              value={this.props.requestedCard || ''}
               readOnly
               required
             />
