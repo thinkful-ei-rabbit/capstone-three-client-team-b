@@ -16,6 +16,9 @@ class ChatLog extends React.Component {
 
   static defaultProps = {
     messages: [],
+    requestedPlayer: {
+      playerName: '',
+    },
   };
   static contextType = UserContext;
 
