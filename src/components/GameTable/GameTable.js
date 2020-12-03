@@ -15,14 +15,7 @@ let socket;
 let currentSeatOfDOMPlayer;
 
 export default class GameTable extends Component {
-  constructor(props) {
-    super(props);
-    if (window.performance) {
-      if (PerformanceNavigation.type == 1) {
-        window.location.href = '/game';
-      }
-    }
-  }
+
   static contextType = UserContext;
 
   state = {
