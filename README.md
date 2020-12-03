@@ -13,19 +13,15 @@
 This app allows users to play a fun game of Go Fish.
 Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-deploy.vercel.app/ 'Go Fish Live Link')
 
-<!-- https://capstone-3-client-deploy.vercel.app/  -->
-
 ### Demo Accounts:
 
-<!-- - playerName: Miles Morales -->
-
+- playerName: Miles Morales
 - email address: SpiderMan@gmail.com
 - password: Foobar!123
 
 OR
 
-<!-- - playerName: Frozone -->
-
+- playerName: Frozone
 - email address: FroZone@incredibles.com
 - password: Boobaz!123
 
@@ -33,7 +29,7 @@ OR
 
 - [Demo Accounts](#Demo-Accounts)
 - [Quick App Demo](#Quick-App-Demo)
-<!-- - [A More Detailed Look](#A-More-Detailed-Look) -->
+- [A More Detailed Look](#A-More-Detailed-Look)
 - [Storytime](#Storytime)
 - [Tech Stack](#Tech-Stack)
   - [Front End](#Front-End)
@@ -47,18 +43,18 @@ OR
 
 ## Quick App Demo
 
-![giphy](https://media.giphy.com/media/AUJnEt2yVTnyfViugs/giphy.gif)
+![giphy](https://media.giphy.com/media/S6F2Yd9QVzrebNN7AP/giphy.gif)
 
-<!-- ## A More Detailed Look
+## A More Detailed Look
 
 ### These links show screenshots of the app with the components they're referencing labeled as well.
 
 Note: component names are listed in the green boxes
 
-- [GAME TABLE](https://imgur.com/a/I0Ag4tv)
-- [CHAT](https://imgur.com/a/k8Repzt)
-- [LOGIN](https://imgur.com/a/MHjs696)
-- [REGISTRATION FORM](https://imgur.com/a/NoXozEx) -->
+- [GAME TABLE](https://imgur.com/a/AsVAnX2)
+- [CHAT](https://imgur.com/a/FelTekV)
+- [LOGIN FORM](https://imgur.com/a/DTNr8Lt)
+- [REGISTRATION FORM](https://imgur.com/a/afGt2xb)
 
 ## Storytime
 
