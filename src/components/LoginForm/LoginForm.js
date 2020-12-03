@@ -63,6 +63,11 @@ export default class LoginForm extends Component {
         <Button className="standard login_reg_buttons" type="submit">
           Login
         </Button>
+        <div>
+          <h4>Test Users: (passwords ending with number one)</h4>
+          <p>test-user-1: test1@ex.com, Pa$$word1</p>
+          <p>test-user-2: test2@ex.com, Pa$$word1</p>
+        </div>
       </form>
     );
   }
