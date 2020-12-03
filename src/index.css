@@ -42,7 +42,7 @@ section {
 }
 
 .pop {
-  background-color: rgb(245, 216, 141);
+  background-color: rgb(63, 110, 120);
   padding: 30px;
   border-radius: 6px;
   margin: 30px 0;
@@ -72,7 +72,7 @@ a:link,
 a:visited {
   background-color: white;
   color: black;
-  border: 2px solid rgb(105, 162, 176);
+  border: 2px solid rgb(63, 110, 120);
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -82,7 +82,7 @@ a:visited {
 
 a:hover,
 a:active {
-  background-color: rgb(105, 162, 176);
+  background-color: rgb(63, 110, 120);
   color: white;
 }
 
@@ -111,6 +111,7 @@ code {
 }
 
 @media all and (min-width: 600px) {
+
   body,
   html,
   main {
