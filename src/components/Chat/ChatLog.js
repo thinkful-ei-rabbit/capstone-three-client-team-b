@@ -3,8 +3,6 @@ import React from 'react';
 import UserContext from '../../contexts/UserContext';
 import './ChatLog.css';
 
-let socket;
-
 class ChatLog extends React.Component {
   constructor(props) {
     super(props);
@@ -70,6 +68,7 @@ class ChatLog extends React.Component {
             <form
               className="chatLog-server-message-form"
               onSubmit={(event) => this.props.onChatMessageSubmit(event)}
+              autoComplete="off"
             >
               <input
                 onKeyPress={this.props.handleKeyPress}
