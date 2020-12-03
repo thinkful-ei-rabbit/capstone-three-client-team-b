@@ -21,7 +21,6 @@ class Header extends Component {
         </Link>
         <Link to="/rules">Rules</Link>
         <Link to="/game">Play</Link>
-        <Link to="/">Home</Link>
       </div>
     );
   }
@@ -31,7 +30,6 @@ class Header extends Component {
       <div className="header-links">
         <Link to="/login">Log in</Link>
         <Link to="/register">Register</Link>
-        <Link to="/">Home</Link>
       </div>
     );
   }
@@ -40,17 +38,11 @@ class Header extends Component {
     return (
       <>
         <nav className="Header">
-          <h1><Logo /></h1>
+          <Logo />
           {TokenService.hasAuthToken()
             ? this.renderLogoutLink()
             : this.renderLoginLink()}
         </nav>
-        
-        <div className="box">
-          <div className="wave -one"></div>
-          <div className="wave -two"></div>
-          <div className="wave -three"></div>
-        </div>
       </>
     );
   }

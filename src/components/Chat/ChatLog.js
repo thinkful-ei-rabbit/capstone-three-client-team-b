@@ -59,6 +59,10 @@ class ChatLog extends React.Component {
         <div>{this.state.room}</div>
         {this.props.chatVisible ? (
           <div className="chat-box-container">
+            <div className="roomPlayers">
+              Players in room: {players.length}
+              {players}
+            </div>
             <div id="chatBox">
               <div id="message">{messagesArr}</div>
               <div id="feedback"></div>
@@ -72,15 +76,12 @@ class ChatLog extends React.Component {
                 type="text"
                 id="input-message"
                 placeholder="Chat!"
-              /> <br/>
+              />{' '}
+              <br />
               <button disabled={!this.state.connected} type="submit">
                 Send
               </button>
             </form>
-            <div className="roomPlayers">
-              Players in room: {players.length}
-              {players}
-            </div>
           </div>
         ) : (
           <div></div>
