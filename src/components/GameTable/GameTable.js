@@ -369,7 +369,7 @@ export default class GameTable extends Component {
       (el) => el.id === requestedId
     ).playerName;
 
-  
+
     const user_id = this.state.self_info.socket_id;
     const name = this.context.userData.player;
     const asker = {
@@ -749,36 +749,35 @@ export default class GameTable extends Component {
 
     return (
       <>
-        {endGame === true ? (
-          <div className="winner-display">
-            The winner is {winner}! The game is over now.
-            <br />
-            <br />
-            <Link to="/game">Return to lobby</Link>
-          </div>
-        ) : (
-          <Section className="game-table">
-            {players.map((player, index) => {
-              return (
-                <GameTableSeat
-                  key={index}
-                  player={player}
-                  onPlayerChoice={this.onPlayerChoice}
-                  onCardChoice={this.onCardChoice}
-                  claimSeat={this.claimSeat}
-                  seated={seated}
-                />
-              );
-            })}
-            <div>
-              <Button
-                onClick={() => this.handleShowChat()}
-                className="chat-toggle"
-              >
-                &#128488;
+        <Section className="game-table">
+          {players.map((player, index) => {
+            return (
+              <GameTableSeat
+                key={index}
+                player={player}
+                onPlayerChoice={this.onPlayerChoice}
+                onCardChoice={this.onCardChoice}
+                claimSeat={this.claimSeat}
+                seated={seated}
+              />
+            );
+          })}
+          <div>
+            <Button
+              onClick={() => this.handleShowChat()}
+              className="chat-toggle"
+            >
+              &#128488;
               </Button>
+          </div>
+          {endGame === true ? (
+            <div className="winner-display">
+              The winner is {winner}! Thanks for playing.
+              <br />
+              <br />
+              <Link to="/game">Return to lobby</Link>
             </div>
-            <div className="center">
+          ) : <div className="center">
               <div className="player-turn-announce">
                 {currentPlayerTurn
                   ? `${currentPlayerTurn.playerName}'s turn`
@@ -790,8 +789,8 @@ export default class GameTable extends Component {
               ) : !this.state.goFishDisabled ? (
                 <Button onClick={this.gofish}>Go Fish!</Button>
               ) : (
-                <div></div>
-              )}
+                    <div></div>
+                  )}
               <ChatLog
                 match={this.props.match}
                 handleKeyPress={this.handleKeyPress}
@@ -807,9 +806,9 @@ export default class GameTable extends Component {
                   currentSeatOfDOMPlayer
                     ? currentSeatOfDOMPlayer.requestedPlayer
                     : {
-                        playerName: '',
-                        id: '',
-                      }
+                      playerName: '',
+                      id: '',
+                    }
                 }
                 askDisabled={this.state.askDisabled}
                 yesResponse={this.yesResponse}
@@ -818,9 +817,9 @@ export default class GameTable extends Component {
                 chatRenders={this.state.chatRenders}
                 chatVisible={this.state.chatVisible}
               />
-            </div>
-          </Section>
-        )}
+            </div>}
+        </Section>
+        )
       </>
     );
   }
