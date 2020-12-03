@@ -55,3 +55,11 @@
   left: 50%;
   margin: -100px 0 0 -150px;
 }
+
+.find-server {
+  margin-top: 10px;
+}
+
+.server-list {
+  margin-top: 20px;
+}

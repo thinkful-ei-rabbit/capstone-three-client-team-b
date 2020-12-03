@@ -37,7 +37,7 @@ export default class TableList extends Component {
       let index = 0;
       for (let game in list) {
         list1.push(
-          <div key={index}>
+          <div className="single-room" key={index}>
             Room {game}, {list[game].capacity}/4 -{' '}
             {list[game].capacity < 4 ? (
               <button onClick={() => this.onJoinServerClick(game)}>Join</button>
@@ -64,10 +64,10 @@ export default class TableList extends Component {
     return (
       <>
         <button onClick={() => this.hostGame()}>Host a game</button>
-        <div>
+        <div className="find-server">
           {/* array of games */}
           Find a server!
-          <div>{this.state.list}</div>
+          <div className="server-list">{this.state.list}</div>
         </div>
       </>
     );
