@@ -16,11 +16,11 @@ class Header extends Component {
   renderLogoutLink() {
     return (
       <div className="header-links">
+        <Link to="/game">Play</Link>
+        <Link to="/rules">Rules</Link>
         <Link onClick={this.handleLogoutClick} to="/">
           Logout
         </Link>
-        <Link to="/rules">Rules</Link>
-        <Link to="/game">Play</Link>
       </div>
     );
   }

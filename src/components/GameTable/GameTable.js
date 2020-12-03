@@ -357,12 +357,19 @@ export default class GameTable extends Component {
 
   askOtherPlayer = (e) => {
     e.preventDefault();
+
+    const rankReq = currentSeatOfDOMPlayer.requestedCard;
     const requestedId = currentSeatOfDOMPlayer.requestedPlayer.id;
+
+    if (!requestedId || rankReq === '') {
+      return alert('Make sure you select both a player and a card before asking');
+    }
+
     const requestedName = this.state.chatLog.players.find(
       (el) => el.id === requestedId
     ).playerName;
 
-    const rankReq = currentSeatOfDOMPlayer.requestedCard;
+  
     const user_id = this.state.self_info.socket_id;
     const name = this.context.userData.player;
     const asker = {
