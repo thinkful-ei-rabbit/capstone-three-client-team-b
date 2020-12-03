@@ -12,7 +12,7 @@ export default function LandingPage() {
   return (
     <Section>
 
-      <div className="container pop">
+      <div className="landing container pop">
         <h1>Ahoy there!</h1>
         <p>Welcome to GoFish.io.</p>
         <p>
@@ -23,7 +23,7 @@ export default function LandingPage() {
           <br />
           <br />
         <img src={fishy} style={{ width: 150 }} alt='fish' />
-        <Link to="/register">Register</Link>
+        <Link className="landing" to="/register">Register</Link>
       </div>
     </Section>
   );
