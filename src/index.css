@@ -13,10 +13,6 @@ body {
   height: 100%;
 }
 
-input:focus {
-  background-color: #ebb572;
-}
-
 .input-label {
   min-width: 300px;
   display: flex;
