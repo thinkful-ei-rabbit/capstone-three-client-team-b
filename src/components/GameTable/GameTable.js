@@ -5,7 +5,7 @@ import GameTableSeat from '../GameTableSeat/GameTableSeat';
 import ChatLog from '../Chat/ChatLog';
 import socketClient from 'socket.io-client';
 import config from '../../config';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import './GameTable.css';
 
@@ -436,7 +436,7 @@ export default class GameTable extends Component {
       (el) => el.value == this.state.chatLog.asked.rankReq
     );
     if (cardInHand) {
-      alert(`You do have a ${this.state.chatLog.asked.rankReq} in hand`);      
+      alert(`You do have a ${this.state.chatLog.asked.rankReq} in hand`);
     } else {
       socket.emit('rank request denial', {
         ...this.state.chatLog.asked,
@@ -579,12 +579,10 @@ export default class GameTable extends Component {
       updatedPlayers[
         currentSeatOfDOMPlayer.playerSeat - 1
       ] = currentSeatOfDOMPlayer;
-      
 
       this.setState({
         players: updatedPlayers,
       });
-      
     }
   };
 
@@ -593,7 +591,8 @@ export default class GameTable extends Component {
     // validate all seated
     const playerSeats = this.state.players;
     const allSeated =
-      playerSeats.filter((el) => el.playerName !== '').length === players.length;
+      playerSeats.filter((el) => el.playerName !== '').length ===
+      players.length;
 
     if (!allSeated) {
       return alert('Wait for everyone to choose their seat.');
@@ -664,7 +663,7 @@ export default class GameTable extends Component {
       //if there's a tie everyone's a winner
       else {
         this.setState({
-          winner: 'It\'s a tie!',
+          winner: "It's a tie!",
         });
       }
     }
@@ -746,8 +745,8 @@ export default class GameTable extends Component {
         {endGame === true ? (
           <div className="winner-display">
             The winner is {winner}! The game is over now.
-            <br/>
-            <br/>
+            <br />
+            <br />
             <Link to="/game">Return to lobby</Link>
           </div>
         ) : (
@@ -778,7 +777,7 @@ export default class GameTable extends Component {
                   ? `${currentPlayerTurn.playerName}'s turn`
                   : ''}
               </div>
-              <div id="feedback"></div>
+              <div id="feedback" className="feedback"></div>
               {!this.state.inProgress ? (
                 <Button onClick={() => this.startGame()}>Start Game</Button>
               ) : !this.state.goFishDisabled ? (

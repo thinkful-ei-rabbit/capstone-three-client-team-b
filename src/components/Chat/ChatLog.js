@@ -34,6 +34,38 @@ class ChatLog extends React.Component {
     this.setState({ connected: true });
   }
 
+  renderInstructions = () => {
+    if (this.props.requestedPlayer.playerName && this.props.requestedCard) {
+      return '';
+    } else if (
+      !this.props.requestedPlayer.playerName &&
+      this.props.requestedCard
+    ) {
+      return (
+        <>
+          <p className="turn-instructions">Click on a player</p>
+        </>
+      );
+    } else if (
+      this.props.requestedPlayer.playerName &&
+      !this.props.requestedCard
+    ) {
+      return (
+        <>
+          <p className="turn-instructions">Click on a card</p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <p className="turn-instructions">Click on a player</p>
+          <p className="turn-instructions">and</p>
+          <p className="turn-instructions">Click on a card</p>
+        </>
+      );
+    }
+  };
+
   render() {
     let players = [];
     let messagesArr = [];
@@ -102,7 +134,9 @@ class ChatLog extends React.Component {
             className="askOtherPlayer_form"
             onSubmit={(e) => this.props.askAnotherPlayer(e)}
           >
+            {this.renderInstructions()}
             <input
+              className="hidden-for-a-reason"
               placeholder="Select another player!"
               type="text"
               id="to-ask-id"
@@ -111,6 +145,7 @@ class ChatLog extends React.Component {
               required
             />
             <input
+              className="hidden-for-a-reason"
               placeholder="Select Card from your hand!"
               type="text"
               id="rank-requested"
@@ -118,9 +153,15 @@ class ChatLog extends React.Component {
               readOnly
               required
             />
-            <button type="submit" disabled={this.props.askDisabled}>
-              Ask Other Player
-            </button>
+            {this.props.requestedPlayer.playerName &&
+            this.props.requestedCard ? (
+              <button type="submit">
+                Ask {this.props.requestedPlayer.playerName} for a{' '}
+                {this.props.requestedCard}
+              </button>
+            ) : (
+              ''
+            )}
           </form>
         ) : (
           ''

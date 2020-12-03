@@ -9,6 +9,10 @@
   justify-content: flex-end;
 }
 
+.roomPlayers {
+  height: 100%;
+}
+
 #chatBox {
   min-height: 70%;
   width: 100%;
@@ -17,7 +21,6 @@
   overflow: auto;
   border-radius: 2px;
   position: relative;
-  overflow: auto;
 }
 #input-message {
   height: 15px;
@@ -30,6 +33,20 @@
   color: rgba(255, 160, 4);
   padding: 14px, 0px;
   margin: 0 20px;
+}
+
+.feedback {
+  visibility: hidden;
+}
+
+.hidden-for-a-reason {
+  visibility: hidden;
+}
+
+.turn-instructions {
+  text-align: center;
+  font-size: 1em;
+  margin: 0;
 }
 
 #message {
@@ -96,6 +113,10 @@
   .chat-box-container {
     width: 500px;
     right: 10px;
-    height: 60%;
+    height: auto;
+  }
+
+  #chatBox {
+    height: 400px;
   }
 }
