@@ -45,3 +45,11 @@
 .being-asked-box > div > button {
   margin: 10px 5px 0;
 }
+
+.find-server {
+  margin-top: 10px;
+}
+
+.server-list {
+  margin-top: 20px;
+}
