@@ -22,3 +22,8 @@ https://media.geeksforgeeks.org/wp-content/uploads/20200326181026/wave3.png);
   background-size: cover; 
   background-repeat: no-repeat; 
 }
+
+.landing a:hover, a:active{
+  background-color: rgb(105, 162, 176);
+  color: white;
+}
