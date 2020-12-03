@@ -20,12 +20,12 @@
   width: 100%;
 }
 
-a.card,
 a.card:link,
 a.card:visited {
   text-decoration: none;
-  padding: 0;
-  border: none;
+  padding: 0.25em;
+  border: 1px solid #666;
+  border-radius: 0.3em;
 }
 /* selected and hover state */
 a.card:hover,
@@ -34,20 +34,17 @@ a.card:focus,
 label.card:hover,
 strong .card {
   bottom: 2em;
+  background-color: rgb(255, 255, 255);
 }
 label.card {
   cursor: pointer;
 }
 .player {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 10px 0;
 }
 
-.player-seat-4 .player,
-.player-seat-2 .player {
-  flex-direction: column;
-}
 .player-seat-4 .name,
 .player-seat-2 .name {
   margin: auto;
@@ -60,7 +57,7 @@ label.card {
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   width: fit-content;
   margin: auto auto;
-  padding: 0 10px;
+  padding: 5px 10px;
   white-space: nowrap;
   vertical-align: middle;
 }
@@ -347,7 +344,7 @@ ul.hand li:nth-child(26) {
 .center {
   margin: auto auto;
   grid-row: 3;
-  grid-column: 2/4;
+  grid-column: 1 / end;
 }
 
 h2.name {
@@ -400,12 +397,6 @@ h2.name {
     margin: auto auto;
     grid-row: 2/4;
     grid-column: 2/4;
-  }
-
-  .player {
-    display: flex;
-    flex-direction: row;
-    margin: 10px 0;
   }
 
   .player-seat-1 .player,
