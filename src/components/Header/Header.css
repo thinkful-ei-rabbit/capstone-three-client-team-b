@@ -2,11 +2,18 @@ html {
   /* background-color: #fa9800; */
 }
 
+.Header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .header-links {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
   text-align: right;
+  margin: 0 auto 20px;
 }
 
 .header-links a {
@@ -14,42 +21,29 @@ html {
   margin-right: 10px;
 }
 
-.box {
-  position: fixed;
-  bottom: 0;
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.wave {
-  position: absolute;
-  opacity: 0.4;
-  width: 3000px;
-  height: 2600px;
-  margin: 100px 0 0 -1000px;
-  border-radius: 40%;
+.logo-text {
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: white;
+  color: #ffa02c;
+  border-radius: 3px;
+  text-align: center;
+  padding: 10px 20px;
 }
 
-/* .wave.-one {
-  animation: rotate 15000ms infinite linear;
-  opacity: 0.1;
-  background-color: #000;
-}
-
-.wave.-two {
-  animation: rotate 19000ms infinite linear;
-  opacity: 0.1;
-  background-color: #f7eec1;
-}
-
-.wave.-three {
-  animation: rotate 25000ms infinite linear;
-  background-color: #777;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+@media all and (min-width: 600px) {
+  .Header {
+    flex-direction: row;
   }
-  from {
-    transform: rotate(360deg);
+
+  .header-links {
+    margin: auto 0;
   }
-} */
+}

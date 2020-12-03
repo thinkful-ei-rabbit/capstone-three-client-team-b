@@ -5,7 +5,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffa02c;
-  background-image: url("./images/flavor/bg-wave.png");
+  background-image: url('./images/flavor/bg-wave.png');
   background-position: center bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -27,27 +27,6 @@ input:focus {
 .img-container {
   display: block;
   position: fixed;
-
-}
-
-.logo-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 100px;
-  align-items: center;
-  justify-content: center;
-  padding: 0 40px;
-  border-radius: 3px;
-}
-
-.logo-text {
-  font-size: 20px;
-  font-weight: bolder;
-  background-color: white;
-  color: #ffa02c;
-  border-radius: 3px;
-  text-align: center;
-  padding: 10px 20px;
 }
 
 section {
@@ -93,23 +72,26 @@ a:link,
 a:visited {
   background-color: white;
   color: black;
-  border: 2px solid rgb(255, 204, 0);
+  border: 2px solid rgb(105, 162, 176);
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
+  font-weight: bold;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
 a:hover,
 a:active {
-  background-color: rgb(255, 204, 0);
+  background-color: rgb(105, 162, 176);
   color: white;
 }
 
 button {
   background-color: white;
   color: black;
-  border: 2px solid rgb(255, 204, 0);
+  font-weight: bold;
+  font-size: 16px;
+  border: 2px solid rgb(105, 162, 176);
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -119,7 +101,7 @@ button {
 
 button:hover,
 button:active {
-  background-color: rgb(255, 204, 0);
+  background-color: rgb(105, 162, 176);
   color: white;
 }
 
