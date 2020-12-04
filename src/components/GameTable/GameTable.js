@@ -15,7 +15,6 @@ let socket;
 let currentSeatOfDOMPlayer;
 
 export default class GameTable extends Component {
-
   static contextType = UserContext;
 
   state = {
@@ -60,7 +59,6 @@ export default class GameTable extends Component {
     ],
     goFishDisabled: true,
     askDisabled: true,
-    deck: [],
     inProgress: false,
     seated: false,
     chatVisible: false,
@@ -68,6 +66,7 @@ export default class GameTable extends Component {
       messages: [],
       connected: false,
     },
+    deckEmpty: false,
     endGame: false,
     winner: '',
   };
@@ -192,9 +191,7 @@ export default class GameTable extends Component {
       });
     });
 
-    socket.on('go fish', (reqObj) => {
-      const { asker, requested, rankReq } = reqObj;
-
+    socket.on('go fish', () => {
       this.setState({
         goFishDisabled: false,
         askDisabled: true,
@@ -204,6 +201,10 @@ export default class GameTable extends Component {
     socket.on('draw card denied', (msg) => {
       // deck empty
       alert(msg);
+
+      this.setState({
+        deckEmpty: true,
+      });
     });
 
     socket.on('update other player card count', (userObj) => {
@@ -230,7 +231,6 @@ export default class GameTable extends Component {
       toUpdate.books = [...userObj.playerBooks];
 
       updatedPlayers[toUpdate.playerSeat - 1] = toUpdate;
-      console.log(toUpdate);
       this.setState({
         players: updatedPlayers,
       });
@@ -313,8 +313,6 @@ export default class GameTable extends Component {
       // otherwise enable ask functionality
       this.setState({
         players: updatedPlayers,
-        goFishDisabled:
-          currentSeatOfDOMPlayer.playerHand.length > 0 ? true : false,
         askDisabled:
           currentSeatOfDOMPlayer.playerHand.length > 0 ? false : true,
       });
@@ -328,7 +326,6 @@ export default class GameTable extends Component {
     });
 
     socket.on('game end', () => {
-      console.log('game END');
       // client side displays
 
       this.displayWinner();
@@ -355,13 +352,14 @@ export default class GameTable extends Component {
     const requestedId = currentSeatOfDOMPlayer.requestedPlayer.id;
 
     if (!requestedId || rankReq === '') {
-      return alert('Make sure you select both a player and a card before asking');
+      return alert(
+        'Make sure you select both a player and a card before asking'
+      );
     }
 
     const requestedName = this.state.chatLog.players.find(
       (el) => el.id === requestedId
     ).playerName;
-
 
     const user_id = this.state.self_info.socket_id;
     const name = this.context.userData.player;
@@ -516,6 +514,19 @@ export default class GameTable extends Component {
     });
 
     this.nextTurn();
+  };
+
+  emptyHand = () => {
+    const playerName = this.context.userData.player;
+    const cardCount = currentSeatOfDOMPlayer.playerHand.length;
+    socket.emit('draw a card from the deck', {
+      cardCount: cardCount,
+      playerName: playerName,
+    });
+
+    if (this.state.deckEmpty) {
+      this.nextTurn();
+    }
   };
 
   handleKeyPress = () => {
@@ -752,6 +763,8 @@ export default class GameTable extends Component {
                 onCardChoice={this.onCardChoice}
                 claimSeat={this.claimSeat}
                 seated={seated}
+                endGame={this.state.endGame}
+                emptyHand={this.emptyHand}
               />
             );
           })}
@@ -761,7 +774,7 @@ export default class GameTable extends Component {
               className="chat-toggle"
             >
               &#128488;
-              </Button>
+            </Button>
           </div>
           {endGame === true ? (
             <div className="winner-display">
@@ -770,7 +783,8 @@ export default class GameTable extends Component {
               <br />
               <Link to="/game">Return to lobby</Link>
             </div>
-          ) : <div className="center">
+          ) : (
+            <div className="center">
               <div className="player-turn-announce">
                 {currentPlayerTurn
                   ? `${currentPlayerTurn.playerName}'s turn`
@@ -782,8 +796,8 @@ export default class GameTable extends Component {
               ) : !this.state.goFishDisabled ? (
                 <Button onClick={this.gofish}>Go Fish!</Button>
               ) : (
-                    <div></div>
-                  )}
+                ''
+              )}
               <ChatLog
                 match={this.props.match}
                 handleKeyPress={this.handleKeyPress}
@@ -799,9 +813,9 @@ export default class GameTable extends Component {
                   currentSeatOfDOMPlayer
                     ? currentSeatOfDOMPlayer.requestedPlayer
                     : {
-                      playerName: '',
-                      id: '',
-                    }
+                        playerName: '',
+                        id: '',
+                      }
                 }
                 askDisabled={this.state.askDisabled}
                 yesResponse={this.yesResponse}
@@ -810,9 +824,9 @@ export default class GameTable extends Component {
                 chatRenders={this.state.chatRenders}
                 chatVisible={this.state.chatVisible}
               />
-            </div>}
+            </div>
+          )}
         </Section>
-        )
       </>
     );
   }

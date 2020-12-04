@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserContext from '../../contexts/UserContext';
 import images from '../../images/images.js';
 import Gravatar from 'react-gravatar';
+import { Button } from '../Utils/Utils';
 
 import './GameTableSeat.css';
 
@@ -12,31 +13,51 @@ export default class GameTableSeat extends Component {
     player: {
       playerName: '',
     },
+    endGame: false,
   };
 
   renderLoggedInUser = (player) => {
-    player.playerHand.sort(function (a, b) {
-      return a.value - b.value;
-    });
+    if (this.props.player.playerHand.length > 0) {
+      player.playerHand.sort(function (a, b) {
+        return a.value - b.value;
+      });
 
-    return player.playerHand.map((card) => {
-      const suitValue = card.suit + card.value;
+      return player.playerHand.map((card) => {
+        const suitValue = card.suit + card.value;
 
+        return (
+          <li
+            key={card.value + card.suit}
+            onClick={(e) => this.props.onCardChoice(card.value, e)}
+          >
+            <a className="card" href="#">
+              <img
+                src={images[suitValue]}
+                alt="card value"
+                className="card-image"
+              />
+            </a>
+          </li>
+        );
+      });
+    } else if (
+      this.props.player.playerHand.length === 0 &&
+      this.props.player.currentPlayer &&
+      !this.props.endGame
+    ) {
       return (
-        <li
-          key={card.value + card.suit}
-          onClick={(e) => this.props.onCardChoice(card.value, e)}
+        <Button
+          className="draw-button"
+          onClick={() => {
+            this.props.emptyHand();
+          }}
         >
-          <a className="card" href="#">
-            <img
-              src={images[suitValue]}
-              alt="card value"
-              className="card-image"
-            />
-          </a>
-        </li>
+          Draw
+        </Button>
       );
-    });
+    } else if (this.props.endGame) {
+      return '';
+    }
   };
 
   renderOtherPlayers = (player) => {
