@@ -11,7 +11,7 @@
 # Go Fish Client
 
 This app allows users to play a fun game of Go Fish.
-Here's the deployed version of `Go Fish`: [Go Fish](https://capstone-3-client-deploy.vercel.app/ 'Go Fish Live Link')
+Here's the deployed version of `Go Fish`: [Go Fish](https://gofish-team2.vercel.app/ 'Go Fish Live Link')
 
 ### Demo Accounts:
 
