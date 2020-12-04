@@ -102,6 +102,10 @@ label.card {
   padding: 0;
 }
 
+.draw-button {
+  margin: 50px auto 0;
+}
+
 /* hand (in your hand)
 ********************************************************************/
 ul.hand {
@@ -389,7 +393,7 @@ h3.name {
 @media all and (min-width: 700px) {
   .player-seat-1 {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     grid-row: 4;
     grid-column: 2 / 4;
     margin-bottom: 30px;
@@ -402,7 +406,7 @@ h3.name {
   }
   .player-seat-3 {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     grid-row: 1;
     grid-column: 2 / 4;
   }
