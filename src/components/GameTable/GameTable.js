@@ -200,8 +200,6 @@ export default class GameTable extends Component {
     });
 
     socket.on('go fish', (reqObj) => {
-      const { asker, requested, rankReq } = reqObj;
-
       this.setState({
         goFishDisabled: false,
         askDisabled: true,
@@ -362,14 +360,15 @@ export default class GameTable extends Component {
     const requestedId = currentSeatOfDOMPlayer.requestedPlayer.id;
 
     if (!requestedId || rankReq === '') {
-      return alert('Make sure you select both a player and a card before asking');
+      return alert(
+        'Make sure you select both a player and a card before asking'
+      );
     }
 
     const requestedName = this.state.chatLog.players.find(
       (el) => el.id === requestedId
     ).playerName;
 
-  
     const user_id = this.state.self_info.socket_id;
     const name = this.context.userData.player;
     const asker = {
