@@ -320,7 +320,6 @@ export default class GameTable extends Component {
 
     socket.on('typing', (data) => {
       let feedback = document.getElementById('feedback');
-      console.log(data);
       feedback.innerHTML =
         '<p><em>' + data + ' is typing a message...</em></p>';
     });
