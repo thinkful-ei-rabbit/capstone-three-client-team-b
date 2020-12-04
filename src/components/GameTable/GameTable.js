@@ -15,14 +15,6 @@ let socket;
 let currentSeatOfDOMPlayer;
 
 export default class GameTable extends Component {
-  constructor(props) {
-    super(props);
-    if (window.performance) {
-      if (PerformanceNavigation.type == 1) {
-        window.location.href = '/game';
-      }
-    }
-  }
   static contextType = UserContext;
 
   state = {
@@ -67,7 +59,6 @@ export default class GameTable extends Component {
     ],
     goFishDisabled: true,
     askDisabled: true,
-    deck: [],
     inProgress: false,
     seated: false,
     chatVisible: false,
@@ -75,6 +66,7 @@ export default class GameTable extends Component {
       messages: [],
       connected: false,
     },
+    deckEmpty: false,
     endGame: false,
     winner: '',
   };
@@ -199,7 +191,7 @@ export default class GameTable extends Component {
       });
     });
 
-    socket.on('go fish', (reqObj) => {
+    socket.on('go fish', () => {
       this.setState({
         goFishDisabled: false,
         askDisabled: true,
@@ -209,6 +201,10 @@ export default class GameTable extends Component {
     socket.on('draw card denied', (msg) => {
       // deck empty
       alert(msg);
+
+      this.setState({
+        deckEmpty: true,
+      });
     });
 
     socket.on('update other player card count', (userObj) => {
@@ -235,7 +231,6 @@ export default class GameTable extends Component {
       toUpdate.books = [...userObj.playerBooks];
 
       updatedPlayers[toUpdate.playerSeat - 1] = toUpdate;
-      console.log(toUpdate);
       this.setState({
         players: updatedPlayers,
       });
@@ -318,8 +313,6 @@ export default class GameTable extends Component {
       // otherwise enable ask functionality
       this.setState({
         players: updatedPlayers,
-        goFishDisabled:
-          currentSeatOfDOMPlayer.playerHand.length > 0 ? true : false,
         askDisabled:
           currentSeatOfDOMPlayer.playerHand.length > 0 ? false : true,
       });
@@ -333,7 +326,6 @@ export default class GameTable extends Component {
     });
 
     socket.on('game end', () => {
-      console.log('game END');
       // client side displays
 
       this.displayWinner();
@@ -522,6 +514,19 @@ export default class GameTable extends Component {
     });
 
     this.nextTurn();
+  };
+
+  emptyHand = () => {
+    const playerName = this.context.userData.player;
+    const cardCount = currentSeatOfDOMPlayer.playerHand.length;
+    socket.emit('draw a card from the deck', {
+      cardCount: cardCount,
+      playerName: playerName,
+    });
+
+    if (this.state.deckEmpty) {
+      this.nextTurn();
+    }
   };
 
   handleKeyPress = () => {
@@ -748,35 +753,37 @@ export default class GameTable extends Component {
 
     return (
       <>
-        {endGame === true ? (
-          <div className="winner-display">
-            The winner is {winner}! The game is over now.
-            <br />
-            <br />
-            <Link to="/game">Return to lobby</Link>
+        <Section className="game-table">
+          {players.map((player, index) => {
+            return (
+              <GameTableSeat
+                key={index}
+                player={player}
+                onPlayerChoice={this.onPlayerChoice}
+                onCardChoice={this.onCardChoice}
+                claimSeat={this.claimSeat}
+                seated={seated}
+                endGame={this.state.endGame}
+                emptyHand={this.emptyHand}
+              />
+            );
+          })}
+          <div>
+            <Button
+              onClick={() => this.handleShowChat()}
+              className="chat-toggle"
+            >
+              &#128488;
+            </Button>
           </div>
-        ) : (
-          <Section className="game-table">
-            {players.map((player, index) => {
-              return (
-                <GameTableSeat
-                  key={index}
-                  player={player}
-                  onPlayerChoice={this.onPlayerChoice}
-                  onCardChoice={this.onCardChoice}
-                  claimSeat={this.claimSeat}
-                  seated={seated}
-                />
-              );
-            })}
-            <div>
-              <Button
-                onClick={() => this.handleShowChat()}
-                className="chat-toggle"
-              >
-                &#128488;
-              </Button>
+          {endGame === true ? (
+            <div className="winner-display">
+              The winner is {winner}! Thanks for playing.
+              <br />
+              <br />
+              <Link to="/game">Return to lobby</Link>
             </div>
+          ) : (
             <div className="center">
               <div className="player-turn-announce">
                 {currentPlayerTurn
@@ -789,7 +796,7 @@ export default class GameTable extends Component {
               ) : !this.state.goFishDisabled ? (
                 <Button onClick={this.gofish}>Go Fish!</Button>
               ) : (
-                <div></div>
+                ''
               )}
               <ChatLog
                 match={this.props.match}
@@ -818,8 +825,8 @@ export default class GameTable extends Component {
                 chatVisible={this.state.chatVisible}
               />
             </div>
-          </Section>
-        )}
+          )}
+        </Section>
       </>
     );
   }

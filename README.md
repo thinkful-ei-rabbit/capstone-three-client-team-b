@@ -146,7 +146,7 @@ npm start
 
 ## About the Devs
 
--[Caleb](https://github.com/cabejackson) -[Harry](https://github.com/fumbl3b) -[Jason](https://github.com/zompocalypse) -[Malik](https://github.com/M-DeJean) -[Michael](https://github.com/michaeljsliger)
+-[Caleb Jackson](https://github.com/cabejackson) -[Harry Winkler](https://github.com/fumbl3b) -[Jason Stankevich](https://github.com/zompocalypse) -[Malik DeJean](https://github.com/M-DeJean) -[Michael Sliger](https://github.com/michaeljsliger)
 
 ## Special Thanks
 
