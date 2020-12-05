@@ -791,9 +791,13 @@ export default class GameTable extends Component {
               </div>
               <div id="feedback" className="feedback"></div>
               {!this.state.inProgress ? (
+                <div className="front-button-z">
                 <Button onClick={() => this.startGame()}>Start Game</Button>
+                  </div>
               ) : !this.state.goFishDisabled ? (
-                <Button onClick={this.gofish}>Go Fish!</Button>
+                <div className="front-button-z">
+                <Button className="front-button-z" onClick={this.gofish}>Go Fish!</Button>
+                </div>
               ) : (
                 ''
               )}

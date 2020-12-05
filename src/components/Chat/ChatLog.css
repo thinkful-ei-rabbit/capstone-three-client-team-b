@@ -66,8 +66,16 @@
 .askOtherPlayer_form {
   display: flex;
   flex-direction: column;
+  padding: 6px;
   margin-top: 8px;
   width: 100%;
+  z-index: 3;
+  background-color: rgba(17, 17, 17, 0.486);
+  pointer-events: none;
+}
+
+.askOtherPlayer_form button {
+  pointer-events: auto;
 }
 
 .askOtherPlayer_form input {
@@ -82,6 +90,7 @@
   background-color: rgb(255, 255, 75);
   border-radius: 12px;
   color: black;
+  z-index: 3;
 }
 
 .ChatLog-and-game-inputs {

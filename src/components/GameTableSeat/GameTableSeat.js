@@ -82,7 +82,11 @@ export default class GameTableSeat extends Component {
             className={`player-seat-${player.playerSeat} rotateHand`}
             onClick={() => this.props.onPlayerChoice(player)}
           >
-            <ul className="hand">{cardBacks}</ul>
+            <ul className="hand mobile-responsive-hand">{cardBacks}</ul>
+            <ul className="mobile-responsive-hand-count"><p>
+              {cardBacks.length > 1 ? `${cardBacks.length} Cards` : ''}
+              </p>
+            </ul>
             <div className="player">
               <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.props.player.email} size={75} />
@@ -90,8 +94,8 @@ export default class GameTableSeat extends Component {
             </div>
           </div>
         ) : (
-          <div></div>
-        )}
+            <div></div>
+          )}
       </>
     );
   };
@@ -118,8 +122,8 @@ export default class GameTableSeat extends Component {
             </div>
           </div>
         ) : (
-          this.renderOtherPlayers(player)
-        )}
+              this.renderOtherPlayers(player)
+            )}
       </>
     );
   }

@@ -479,6 +479,11 @@ h3.name {
     height: 75px;
     width: 75px;
   }
+
+  .mobile-responsive-hand {
+    display: inline-block;
+  }
+  
 }
 
 @media all and (min-width: 800px) {
@@ -490,5 +495,23 @@ h3.name {
   .card {
     width: 5.3em;
     height: 8.1em;
+    position: relative;
+    z-index: 1;
+  }
+  .mobile-responsive-hand-count {
+    text-align: center;
+    display: none;
+  }
+}
+
+@media all and (max-width: 800px) {
+  .mobile-responsive-hand {
+    display: none;
+  }
+  .mobile-response-hand-count {
+    display: block;
+  }
+  .mobile-response-hand-count p {
+    font-size: 44px;
   }
 }
