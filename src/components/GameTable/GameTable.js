@@ -175,7 +175,6 @@ export default class GameTable extends Component {
         inProgress: true,
         players: updatedPlayers,
       });
-      // console.log(this.state.players);
     });
 
     socket.on('gameFull', (message) => {

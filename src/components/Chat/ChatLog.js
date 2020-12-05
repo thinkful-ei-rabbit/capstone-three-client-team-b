@@ -1,5 +1,4 @@
 import React from 'react';
-// import TokenService from '../../services/token-service';
 import UserContext from '../../contexts/UserContext';
 import './ChatLog.css';
 
