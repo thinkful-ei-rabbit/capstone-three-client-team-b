@@ -92,11 +92,15 @@ export default class GameTableSeat extends Component {
           >
             <ul className="opponent-hand">{cardBacks}</ul>
             <div className="opponent-player">
-              <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.props.player.email} size={75} />
-              <div>
-                <p className="hand-count books">cards: {cardBacks.length}</p>
-                <p className="books">books: {this.props.player.books.length}</p>
+              <div className="opponent-details">
+                <h3 className="name">{player.playerName}</h3>
+                <div>
+                  <p className="hand-count books">cards: {cardBacks.length}</p>
+                  <p className="books">
+                    books: {this.props.player.books.length}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -123,9 +127,11 @@ export default class GameTableSeat extends Component {
           <div className={`player-logged-in rotateHand`}>
             <ul className="hand">{this.renderLoggedInUser(player)}</ul>
             <div className="player">
-              <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.context.userData.email} size={75} />
-              <p className="books">books: {this.props.player.books.length}</p>
+              <div className="player-details">
+                <h3 className="name">{player.playerName}</h3>
+                <p className="books">books: {this.props.player.books.length}</p>
+              </div>
             </div>
           </div>
         ) : (

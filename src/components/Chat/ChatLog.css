@@ -29,14 +29,10 @@
   margin-bottom: 3px;
   font-family: 'Architects Daughter', cursive;
 }
-#feedback {
-  color: rgba(255, 160, 4);
-  padding: 14px, 0px;
-  margin: 0 20px;
-}
-
 .feedback {
-  visibility: hidden;
+  color: rgba(255, 160, 4);
+  padding: 14px 0px;
+  margin: 0 20px;
 }
 
 .hidden-for-a-reason {

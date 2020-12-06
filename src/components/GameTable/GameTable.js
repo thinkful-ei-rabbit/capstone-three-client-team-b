@@ -17,6 +17,13 @@ let currentSeatOfDOMPlayer;
 export default class GameTable extends Component {
   static contextType = UserContext;
 
+  static defaultProps = {
+    location: {},
+    history: {
+      push: () => {},
+    },
+  };
+
   state = {
     user: '',
     players: [
@@ -66,6 +73,8 @@ export default class GameTable extends Component {
       messages: [],
       connected: false,
     },
+    lastMove: '',
+    interval: 0,
     deckEmpty: false,
     endGame: false,
     winner: '',
@@ -80,8 +89,6 @@ export default class GameTable extends Component {
     let count = 0;
     socket.on('messageResponse', (msg) => {
       // individual message response
-      let feedback = document.getElementById('feedback');
-      feedback.innerHTML = '';
       msg = (
         <div key={count}>
           <strong>{msg.user}</strong>: {msg.value}
@@ -93,6 +100,16 @@ export default class GameTable extends Component {
           ...this.state.chatLog,
           messages: [...this.state.chatLog.messages, msg],
         },
+      });
+    });
+
+    socket.on('gameMessage', (msg) => {
+      let timeout = setTimeout(this.clearGameMessage, 5000);
+
+      // messages about game interactions
+      this.setState({
+        lastMove: msg.value,
+        timeout: timeout,
       });
     });
 
@@ -317,18 +334,16 @@ export default class GameTable extends Component {
       });
     });
 
-    // socket.on('typing', (data) => {
-    //   let feedback = document.getElementById('feedback');
-    //   feedback.innerHTML =
-    //     '<p><em>' + data + ' is typing a message...</em></p>';
-    // });
-
     socket.on('game end', () => {
       // client side displays
 
       this.displayWinner();
     });
   };
+
+  // componentWillUnmount() {
+  //   socket.emit('leave table');
+  // }
 
   onChatMessageSubmit = (event) => {
     event.preventDefault();
@@ -443,6 +458,13 @@ export default class GameTable extends Component {
         },
       });
     }
+  };
+
+  clearGameMessage = () => {
+    this.setState({
+      lastMove: '. . .',
+      timeout: 0,
+    });
   };
 
   onPlayerJoin = () => {
@@ -736,6 +758,13 @@ export default class GameTable extends Component {
     });
   };
 
+  leaveRoom = () => {
+    socket.emit('leave table');
+
+    const { history } = this.props;
+    history.push(`/game`);
+  };
+
   render() {
     const { players, seated, endGame, winner } = this.state;
     const playerPlacement = this.state.chatLog.players;
@@ -783,9 +812,22 @@ export default class GameTable extends Component {
                   ? `${currentPlayerTurn.playerName}'s turn`
                   : ''}
               </div>
-              <div id="feedback" className="feedback"></div>
+              <div className="feedback fade-out">{this.state.lastMove}</div>
               {!this.state.inProgress ? (
-                <Button onClick={() => this.startGame()}>Start Game</Button>
+                <div className="entry-buttons">
+                  <Button
+                    className="entry-btn"
+                    onClick={() => this.startGame()}
+                  >
+                    Start Game
+                  </Button>
+                  <Button
+                    className="entry-btn"
+                    onClick={() => this.leaveRoom()}
+                  >
+                    Leave Room
+                  </Button>
+                </div>
               ) : !this.state.goFishDisabled ? (
                 <Button onClick={this.gofish}>Go Fish!</Button>
               ) : (
