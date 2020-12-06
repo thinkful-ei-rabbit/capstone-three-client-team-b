@@ -54,10 +54,10 @@ export default class GameTableSeat extends Component {
         <Button
           className="draw-button"
           onClick={() => {
-            this.props.emptyHand();
+            this.props.gofish();
           }}
         >
-          Draw
+          Draw and Pass
         </Button>
       );
     } else if (this.props.endGame) {

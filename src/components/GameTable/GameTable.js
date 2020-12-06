@@ -75,7 +75,6 @@ export default class GameTable extends Component {
     },
     lastMove: '',
     interval: 0,
-    deckEmpty: false,
     endGame: false,
     winner: '',
   };
@@ -217,10 +216,6 @@ export default class GameTable extends Component {
     socket.on('draw card denied', (msg) => {
       // deck empty
       alert(msg);
-
-      this.setState({
-        deckEmpty: true,
-      });
     });
 
     socket.on('update other player card count', (userObj) => {
@@ -347,7 +342,7 @@ export default class GameTable extends Component {
   };
 
   componentWillUnmount() {
-    if (this.state.inProgress) {
+    if (this.state.inProgress && !this.state.endGame) {
       this.displayEnd();
     }
     socket.emit('leave table');
@@ -537,19 +532,6 @@ export default class GameTable extends Component {
     });
 
     this.nextTurn();
-  };
-
-  emptyHand = () => {
-    const playerName = this.context.userData.player;
-    const cardCount = currentSeatOfDOMPlayer.playerHand.length;
-    socket.emit('draw a card from the deck', {
-      cardCount: cardCount,
-      playerName: playerName,
-    });
-
-    if (this.state.deckEmpty) {
-      this.nextTurn();
-    }
   };
 
   handleKeyPress = () => {
@@ -798,7 +780,7 @@ export default class GameTable extends Component {
                 claimSeat={this.claimSeat}
                 seated={seated}
                 endGame={this.state.endGame}
-                emptyHand={this.emptyHand}
+                gofish={this.gofish}
               />
             );
           })}
