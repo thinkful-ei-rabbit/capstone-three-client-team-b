@@ -10,7 +10,7 @@
 }
 
 .roomPlayers {
-  height: 100%;
+  display: none;
 }
 
 #chatBox {
@@ -40,7 +40,7 @@
 }
 
 .hidden-for-a-reason {
-  visibility: hidden;
+  display: none;
 }
 
 .turn-instructions {
@@ -69,8 +69,6 @@
   padding: 6px;
   margin-top: 8px;
   width: 100%;
-  z-index: 3;
-  background-color: rgba(17, 17, 17, 0.486);
   pointer-events: none;
 }
 
@@ -90,7 +88,6 @@
   background-color: rgb(255, 255, 75);
   border-radius: 12px;
   color: black;
-  z-index: 3;
 }
 
 .ChatLog-and-game-inputs {
@@ -116,6 +113,13 @@
   font-family: 'Architects Daughter', cursive;
   padding: 5px 0;
   border-radius: 0 0 2px 2px;
+}
+
+@media all and (min-width: 325px) {
+  .roomPlayers {
+    height: 100%;
+    display: block;
+  }
 }
 
 @media all and (min-width: 800px) {

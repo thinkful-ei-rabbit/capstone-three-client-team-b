@@ -1,21 +1,3 @@
-// let count = 1;
-// let idx = 0;
-// const cardsuits = ['club', 'heart', 'diamond', 'spade'];
-
-// for (let i = 1; i <= 52; i++) {
-//     if (count > 13) {
-//         count = 1;
-//         idx++;
-//     }
-
-//     // console.log(`import ${cardsuits[idx][0]}${count} from './${count}${cardsuits[idx]}.png'`)
-//     console.log(`${cardsuits[idx][0]}${count},`)
-
-//     count++;
-// }
-
-// // import c2 from './2club.png';
-
 import c1 from './1club.png';
 import c2 from './2club.png';
 import c3 from './3club.png';

@@ -1,3 +1,4 @@
+/* Player Cards */
 .card {
   display: inline-block;
   width: 5.3em;
@@ -16,6 +17,11 @@
   font-size: 16px;
 }
 
+.card {
+  width: 3.5em;
+  height: 5.35em;
+}
+
 .card-image {
   width: 100%;
 }
@@ -27,7 +33,7 @@ a.card:visited {
   border: 1px solid #666;
   border-radius: 0.3em;
 }
-/* selected and hover state */
+
 a.card:hover,
 a.card:active,
 a.card:focus,
@@ -36,101 +42,15 @@ strong .card {
   bottom: 2em;
   background-color: rgb(255, 255, 255);
 }
-label.card {
-  cursor: pointer;
-}
-.player {
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0;
-}
 
-.player-seat-4 .name,
-.player-seat-2 .name {
-  margin: auto;
-}
-
-.player-seat-3 .player {
-  flex-direction: row-reverse;
-  margin: 10px auto 10px;
-  text-align: initial;
-}
-
-.books {
-  font-size: 14px;
-  line-height: 14px;
-  border: 3px solid #fff;
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  width: fit-content;
-  margin: auto auto;
-  padding: 5px 10px;
-  white-space: nowrap;
-  vertical-align: middle;
-}
-
-.name {
-  flex: 1;
-  margin: auto 10px;
-  overflow: visible;
-  white-space: nowrap;
-}
-.react-gravatar {
-  margin-top: 10px;
-  visibility: hidden;
-  height: 0px;
-  width: 0px;
-}
-
-.hand {
-  flex: 1;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  padding-inline-start: 0;
-}
-
-.claim-seat-button {
-  margin: auto auto;
-  height: 1.25em;
-  width: 1.25em;
-  border-radius: 50%;
-  border: #000 solid 1px;
-  font-size: 2rem;
-  box-shadow: #000 5px 5px 10px;
-  align-items: center;
-  padding: 0;
-}
-
-.draw-button {
-  margin: 50px auto 0;
-}
-
-/* hand (in your hand)
-********************************************************************/
+/* hand styles */
 ul.hand {
   list-style-type: none;
   position: relative;
   padding: 0;
   clear: both;
-  margin: 0 0 20px 0;
   white-space: nowrap;
-}
-
-.player-seat-2 ul.hand {
-  transform: rotate(90deg);
-}
-
-.player-seat-2 .player {
-  margin: 0 -45px 45px 0;
-}
-
-.player-seat-3 ul.hand {
-  margin: 10px 0 50px 0;
-}
-
-.player-seat-4 ul.hand {
-  transform: rotate(270deg);
+  margin: 0 0 0 10px;
 }
 
 ul.hand li {
@@ -242,135 +162,103 @@ ul.hand li:nth-child(26) {
   left: 27.5em;
 }
 
-/* rotate cards */
-.rotateHand ul.hand li:nth-child(1) {
-  -moz-transform: translate(1.9em, 0.9em) rotate(-42deg);
-  -webkit-transform: translate(1.9em, 0.9em) rotate(-42deg);
-  -o-transform: translate(1.9em, 0.9em) rotate(-42deg);
-  transform: translate(1.9em, 0.9em) rotate(-42deg);
-}
-.rotateHand ul.hand li:nth-child(2) {
-  -moz-transform: translate(1.5em, 0.5em) rotate(-33deg);
-  -webkit-transform: translate(1.5em, 0.5em) rotate(-33deg);
-  -o-transform: translate(1.5em, 0.5em) rotate(-33deg);
-  transform: translate(1.5em, 0.5em) rotate(-33deg);
-}
-.rotateHand ul.hand li:nth-child(3) {
-  -moz-transform: translate(1.1em, 0.3em) rotate(-24deg);
-  -webkit-transform: translate(1.1em, 0.3em) rotate(-24deg);
-  -o-transform: translate(1.1em, 0.3em) rotate(-24deg);
-  transform: translate(1.1em, 0.3em) rotate(-24deg);
-}
-.rotateHand ul.hand li:nth-child(4) {
-  -moz-transform: translate(0.7em, 0.2em) rotate(-15deg);
-  -webkit-transform: translate(0.7em, 0.2em) rotate(-15deg);
-  -o-transform: translate(0.7em, 0.2em) rotate(-15deg);
-  transform: translate(0.7em, 0.2em) rotate(-15deg);
-}
-.rotateHand ul.hand li:nth-child(5) {
-  -moz-transform: translate(0.3em, 0.1em) rotate(-6deg);
-  -webkit-transform: translate(0.3em, 0.1em) rotate(-6deg);
-  -o-transform: translate(0.3em, 0.1em) rotate(-6deg);
-  transform: translate(0.3em, 0.1em) rotate(-6deg);
-}
-.rotateHand ul.hand li:nth-child(6) {
-  -moz-transform: translate(-0.1em, 0.1em) rotate(3deg);
-  -webkit-transform: translate(-0.1em, 0.1em) rotate(3deg);
-  -o-transform: translate(-0.1em, 0.1em) rotate(3deg);
-  transform: translate(-0.1em, 0.1em) rotate(3deg);
-}
-.rotateHand ul.hand li:nth-child(7) {
-  -moz-transform: translate(-0.5em, 0.2em) rotate(12deg);
-  -webkit-transform: translate(-0.5em, 0.2em) rotate(12deg);
-  -o-transform: translate(-0.5em, 0.2em) rotate(12deg);
-  transform: translate(-0.5em, 0.2em) rotate(12deg);
-}
-.rotateHand ul.hand li:nth-child(8) {
-  -moz-transform: translate(-0.9em, 0.3em) rotate(21deg);
-  -webkit-transform: translate(-0.9em, 0.3em) rotate(21deg);
-  -o-transform: translate(-0.9em, 0.3em) rotate(21deg);
-  transform: translate(-0.9em, 0.3em) rotate(21deg);
-}
-.rotateHand ul.hand li:nth-child(9) {
-  -moz-transform: translate(-1.3em, 0.6em) rotate(30deg);
-  -webkit-transform: translate(-1.3em, 0.6em) rotate(30deg);
-  -o-transform: translate(-1.3em, 0.6em) rotate(30deg);
-  transform: translate(-1.3em, 0.6em) rotate(30deg);
-}
-.rotateHand ul.hand li:nth-child(10) {
-  -moz-transform: translate(-1.7em, 1em) rotate(39deg);
-  -webkit-transform: translate(-1.7em, 1em) rotate(39deg);
-  -o-transform: translate(-1.7em, 1em) rotate(39deg);
-  transform: translate(-1.7em, 1em) rotate(39deg);
-}
-.rotateHand ul.hand li:nth-child(11) {
-  -moz-transform: translate(-2.2em, 1.5em) rotate(48deg);
-  -webkit-transform: translate(-2.2em, 1.5em) rotate(48deg);
-  -o-transform: translate(-2.2em, 1.5em) rotate(48deg);
-  transform: translate(-2.2em, 1.5em) rotate(48deg);
-}
-.rotateHand ul.hand li:nth-child(12) {
-  -moz-transform: translate(-2.8em, 2.1em) rotate(57deg);
-  -webkit-transform: translate(-2.8em, 2.1em) rotate(57deg);
-  -o-transform: translate(-2.8em, 2.1em) rotate(57deg);
-  transform: translate(-2.8em, 2.1em) rotate(57deg);
-}
-.rotateHand ul.hand li:nth-child(13) {
-  -moz-transform: translate(-3.5em, 2.8em) rotate(66deg);
-  -webkit-transform: translate(-3.5em, 2.8em) rotate(66deg);
-  -o-transform: translate(-3.5em, 2.8em) rotate(66deg);
-  transform: translate(-3.5em, 2.8em) rotate(66deg);
-}
-.rotateHand ul.hand li:nth-child(14) {
-  -moz-transform: translate(-4.2em, 3.5em) rotate(75deg);
-  -webkit-transform: translate(-4.2em, 3.5em) rotate(75deg);
-  -o-transform: translate(-4.2em, 3.5em) rotate(75deg);
-  transform: translate(-4.2em, 3.5em) rotate(75deg);
-}
-.rotateHand ul.hand li:nth-child(15) {
-  -moz-transform: translate(-5em, 4.3em) rotate(84deg);
-  -webkit-transform: translate(-5em, 4.3em) rotate(84deg);
-  -o-transform: translate(-5em, 4.3em) rotate(84deg);
-  transform: translate(-5em, 4.3em) rotate(84deg);
-}
-
-.player-seat-1 {
+/* Player Seats */
+.player-logged-in {
   display: flex;
   flex-direction: column;
   justify-content: center;
   grid-row: 4;
-  grid-column: 2 / 4;
+  grid-column: 1 / 4;
 }
 
+.player-seat-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  grid-row: 1;
+  grid-column: 1;
+}
 .player-seat-2 {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row;
   justify-content: center;
-  grid-row: 2 / 3;
-  grid-column: 1 / 3;
+  grid-row: 1;
+  grid-column: 2 / 4;
 }
 .player-seat-3 {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row;
   justify-content: center;
   grid-row: 1;
-  grid-column: 1 / end;
-}
-.player-seat-4 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  grid-row: 2 / 3;
-  grid-column: 3 / end;
-}
-.center {
-  margin: auto auto;
-  grid-row: 3;
-  grid-column: 1 / end;
+  grid-column: 4;
 }
 
-h3.name {
-  height: fit-content;
+/* Player labels */
+.opponent-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px #000;
+  margin: 10px 5px 0 5px;
+  padding: 0 10px 5px;
+  width: 75px;
+}
+
+.opponent-player:active {
+  box-shadow: none;
+}
+
+ul.opponent-hand {
+  display: none;
+}
+
+.player {
+  display: flex;
+  flex-direction: row;
+  margin: 10px auto;
+}
+
+.player-logged-in .name {
+  margin: auto 10px;
+}
+
+.player-logged-in .books {
+  margin: auto;
+}
+
+.books {
+  font-size: 14px;
+  line-height: 14px;
+  border: 3px solid #fff;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  width: fit-content;
+  margin: 5px auto;
+  padding: 5px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.react-gravatar {
+  display: none;
+}
+
+/* Buttons */
+.claim-seat-button {
+  margin: auto auto;
+  height: 1.25em;
+  width: 1.25em;
+  border-radius: 50%;
+  border: #000 solid 1px;
+  font-size: 2rem;
+  box-shadow: #000 5px 5px 10px;
+  align-items: center;
+  padding: 0;
+}
+
+.draw-button {
+  margin: 50px auto 0;
 }
 
 .claim-seat-button:active {
@@ -385,32 +273,154 @@ h3.name {
 .plus {
   margin-left: 18px;
 }
-.card {
-  width: 3.5em;
-  height: 5.35em;
+
+.center {
+  margin: 20px auto;
+  grid-row: 2/ 4;
+  grid-column: 1 / end;
+}
+@media all and (min-width: 325px) {
+  .card {
+    width: 4.5em;
+    height: 6.8em;
+  }
 }
 
 @media all and (min-width: 700px) {
-  .player-seat-1 {
+  /* .player {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+} */
+  /* .hand {
+  flex: 1;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+} */
+  /* rotate cards */
+  .rotateHand ul.hand li:nth-child(1) {
+    -moz-transform: translate(1.9em, 0.9em) rotate(-42deg);
+    -webkit-transform: translate(1.9em, 0.9em) rotate(-42deg);
+    -o-transform: translate(1.9em, 0.9em) rotate(-42deg);
+    transform: translate(1.9em, 0.9em) rotate(-42deg);
+  }
+  .rotateHand ul.hand li:nth-child(2) {
+    -moz-transform: translate(1.5em, 0.5em) rotate(-33deg);
+    -webkit-transform: translate(1.5em, 0.5em) rotate(-33deg);
+    -o-transform: translate(1.5em, 0.5em) rotate(-33deg);
+    transform: translate(1.5em, 0.5em) rotate(-33deg);
+  }
+  .rotateHand ul.hand li:nth-child(3) {
+    -moz-transform: translate(1.1em, 0.3em) rotate(-24deg);
+    -webkit-transform: translate(1.1em, 0.3em) rotate(-24deg);
+    -o-transform: translate(1.1em, 0.3em) rotate(-24deg);
+    transform: translate(1.1em, 0.3em) rotate(-24deg);
+  }
+  .rotateHand ul.hand li:nth-child(4) {
+    -moz-transform: translate(0.7em, 0.2em) rotate(-15deg);
+    -webkit-transform: translate(0.7em, 0.2em) rotate(-15deg);
+    -o-transform: translate(0.7em, 0.2em) rotate(-15deg);
+    transform: translate(0.7em, 0.2em) rotate(-15deg);
+  }
+  .rotateHand ul.hand li:nth-child(5) {
+    -moz-transform: translate(0.3em, 0.1em) rotate(-6deg);
+    -webkit-transform: translate(0.3em, 0.1em) rotate(-6deg);
+    -o-transform: translate(0.3em, 0.1em) rotate(-6deg);
+    transform: translate(0.3em, 0.1em) rotate(-6deg);
+  }
+  .rotateHand ul.hand li:nth-child(6) {
+    -moz-transform: translate(-0.1em, 0.1em) rotate(3deg);
+    -webkit-transform: translate(-0.1em, 0.1em) rotate(3deg);
+    -o-transform: translate(-0.1em, 0.1em) rotate(3deg);
+    transform: translate(-0.1em, 0.1em) rotate(3deg);
+  }
+  .rotateHand ul.hand li:nth-child(7) {
+    -moz-transform: translate(-0.5em, 0.2em) rotate(12deg);
+    -webkit-transform: translate(-0.5em, 0.2em) rotate(12deg);
+    -o-transform: translate(-0.5em, 0.2em) rotate(12deg);
+    transform: translate(-0.5em, 0.2em) rotate(12deg);
+  }
+  .rotateHand ul.hand li:nth-child(8) {
+    -moz-transform: translate(-0.9em, 0.3em) rotate(21deg);
+    -webkit-transform: translate(-0.9em, 0.3em) rotate(21deg);
+    -o-transform: translate(-0.9em, 0.3em) rotate(21deg);
+    transform: translate(-0.9em, 0.3em) rotate(21deg);
+  }
+  .rotateHand ul.hand li:nth-child(9) {
+    -moz-transform: translate(-1.3em, 0.6em) rotate(30deg);
+    -webkit-transform: translate(-1.3em, 0.6em) rotate(30deg);
+    -o-transform: translate(-1.3em, 0.6em) rotate(30deg);
+    transform: translate(-1.3em, 0.6em) rotate(30deg);
+  }
+  .rotateHand ul.hand li:nth-child(10) {
+    -moz-transform: translate(-1.7em, 1em) rotate(39deg);
+    -webkit-transform: translate(-1.7em, 1em) rotate(39deg);
+    -o-transform: translate(-1.7em, 1em) rotate(39deg);
+    transform: translate(-1.7em, 1em) rotate(39deg);
+  }
+  .rotateHand ul.hand li:nth-child(11) {
+    -moz-transform: translate(-2.2em, 1.5em) rotate(48deg);
+    -webkit-transform: translate(-2.2em, 1.5em) rotate(48deg);
+    -o-transform: translate(-2.2em, 1.5em) rotate(48deg);
+    transform: translate(-2.2em, 1.5em) rotate(48deg);
+  }
+  .rotateHand ul.hand li:nth-child(12) {
+    -moz-transform: translate(-2.8em, 2.1em) rotate(57deg);
+    -webkit-transform: translate(-2.8em, 2.1em) rotate(57deg);
+    -o-transform: translate(-2.8em, 2.1em) rotate(57deg);
+    transform: translate(-2.8em, 2.1em) rotate(57deg);
+  }
+  .rotateHand ul.hand li:nth-child(13) {
+    -moz-transform: translate(-3.5em, 2.8em) rotate(66deg);
+    -webkit-transform: translate(-3.5em, 2.8em) rotate(66deg);
+    -o-transform: translate(-3.5em, 2.8em) rotate(66deg);
+    transform: translate(-3.5em, 2.8em) rotate(66deg);
+  }
+  .rotateHand ul.hand li:nth-child(14) {
+    -moz-transform: translate(-4.2em, 3.5em) rotate(75deg);
+    -webkit-transform: translate(-4.2em, 3.5em) rotate(75deg);
+    -o-transform: translate(-4.2em, 3.5em) rotate(75deg);
+    transform: translate(-4.2em, 3.5em) rotate(75deg);
+  }
+  .rotateHand ul.hand li:nth-child(15) {
+    -moz-transform: translate(-5em, 4.3em) rotate(84deg);
+    -webkit-transform: translate(-5em, 4.3em) rotate(84deg);
+    -o-transform: translate(-5em, 4.3em) rotate(84deg);
+    transform: translate(-5em, 4.3em) rotate(84deg);
+  }
+  /* h3.name {
+  height: fit-content;
+} */
+  /* .name {
+  flex: 1;
+  margin: auto 10px;
+} */
+  label.card {
+    cursor: pointer;
+  }
+  .player-logged-in {
     display: flex;
     flex-direction: row-reverse;
     grid-row: 4;
     grid-column: 2 / 4;
     margin-bottom: 30px;
   }
-  .player-seat-2 {
+  .player-seat-1 {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     grid-row: 2 / 4;
     grid-column: 1;
   }
-  .player-seat-3 {
+  .player-seat-2 {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     grid-row: 1;
     grid-column: 2 / 4;
   }
-  .player-seat-4 {
+  .player-seat-3 {
     display: flex;
     flex-direction: column;
     grid-row: 2 / 4;
@@ -422,33 +432,40 @@ h3.name {
     grid-column: 2/4;
   }
 
-  .player {
-    flex: 1;
-  }
-  .player-seat-1 .player,
-  .player-seat-3 .player {
-    flex-direction: column;
-  }
-
-  .player-seat-2 .player {
-    margin: 0 0 10px 0;
-  }
-
-  .player-seat-2 .name,
-  .player-seat-4 .name {
-    margin: inherit;
-  }
-
   .player-seat-1 ul.hand {
-    margin-bottom: 50px;
-  }
-
-  .player-seat-2 ul.hand,
-  .player-seat-4 ul.hand {
-    transform: rotate(0deg);
+    transform: rotate(90deg);
   }
 
   .player-seat-2 ul.hand {
+    transform: rotate(180deg);
+  }
+
+  .player-seat-3 ul.hand {
+    transform: rotate(270deg);
+  }
+
+  .player {
+    flex: 1;
+  }
+  .player-logged-in .player,
+  .player-seat-2 .player {
+    flex-direction: column;
+  }
+
+  .player-seat-1 .player {
+    margin: 0 0 10px 0;
+  }
+
+  .player-seat-1 .name,
+  .player-seat-3 .name {
+    margin: inherit;
+  }
+
+  .player-logged-in ul.hand {
+    margin-bottom: 50px;
+  }
+
+  .player-seat-1 ul.hand {
     margin: 0 0 30px 30px;
   }
 
@@ -469,9 +486,15 @@ h3.name {
     width: 1.5em;
     font-size: 2.5rem;
   }
-  .card {
+  .card-opponent {
     width: 4em;
     height: 6.11em;
+  }
+  .card-player {
+    width: 5.3em;
+    height: 8.1em;
+    position: relative;
+    z-index: 1;
   }
   .react-gravatar {
     visibility: visible;
@@ -480,38 +503,19 @@ h3.name {
     width: 75px;
   }
 
-  .mobile-responsive-hand {
-    display: inline-block;
-  }
-  
-}
-
-@media all and (min-width: 800px) {
-  .claim-seat-button {
-    height: 1.75em;
-    width: 1.75em;
-    font-size: 3rem;
-  }
-  .card {
-    width: 5.3em;
-    height: 8.1em;
-    position: relative;
-    z-index: 1;
-  }
   .mobile-responsive-hand-count {
     text-align: center;
     display: none;
   }
 }
 
-@media all and (max-width: 800px) {
-  .mobile-responsive-hand {
+@media all and (min-width: 1000px) {
+  .claim-seat-button {
+    height: 1.75em;
+    width: 1.75em;
+    font-size: 3rem;
+  }
+  .mobile-responsive-hand-count {
     display: none;
-  }
-  .mobile-response-hand-count {
-    display: block;
-  }
-  .mobile-response-hand-count p {
-    font-size: 44px;
   }
 }

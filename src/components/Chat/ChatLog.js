@@ -38,7 +38,47 @@ class ChatLog extends React.Component {
 
   renderInstructions = () => {
     if (this.props.requestedPlayer.playerName && this.props.requestedCard) {
-      return '';
+      return (
+        <form
+          className="askOtherPlayer_form"
+          onSubmit={(e) => this.props.askAnotherPlayer(e)}
+        >
+          <input
+            className="hidden-for-a-reason"
+            placeholder="Select another player!"
+            type="text"
+            id="to-ask-id"
+            value={this.props.requestedPlayer.playerName || ''}
+            readOnly
+            required
+          />
+          <input
+            className="hidden-for-a-reason"
+            placeholder="Select Card from your hand!"
+            type="text"
+            id="rank-requested"
+            value={this.props.requestedCard || ''}
+            readOnly
+            required
+          />
+          {this.props.requestedPlayer.playerName && this.props.requestedCard ? (
+            <button type="submit">
+              Ask {this.props.requestedPlayer.playerName} for a{' '}
+              {this.props.requestedCard === 1
+                ? 'Ace'
+                : this.props.requestedCard === 11
+                ? 'Jack'
+                : this.props.requestedCard === 12
+                ? 'Queen'
+                : this.props.requestedCard === 13
+                ? 'King'
+                : this.props.requestedCard}
+            </button>
+          ) : (
+            ''
+          )}
+        </form>
+      );
     } else if (
       !this.props.requestedPlayer.playerName &&
       this.props.requestedCard
@@ -123,7 +163,16 @@ class ChatLog extends React.Component {
           <div className="being-asked-box">
             <div>
               {this.state.asked.asker.name} is asking for a{' '}
-              {this.state.asked.rankReq === 1 ? 'Ace' : this.state.asked.rankReq === 11 ? 'Jack' : this.state.asked.rankReq === 12 ? 'Queen' : this.state.asked.rankReq === 13 ? 'King' : this.state.asked.rankReq}, do you have one?
+              {this.state.asked.rankReq === 1
+                ? 'Ace'
+                : this.state.asked.rankReq === 11
+                ? 'Jack'
+                : this.state.asked.rankReq === 12
+                ? 'Queen'
+                : this.state.asked.rankReq === 13
+                ? 'King'
+                : this.state.asked.rankReq}
+              , do you have one?
             </div>
             <div>
               <button onClick={() => this.props.yesResponse()}>Yes</button>
@@ -131,47 +180,7 @@ class ChatLog extends React.Component {
             </div>
           </div>
         )}
-        {!this.props.askDisabled ? (
-          <form
-            className="askOtherPlayer_form"
-            onSubmit={(e) => this.props.askAnotherPlayer(e)}
-          >
-            {this.renderInstructions()}
-            <input
-              className="hidden-for-a-reason"
-              placeholder="Select another player!"
-              type="text"
-              id="to-ask-id"
-              value={this.props.requestedPlayer.playerName || ''}
-              readOnly
-              required
-            />
-            <input
-              className="hidden-for-a-reason"
-              placeholder="Select Card from your hand!"
-              type="text"
-              id="rank-requested"
-              value={this.props.requestedCard || ''}
-              readOnly
-              required
-            />
-            {this.props.requestedPlayer.playerName &&
-            this.props.requestedCard ? (
-              <button type="submit">
-                Ask {this.props.requestedPlayer.playerName} for a{' '}
-                {this.props.requestedCard === 1 ? 'Ace' : 
-                this.props.requestedCard === 11 ? 'Jack' : 
-                this.props.requestedCard === 12 ? 'Queen' :
-                this.props.requestedCard === 13 ? 'King' :
-                this.props.requestedCard}
-              </button>
-            ) : (
-              ''
-            )}
-          </form>
-        ) : (
-          ''
-        )}
+        {!this.props.askDisabled ? this.renderInstructions() : ''}
       </div>
     );
   }

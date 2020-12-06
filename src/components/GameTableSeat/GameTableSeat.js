@@ -13,6 +13,7 @@ export default class GameTableSeat extends Component {
     player: {
       playerName: '',
     },
+    playerPlacement: [{ playerName: '' }],
     endGame: false,
   };
 
@@ -30,7 +31,7 @@ export default class GameTableSeat extends Component {
             key={card.value + card.suit}
             onClick={(e) => this.props.onCardChoice(card.value, e)}
           >
-            <a className="card" href="#">
+            <a className="card card-player" href="#">
               <img
                 src={images[suitValue]}
                 alt="card value"
@@ -61,11 +62,18 @@ export default class GameTableSeat extends Component {
   };
 
   renderOtherPlayers = (player) => {
+    let playerOrder = this.props.playerPlacement;
+    if (playerOrder[0].playerName !== this.context.userData.player) {
+      playerOrder.push(playerOrder.shift());
+    }
+    const playerIndex = playerOrder.findIndex(
+      (indv) => indv.playerName === player.playerName
+    );
     let cardBacks = [];
     for (let i = 0; i < player.handCount; i++) {
       cardBacks.push(
         <li key={i}>
-          <p className="card">
+          <p className="card card-opponent">
             <img
               src={images.back}
               alt="back of playing card"
@@ -79,23 +87,22 @@ export default class GameTableSeat extends Component {
       <>
         {player.playerName ? (
           <div
-            className={`player-seat-${player.playerSeat} rotateHand`}
+            className={`player-seat-${playerIndex} rotateHand`}
             onClick={() => this.props.onPlayerChoice(player)}
           >
-            <ul className="hand mobile-responsive-hand">{cardBacks}</ul>
-            <ul className="mobile-responsive-hand-count"><p>
-              {cardBacks.length > 1 ? `${cardBacks.length} Cards` : ''}
-              </p>
-            </ul>
-            <div className="player">
+            <ul className="opponent-hand">{cardBacks}</ul>
+            <div className="opponent-player">
               <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.props.player.email} size={75} />
-              <p className="books">sets: {this.props.player.books.length}</p>
+              <div>
+                <p className="hand-count books">cards: {cardBacks.length}</p>
+                <p className="books">books: {this.props.player.books.length}</p>
+              </div>
             </div>
           </div>
         ) : (
-            <div></div>
-          )}
+          <div></div>
+        )}
       </>
     );
   };
@@ -108,22 +115,22 @@ export default class GameTableSeat extends Component {
           <button
             value={player.playerSeat}
             onClick={(e) => this.props.claimSeat(e.target.value)}
-            className={`player-seat-${player.playerSeat} claim-seat-button`}
+            className="claim-seat-button"
           >
             +
           </button>
         ) : player.playerName === this.context.userData.player ? (
-          <div className={`player-seat-${player.playerSeat} rotateHand`}>
+          <div className={`player-logged-in rotateHand`}>
             <ul className="hand">{this.renderLoggedInUser(player)}</ul>
             <div className="player">
               <h3 className="name">{player.playerName}</h3>
               <Gravatar email={this.context.userData.email} size={75} />
-              <p className="books">sets: {this.props.player.books.length}</p>
+              <p className="books">books: {this.props.player.books.length}</p>
             </div>
           </div>
         ) : (
-              this.renderOtherPlayers(player)
-            )}
+          this.renderOtherPlayers(player)
+        )}
       </>
     );
   }

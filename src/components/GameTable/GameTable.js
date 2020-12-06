@@ -317,11 +317,11 @@ export default class GameTable extends Component {
       });
     });
 
-    socket.on('typing', (data) => {
-      let feedback = document.getElementById('feedback');
-      feedback.innerHTML =
-        '<p><em>' + data + ' is typing a message...</em></p>';
-    });
+    // socket.on('typing', (data) => {
+    //   let feedback = document.getElementById('feedback');
+    //   feedback.innerHTML =
+    //     '<p><em>' + data + ' is typing a message...</em></p>';
+    // });
 
     socket.on('game end', () => {
       // client side displays
@@ -379,7 +379,7 @@ export default class GameTable extends Component {
     });
 
     currentSeatOfDOMPlayer.requestedCard = '';
-    // console.log(currentSeatOfDOMPlayer);
+    currentSeatOfDOMPlayer.requestedPlayer = '';
 
     const updatedPlayers = [...this.state.players];
 
@@ -424,8 +424,6 @@ export default class GameTable extends Component {
   };
 
   noResponse = () => {
-    // console.log(this.state.asked);
-
     // VALIDATE - cannot lie
     const player = currentSeatOfDOMPlayer;
     const cardInHand = player.playerHand.find(
@@ -464,11 +462,9 @@ export default class GameTable extends Component {
   };
 
   onCardChoice = (card, e) => {
-    // console.log(card);
     e.preventDefault();
 
     currentSeatOfDOMPlayer.requestedCard = card;
-    // console.log(currentSeatOfDOMPlayer);
 
     const updatedPlayers = [...this.state.players];
 
@@ -490,7 +486,6 @@ export default class GameTable extends Component {
     }
 
     currentSeatOfDOMPlayer.requestedPlayer = playerObj;
-    // console.log(currentSeatOfDOMPlayer);
 
     const updatedPlayers = [...this.state.players];
 
@@ -552,7 +547,6 @@ export default class GameTable extends Component {
     }
 
     const booksObj = [];
-    // console.log(cardsInHand);
     for (var val in cardsInHand) {
       // iterate through hashmap: cardsInHand[val] = [...indices]
       if (cardsInHand[val].length >= 4) {
@@ -712,7 +706,6 @@ export default class GameTable extends Component {
       seated: true,
     });
 
-    // console.log(name, seat, roomPlayers)
     socket.emit('claim seat', { name, seat, roomPlayers });
   };
 
@@ -745,6 +738,7 @@ export default class GameTable extends Component {
 
   render() {
     const { players, seated, endGame, winner } = this.state;
+    const playerPlacement = this.state.chatLog.players;
     const currentPlayerTurn = this.state.players.find(
       (el) => el.currentPlayer === true
     );
@@ -757,6 +751,7 @@ export default class GameTable extends Component {
               <GameTableSeat
                 key={index}
                 player={player}
+                playerPlacement={playerPlacement}
                 onPlayerChoice={this.onPlayerChoice}
                 onCardChoice={this.onCardChoice}
                 claimSeat={this.claimSeat}
@@ -790,13 +785,9 @@ export default class GameTable extends Component {
               </div>
               <div id="feedback" className="feedback"></div>
               {!this.state.inProgress ? (
-                <div className="front-button-z">
                 <Button onClick={() => this.startGame()}>Start Game</Button>
-                  </div>
               ) : !this.state.goFishDisabled ? (
-                <div className="front-button-z">
-                <Button className="front-button-z" onClick={this.gofish}>Go Fish!</Button>
-                </div>
+                <Button onClick={this.gofish}>Go Fish!</Button>
               ) : (
                 ''
               )}
