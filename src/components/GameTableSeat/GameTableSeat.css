@@ -290,6 +290,7 @@ ul.opponent-hand {
   box-shadow: #000 5px 5px 10px;
   align-items: center;
   padding: 0;
+  z-index: 5;
 }
 
 .draw-button {
@@ -588,7 +589,13 @@ ul.opponent-hand {
     width: 1.75em;
     font-size: 3rem;
   }
-  .mobile-responsive-hand-count {
-    display: none;
+
+  /* Hand Styles */
+  .player-seat-1 ul.opponent-hand {
+    margin: 100px 0 0 0;
+  }
+
+  .player-seat-3 ul.opponent-hand {
+    margin: 0 0 80px 0;
   }
 }

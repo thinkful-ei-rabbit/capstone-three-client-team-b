@@ -87,7 +87,7 @@ export default class GameTable extends Component {
     });
 
     let count = 0;
-    socket.on('messageResponse', (msg) => {
+    socket.on('messageResponse', async (msg) => {
       // individual message response
       msg = (
         <div key={count}>
@@ -103,7 +103,7 @@ export default class GameTable extends Component {
       });
     });
 
-    socket.on('gameMessage', (msg) => {
+    socket.on('gameMessage', async (msg) => {
       let timeout = setTimeout(this.clearGameMessage, 5000);
 
       // messages about game interactions
@@ -336,14 +336,22 @@ export default class GameTable extends Component {
 
     socket.on('game end', () => {
       // client side displays
-
       this.displayWinner();
+    });
+
+    socket.on('force end', () => {
+      socket.emit('leave table');
+      const { history } = this.props;
+      history.push(`/end`);
     });
   };
 
-  // componentWillUnmount() {
-  //   socket.emit('leave table');
-  // }
+  componentWillUnmount() {
+    if (this.state.inProgress) {
+      this.displayEnd();
+    }
+    socket.emit('leave table');
+  }
 
   onChatMessageSubmit = (event) => {
     event.preventDefault();
@@ -703,6 +711,10 @@ export default class GameTable extends Component {
       booksCollected: currentSeatOfDOMPlayer.books.length,
       win: DOMwon,
     });
+  };
+
+  displayEnd = () => {
+    socket.emit('game over');
   };
 
   claimSeat = (seat) => {

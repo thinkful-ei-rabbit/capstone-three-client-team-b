@@ -13,8 +13,12 @@ export default class GameTableSeat extends Component {
     player: {
       playerName: '',
     },
-    playerPlacement: [{ playerName: '' }],
+    playerPlacement: [],
     endGame: false,
+  };
+
+  state = {
+    playerOrder: [],
   };
 
   renderLoggedInUser = (player) => {
