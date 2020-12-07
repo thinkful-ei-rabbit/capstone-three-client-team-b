@@ -58,7 +58,7 @@ Note: component names are listed in the green boxes
 
 ## Storytime
 
-Go Fish is a classic children's card game where users try to win the most books (a matching set of cards). Throughout the game, users can chat with one another. Also, the chat box displays updates of what's going on in the game. For example, if player 1 asks player 3 for a card. Then the chat box will display whether or not player 3 told player 1 to go fish. The term "go fish" refers to when users have to draw a card from the deck. Currently, users can also see a card be added to other player's hands. Within the game, users are only displayed their own cards [note: other users' cards are not displayed in state, for you devs who might be wondering ;)] Overall, this was an exciting project to start, because we had no prior experience to building a gaming application, but we took on the challenge! We have a few [upcoming users stories](#Upcoming-Features) that we're excited to implement as well!
+Go Fish is a classic children's card game where users try to win the most books (a matching set of cards). Throughout the game, users can chat with one another. Also, the game displays updates of what's going on between players. For example, if player 1 asks player 3 for a card. Then the display will show whether or not player 3 told player 1 to go fish. The term "go fish" refers to when users have to draw a card from the deck. Currently, users can also see a card be added to other player's hands. Within the game, users are only displayed their own cards [note: other users' cards are not displayed in state, for you devs who might be wondering ;)]. There's more [notes on game play under](#Notes-on-Game-play) Getting Started. Overall, this was an exciting project to start, because we had no prior experience to building a gaming application, but we took on the challenge! We have a few [upcoming users stories](#Upcoming-Features) that we're excited to implement as well!
 
 Fun tidbits:
 
@@ -136,6 +136,9 @@ Start the application
 ```
 npm start
 ```
+## Notes on Game play
+
+The rules are listed in the app, but in general you're trying to get the most books. A book for example would be a King of Diamonds, King of Hearts, King of Clubs and King of Spades. There's a total of 13 books that need to be collected to render an end game state. The game allows for up to 4 players, but only 2 players are required to start a game. NOTE: When testing the game, open up 2 browsers and play with 1 player in each. The socket.io connection breaks if you're trying to play as the same player in the same browser.  Opening up an incognito window and a regular google chrome window works allows the game to function properly as well.
 
 ## Upcoming Features
 
