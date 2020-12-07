@@ -138,7 +138,7 @@ npm start
 ```
 ## Notes on Game play
 
-The rules are listed in the app, but in general you're trying to get the most books. A book for example would be a King of Diamonds, King of Hearts, King of Clubs and King of Spades. There's a total of 13 books that need to be collected to render an end game state. The game allows for up to 4 players, but only 2 players are required to start a game. NOTE: When testing the game, open up 2 browsers and play with 1 player in each. The socket.io connection breaks if you're trying to play as the same player in the same browser.  Opening up an incognito window and a regular google chrome window works allows the game to function properly as well.
+The rules are listed in the app, but in general you're trying to get the most books. A book for example would be a King of Diamonds, King of Hearts, King of Clubs and King of Spades. There's a total of 13 books that need to be collected to render an end game state. The game allows for up to 4 players, but only 2 players are required to start a game. NOTE: When testing the game, there are potential issues running the game in your browser multiple times due to the socket technology. Using the same account twice and using different accounts in the same browser will cause session issues with socket.io. To avoid these issues, open up 2 browsers and play with 1 player in each. Also, opening up an incognito google chrome window and a regular google chrome window allows the game to function properly as well.
 
 ## Upcoming Features
 
